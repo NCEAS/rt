@@ -1,5 +1,5 @@
 rt_search <- function(base, query, orderBy=NULL, format="l") {
-  url <- paste0(base, "/search/ticket?query=", query)
+  url <- paste0(base, "/REST/1.0/search/ticket?query=", query)
 
   if (!is.null(orderBy)) {
     url <- paste0(url, "&orderBy=", orderBy)

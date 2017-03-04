@@ -3,7 +3,7 @@ rt_ticket_history <- function(base, ticket) {
     stop("'ticket' must be specified.", call. = FALSE)
   }
 
-  url <- paste0(base, "/ticket/", as.character(ticket), "/history")
+  url <- paste0(base, "/REST/1.0/ticket/", as.character(ticket), "/history")
 
   req <- httr::GET(url)
   history <- stringr::str_split(httr::content(req), "\\n")[[1]]
