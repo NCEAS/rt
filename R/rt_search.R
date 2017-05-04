@@ -15,7 +15,6 @@ rt_search <- function(base, query, orderBy=NULL, format="l") {
     stop(req, call. = FALSE)
   }
 
-
   if (format != "l") {
     return(req)
   }
@@ -50,6 +49,12 @@ rt_search <- function(base, query, orderBy=NULL, format="l") {
 
     result <- rbind(result, zdf)
   }
+
+  # Post-process results
+  # Remove ticket/ from `id` col
+  result$id <- str_replace_all(result$id, "ticket/", "")
+
+  # Resolved, Told, LastUpdated,Created,Started
 
   result
 }
