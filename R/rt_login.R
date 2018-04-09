@@ -1,3 +1,18 @@
+#' Log in to RT
+#'
+#' Use this to log into RT at the start of your session.
+#'
+#' @param base (character) The base URL that hosts RT for your organization
+#' @param user (character) Your username
+#' @param pass (character) Your password
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' rt_login("https://server.name/rt/", "my_username", "my_password")
+#' }
+
 rt_login <- function(base, user, pass) {
   req <- httr::POST(rt_url(base), body = list('user' = user, 'pass' = pass))
 
@@ -17,4 +32,28 @@ rt_login <- function(base, user, pass) {
   }
 
   invisible(TRUE)
+}
+
+#' Log in to RT interactively
+#'
+#' Wrapper for \code{\link{rt_login}} to interactively log into RT at the start of your
+#' session. Keeps your log-in information private.
+#'
+#' @param base (character) The base URL that hosts RT for your organization
+#'
+#' @import getPass
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' rt_login_interactive("https://server.name/rt/")
+#' }
+
+rt_login_interactive <- function(base,
+                                 username = readline("Enter username: ") ,
+                                 password = getPass::getPass()) {
+  rt_login(base = base,
+           user = username,
+           pass = password)
 }

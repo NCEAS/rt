@@ -10,6 +10,7 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 Depends: httr,
-  stringr
+  stringr,
+  getPass
 Suggests: testthat
 RoxygenNote: 6.0.1
