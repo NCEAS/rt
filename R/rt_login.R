@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_login("https://support.nceas.ucsb.edu/rt/", "my_username", "my_password")
+#' rt_login("https://server.name/rt/", "my_username", "my_password")
 #' }
 
 rt_login <- function(base, user, pass) {
@@ -47,7 +47,7 @@ rt_login <- function(base, user, pass) {
 #'
 #' @examples
 #' \dontrun{
-#' rt_login_interactive("https://support.nceas.ucsb.edu/rt/")
+#' rt_login_interactive("https://server.name/rt/")
 #' }
 
 rt_login_interactive <- function(base,
