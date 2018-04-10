@@ -1,3 +1,21 @@
+#' Get ticket attachment
+#'
+#' Retrieves attachment information using the GET method.
+#'
+#' @param base (character) The base URL that hosts RT for your organization
+#' @param ticket (numeric) The ticket identifier
+#' @param attachment (numeric) The attachment identifier
+#'
+#' @return
+#' @export
+#' 
+#' @importFrom httr GET
+#'
+#' @examples
+#' \dontrun{
+#' rt_ticket_attachment("https://server.name/rt/", 12345, 56789)
+#' }
+
 rt_ticket_attachment <- function(base, ticket, attachment) {
   if (missing(ticket)) {
     stop("The argument 'ticket' must be specified.", call. = FALSE)
