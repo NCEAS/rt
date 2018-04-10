@@ -5,7 +5,6 @@
 #' @param base (character) The base URL that hosts RT for your organization
 #' @param ticket (numeric) The ticket identifier
 #'
-#' @return
 #' @export
 #' 
 #' @importFrom httr GET

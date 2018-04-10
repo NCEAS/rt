@@ -1,9 +1,11 @@
 #' Generate an RT API URL
 #'
-#' @param base
-#' @param ...
+#' Create an RT API URL based on the server URL and any arguments provided
 #'
-#' @return
+#' @param base (character) The base URL that hosts RT for your organization
+#' @param ... Other parameters
+#'
+
 rt_url <- function(base, ...) {
   paste(gsub("\\/$", "", base), # Removes trailing slash from base URL just in case
         "REST",

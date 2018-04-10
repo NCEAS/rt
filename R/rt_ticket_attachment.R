@@ -6,7 +6,6 @@
 #' @param ticket (numeric) The ticket identifier
 #' @param attachment (numeric) The attachment identifier
 #'
-#' @return
 #' @export
 #' 
 #' @importFrom httr GET
