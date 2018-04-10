@@ -1,3 +1,23 @@
+#' Search RT
+#'
+#' Search RT for tickets that fit your query.
+#'
+#' @param base (character) The base URL that hosts RT for your organization
+#' @param query (character) A query
+#' @param orderBy (character) How to order your search results
+#' @param format (character) Either \code{i} (ticket ID only),
+#' \code{s} (ticket ID and title), or \code{l} (full ticket metadata).
+#' Defaults to \code{l}.
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # To return all un-owned tickets on a queue:
+#' rt_search("https://server.name/rt/",
+#' query="Queue='some_queue'AND(Owner='Nobody')")
+#' }
+
 rt_search <- function(base, query, orderBy=NULL, format="l") {
   url <- paste0(base, "/REST/1.0/search/ticket?query=", query)
 
