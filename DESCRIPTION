@@ -2,7 +2,10 @@ Package: rt
 Type: Package
 Title: An R Package for the RT REST API
 Version: 0.1.0
-Author: Bryce Mecum <brycemecum@gmail.com>
+Author: c(
+  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre")),
+  person("Irene", "Steves", role = "ctb")
+  )
 Maintainer: Bryce Mecum <brycemecum@gmail.com>
 Description: This package implements a number of the functions provided by the
   RT REST API.
