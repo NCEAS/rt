@@ -1,3 +1,21 @@
+#' Get ticket history
+#'
+#' Retrieves attachment information using the GET method.
+#'
+#' @param base (character) The base URL that hosts RT for your organization
+#' @param ticket (numeric) The ticket identifier
+#'
+#' @return
+#' @export
+#' 
+#' @importFrom httr GET
+#' @import stringr
+#'
+#' @examples
+#' \dontrun{
+#' rt_ticket_history("https://server.name/rt/", 12345)
+#' }
+
 rt_ticket_history <- function(base, ticket) {
   if (missing(ticket)) {
     stop("'ticket' must be specified.", call. = FALSE)

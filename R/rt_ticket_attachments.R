@@ -2,8 +2,8 @@
 #'
 #' Retrieves attachment metadata using the GET method.
 #'
-#' @param base 
-#' @param ticket 
+#' @param base (character) The base URL that hosts RT for your organization
+#' @param ticket (numeric) The ticket identifier
 #'
 #' @return
 #' @export
@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_attachments("https://server.name/rt/", "12345")
+#' rt_ticket_attachments("https://server.name/rt/", 12345)
 #' }
 
 rt_ticket_attachments <- function(base, ticket) {
