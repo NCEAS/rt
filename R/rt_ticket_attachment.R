@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_attachment("https://server.name/rt/", "12345", "56789)
+#' rt_ticket_attachment("https://server.name/rt/", "12345", "56789")
 #' }
 
 rt_ticket_attachment <- function(base, ticket, attachment) {
