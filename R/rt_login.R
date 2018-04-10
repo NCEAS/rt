@@ -7,6 +7,9 @@
 #' @param pass (character) Your password
 #'
 #' @export
+#' 
+#' @import httr
+#' @import stringr
 #'
 #' @examples
 #' \dontrun{
@@ -17,7 +20,7 @@ rt_login <- function(base, user, pass) {
   req <- httr::POST(rt_url(base), body = list('user' = user, 'pass' = pass))
 
   # Process RT's strange custom status code
-  status_match <- str_match_all(content(req), "RT\\/[\\d\\.]+ (\\d+).+")
+  status_match <- stringr::str_match_all(httr::content(req), "RT\\/[\\d\\.]+ (\\d+).+")
 
   if (length(status_match) != 1 && all(dim(status_match[[1]]) != c(1, 2))) {
     stop(call. = FALSE, "Failed to parse response from RT.")
@@ -50,10 +53,8 @@ rt_login <- function(base, user, pass) {
 #' rt_login_interactive("https://server.name/rt/")
 #' }
 
-rt_login_interactive <- function(base,
-                                 username = readline("Enter username: ") ,
-                                 password = getPass::getPass()) {
+rt_login_interactive <- function(base) {
   rt_login(base = base,
-           user = username,
-           pass = password)
+           user = readline("Enter username: "),
+           pass = getPass::getPass())
 }

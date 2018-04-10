@@ -7,8 +7,10 @@
 rt_url(base, ...)
 }
 \arguments{
-\item{...}{}
+\item{base}{(character) The base URL that hosts RT for your organization}
+
+\item{...}{Other parameters}
 }
 \description{
-Generate an RT API URL
+Create an RT API URL based on the server URL and any arguments provided
 }
