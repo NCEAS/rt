@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/NCEAS/rt.svg?branch=master)](https://travis-ci.org/NCEAS/rt)
+
 # rt
 ### *An R package for the [RT REST API](https://rt-wiki.bestpractical.com/wiki/REST)*
 
