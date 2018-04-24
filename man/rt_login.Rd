@@ -4,20 +4,21 @@
 \alias{rt_login}
 \title{Log in to RT}
 \usage{
-rt_login(base, user, pass)
+rt_login(user, pass, rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{base}{(character) The base URL that hosts RT for your organization}
-
 \item{user}{(character) Your username}
 
 \item{pass}{(character) Your password}
+
+\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
-Use this to log into RT at the start of your session.
+Use this to log into RT at the start of your session. You may want to set your
 }
 \examples{
 \dontrun{
+options(rt_base = "https://server.name/rt/")
 rt_login("https://server.name/rt/", "my_username", "my_password")
 }
 }
