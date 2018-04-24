@@ -27,10 +27,8 @@ rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
   req <- httr::POST(base_api, body = list('user' = user, 'pass' = pass))
 
   # Check that login worked
-  # Try getting a ticket
-  test_ticket <- httr::GET(paste(base_api, "ticket", 00000, sep = "/"))
 
-  if(stringr::str_detect(test_ticket, "Credentials required")){
+  if(stringr::str_detect(httr::content(req), "Credentials required")){
     message("Your log-in was unsuccessful. Check your username, password, and base URL and try again.")
     invisible(FALSE)
   } else {
