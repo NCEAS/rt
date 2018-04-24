@@ -14,7 +14,7 @@
 #' @examples
 #' \dontrun{
 #' options(rt_base = "https://server.name/rt/")
-#' rt_login("https://server.name/rt/", "my_username", "my_password")
+#' rt_login("my_username", "my_password")
 #' }
 
 rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
