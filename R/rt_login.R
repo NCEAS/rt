@@ -7,7 +7,7 @@
 #' @param pass (character) Your password
 #'
 #' @export
-#' 
+#'
 #' @import httr
 #' @import stringr
 #'
@@ -17,24 +17,20 @@
 #' }
 
 rt_login <- function(base, user, pass) {
-  req <- httr::POST(rt_url(base), body = list('user' = user, 'pass' = pass))
+  base_api <- paste(stringr::str_replace(base, "\\/$", ""), # removes trailing slash from base URL just in case
+                "REST", "1.0", sep = "/")
+  req <- httr::POST(base_api, body = list('user' = user, 'pass' = pass))
 
-  # Process RT's strange custom status code
-  status_match <- stringr::str_match_all(httr::content(req), "RT\\/[\\d\\.]+ (\\d+).+")
-
-  if (length(status_match) != 1 && all(dim(status_match[[1]]) != c(1, 2))) {
-    stop(call. = FALSE, "Failed to parse response from RT.")
-  }
-
-  status_code <- as.numeric(status_match[[1]][,2])
-
-  if (status_code == 200) {
-    message("Successfully logged in.")
+  # Check that login worked
+  # Try getting a ticket
+  test_ticket <- httr::GET(paste(base_api, "ticket", 00000, sep = "/"))
+  if(stringr::str_detect(test_ticket, "Credentials required")){
+    message("Your log-in was unsuccessful. Please try again.")
+    invisible(FALSE)
   } else {
-    stop(req)
+    message("Successfully logged in.")
+    invisible(TRUE)
   }
-
-  invisible(TRUE)
 }
 
 #' Log in to RT interactively
