@@ -29,8 +29,9 @@ rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
   # Check that login worked
 
   if(stringr::str_detect(httr::content(req), "Credentials required")){
-    message("Your log-in was unsuccessful. Check your username, password, and base URL and try again.")
     invisible(FALSE)
+    stop("Your log-in was unsuccessful. Check your username, password, and base URL and try again.",
+         call. = FALSE)
   } else {
     message("Successfully logged in.")
     invisible(TRUE)
