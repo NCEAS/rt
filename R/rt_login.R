@@ -1,6 +1,6 @@
 #' Log in to RT
 #'
-#' Use this to log into RT at the start of your session. You may want to set your
+#' Use this to log into RT at the start of your session.
 #'
 #' @param user (character) Your username
 #' @param pass (character) Your password
