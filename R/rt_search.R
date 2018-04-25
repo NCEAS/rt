@@ -2,24 +2,31 @@
 #'
 #' Search RT for tickets that fit your query.
 #'
-#' @param base (character) The base URL that hosts RT for your organization
 #' @param query (character) A query
 #' @param orderBy (character) How to order your search results
 #' @param format (character) Either \code{i} (ticket ID only),
 #' \code{s} (ticket ID and title), or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
+#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
+#'
+#' @importFrom tidyr unnest separate spread
+#' @import dplyr
+#' @importFrom tibble tibble
+#' @import stringr
 #'
 #' @examples
 #' \dontrun{
 #' # To return all un-owned tickets on a queue:
-#' rt_search("https://server.name/rt/",
-#' query="Queue='some_queue'AND(Owner='Nobody')")
+#' rt_search(query = "Queue='some_queue'AND(Owner='Nobody')")
 #' }
 
-rt_search <- function(base, query, orderBy=NULL, format="l") {
-  url <- paste0(base, "/REST/1.0/search/ticket?query=", query)
+rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt_base")) {
+  base_api <- paste(stringr::str_replace(rt_base, "\\/$", ""), # removes trailing slash from base URL just in case
+                    "REST", "1.0", sep = "/")
+
+  url <- paste0(base_api, "/search/ticket?query=", query)
 
   if (!is.null(orderBy)) {
     url <- paste0(url, "&orderBy=", orderBy)
@@ -32,50 +39,27 @@ rt_search <- function(base, query, orderBy=NULL, format="l") {
   req <- httr::GET(url)
 
   if (req$status_code != 200) {
-    stop(req, call. = FALSE)
+    stop(req, call. = FALSE) #maybe not needed?
   }
 
   if (format != "l") {
     return(req)
   }
 
-  result_split <- lapply(stringr::str_split(httr::content(req), "\\n--\\n"), stringr::str_split, "\\n")[[1]]
-
-  parse_rt_result <- function(x) {
-    lines_f <- Filter(function(x) { stringr::str_detect(x, ": ")}, x)
-    parts <- stringr::str_split(lines_f, ": ")
-    x <- do.call(list, lapply(parts, function(p) paste0(p[-1], collapse = ": ")))
-    names(x) <- lapply(parts, function(p) p[[1]])
-
-    x
+  not_empty <- function(column) {
+    !all(column == "" | is.na(column))
   }
 
-  y <- lapply(result_split, parse_rt_result)
+  result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
+    dplyr::mutate(content = stringr::str_split(content, "\\n"),
+                  line = 1:dplyr::n()) %>%
+    tidyr::unnest() %>%
+    dplyr::filter(content != "") %>%
+    tidyr::separate(content, c("colname", "value"), sep = ":", fill = "right", extra = "merge") %>%
+    tidyr::spread(colname, value) %>%
+    dplyr::mutate(id = stringr::str_replace(id, "ticket/", "")) %>% # remove "ticket/ from id
+    dplyr::select_if(not_empty)
 
-  result <- data.frame()
-
-  for (z in y) {
-    zdf <- as.data.frame(z, stringsAsFactors = FALSE)
-
-    if (nrow(result) > 0 ) {
-      for (name in setdiff(names(result), names(zdf))) {
-        zdf[,name] <- NA
-      }
-
-      for (name in setdiff(names(zdf), names(result))) {
-        result[,name] <- NA
-      }
-    }
-
-    result <- rbind(result, zdf)
-  }
-
-  # Post-process results
-  # Remove ticket/ from `id` col
-  result$id <- str_replace_all(result$id, "ticket/", "")
-
-  # Resolved, Told, LastUpdated,Created,Started
-
-  result
+  return(result)
 }
 
