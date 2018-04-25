@@ -2,24 +2,26 @@
 #'
 #' Search RT for tickets that fit your query.
 #'
-#' @param base (character) The base URL that hosts RT for your organization
 #' @param query (character) A query
 #' @param orderBy (character) How to order your search results
 #' @param format (character) Either \code{i} (ticket ID only),
 #' \code{s} (ticket ID and title), or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
+#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # To return all un-owned tickets on a queue:
-#' rt_search("https://server.name/rt/",
-#' query="Queue='some_queue'AND(Owner='Nobody')")
+#' rt_search(query="Queue='some_queue'AND(Owner='Nobody')")
 #' }
 
-rt_search <- function(base, query, orderBy=NULL, format="l") {
-  url <- paste0(base, "/REST/1.0/search/ticket?query=", query)
+rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt_base")) {
+  base_api <- paste(stringr::str_replace(rt_base, "\\/$", ""), # removes trailing slash from base URL just in case
+                    "REST", "1.0", sep = "/")
+
+  url <- paste0(base_api, "/search/ticket?query=", query)
 
   if (!is.null(orderBy)) {
     url <- paste0(url, "&orderBy=", orderBy)
