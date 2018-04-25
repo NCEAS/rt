@@ -4,11 +4,10 @@
 \alias{rt_search}
 \title{Search RT}
 \usage{
-rt_search(base, query, orderBy = NULL, format = "l")
+rt_search(query, orderBy = NULL, format = "l",
+  rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{base}{(character) The base URL that hosts RT for your organization}
-
 \item{query}{(character) A query}
 
 \item{orderBy}{(character) How to order your search results}
@@ -16,6 +15,8 @@ rt_search(base, query, orderBy = NULL, format = "l")
 \item{format}{(character) Either \code{i} (ticket ID only),
 \code{s} (ticket ID and title), or \code{l} (full ticket metadata).
 Defaults to \code{l}.}
+
+\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
 Search RT for tickets that fit your query.
@@ -23,7 +24,6 @@ Search RT for tickets that fit your query.
 \examples{
 \dontrun{
 # To return all un-owned tickets on a queue:
-rt_search("https://server.name/rt/",
-query="Queue='some_queue'AND(Owner='Nobody')")
+rt_search(query = "Queue='some_queue'AND(Owner='Nobody')")
 }
 }
