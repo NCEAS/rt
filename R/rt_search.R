@@ -36,7 +36,7 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
     url <- paste0(url, "&format=", format)
   }
 
-  req <- httr::GET(url)
+  req <- httr::GET(URLencode(url))
 
   if (stringr::str_detect(httr::content(req), "Bad request")) {
     stop(httr::content(req), call. = FALSE)
@@ -57,7 +57,6 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
     dplyr::filter(content != "") %>%
     tidyr::separate(content, c("colname", "value"), sep = ":", fill = "right", extra = "merge") %>%
     tidyr::spread(colname, value) %>%
-    dplyr::mutate(id = stringr::str_replace(id, "ticket/", "")) %>% # remove "ticket/ from id
     dplyr::select_if(not_empty)
 
   return(result)
