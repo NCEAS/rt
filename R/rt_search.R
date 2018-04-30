@@ -52,7 +52,7 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
 
   result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
     dplyr::mutate(content = stringr::str_split(content, "\\n"),
-                  line = 1:dplyr::n()) %>%
+                  line = 1:n()) %>%
     tidyr::unnest() %>%
     dplyr::filter(content != "") %>%
     tidyr::separate(content, c("colname", "value"), sep = ":", fill = "right", extra = "merge") %>%
