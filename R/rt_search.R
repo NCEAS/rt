@@ -39,7 +39,7 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
   req <- httr::GET(url)
 
   if (stringr::str_detect(httr::content(req), "Bad request")) {
-    stop(cat(httr::content(req)), call. = FALSE)
+    stop(httr::content(req), call. = FALSE)
   }
 
   if (format != "l") {
