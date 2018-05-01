@@ -1,0 +1,121 @@
+---
+title: "Searching RT"
+author: "Irene Steves"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+# knitr::opts_chunk$set(eval = FALSE)
+library(knitr)
+library(kableExtra)
+
+format_result <- function(query_result) {
+  query_result %>% 
+    knitr::kable(format = "html") %>% 
+    kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
+    kableExtra::scroll_box(width = "100%",
+                           height = "400px") #display concisely
+}
+```
+
+Searching through RT requires some knowledge of queries, but it's easy to do once you understand the syntax and have some examples to work off of. Best Practical's [Query Builder documentation](https://docs.bestpractical.com/rt/4.4.0/query_builder.html) and [Ticket SQL wiki page](https://rt-wiki.bestpractical.com/wiki/TicketSQL) highlight some of the key aspects of query-building. In this vignette, I've included some of common query examples.
+
+## Set-up
+
+To use the `rt` R package, start by connecting to your RT instance. For the purpose of this vignette, we'll use Best Practical's [demo RT instance](https://demo.bestpractical.com/). Normally, we would use `rt_login_interactive()` rather than `rt_login()` to avoid saving your username and password in your R script.
+
+```{r message = FALSE}
+library(rt)
+
+options(rt_base = "https://demo.bestpractical.com/") #set your server name
+rt_login(user = "guest", pass = "guest") #generally, you'd use rt_login_interactive()
+```
+
+Once you are successfully logged in, you can start interacting with RT!
+
+*Note: if you restart your R session, you'll have to log back into RT.*
+
+## Writing a query
+
+The `rt_search` function makes it easy to search through your tickets. These are the primary query-able fields in RT:
+
+```{r echo = FALSE}
+c("AdminCc", "Created", "Creator", "Due", "FinalPriority", "id", "InitialPriority", "LastUpdated", "Owner", "Priority", "Queue", "Requestors", "Resolved", "Started", "Starts", "Status", "Subject", "TimeEstimated", "TimeLeft", "TimeWorked", "Told")
+```
+
+These fields are some of the most commonly queried:
+
+- **id** - the ticket #
+- **Subject** - the subject of the ticket
+- **Owner** - the current owner of the ticket
+- **Queue** - the queue(s) you want to search through
+
+To build a query, you'll want to use the following vocabulary:
+
+- `AND` or `OR` to join multiple query parameters together
+- `=` to specify that a parameter `is` or is `equal to` something
+- `!=` to specify that a parameter `is not` or is `not equal to` something
+- `<` or `>` to specify that a parameter `less than` (`before`) or `greater than` (`after`) something
+- `LIKE` to specify that a parameter `matches` something
+- `NOT LIKE` to specify that a parameter `doesn't match` something
+
+## Example queries
+
+To search through your tickets, input your query as a string (enclose it in quotes). 
+
+```{r}
+result <- rt_search(query = "Queue = 'General'")
+```
+
+```{r echo = FALSE}
+format_result(result)
+```
+
+You can search multiple parameters using `AND` or `OR` to combine them.
+
+```{r}
+result <- rt_search("Queue = 'General' AND Subject LIKE 'test'")
+```
+
+```{r echo = FALSE}
+format_result(result)
+```
+
+For numeric and date/time fields, you can use `>`/`>=`/`<`/`<=` in addition to `=`.
+
+```{r}
+result <- rt_search("Created > '2018-04-04'")
+```
+
+```{r echo = FALSE}
+format_result(result)
+```
+
+You can also use special [date syntax](https://rt-wiki.bestpractical.com/wiki/TicketSQL#Date_Syntax) for more options.
+
+```{r}
+result <- rt_search("Created >= '2 days ago'")
+```
+
+```{r echo = FALSE}
+format_result(result)
+```
+
+Use parentheses to group query parameters together.
+
+```{r}
+result <- rt_search(query = "(Status = 'new' OR Status = 'open') AND Queue = 'General'")
+```
+
+```{r echo = FALSE}
+format_result(result)
+```
+
+## Logging out
+
+placeholder until I figure it out!
