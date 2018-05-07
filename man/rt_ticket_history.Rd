@@ -4,18 +4,32 @@
 \alias{rt_ticket_history}
 \title{Get ticket history}
 \usage{
-rt_ticket_history(base, ticket)
+rt_ticket_history(ticket, format = "l", rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{base}{(character) The base URL that hosts RT for your organization}
-
 \item{ticket}{(numeric) The ticket identifier}
+
+\item{format}{(character) Either  \code{s} (ticket ID and subject)
+or \code{l} (full ticket metadata).
+Defaults to \code{l}.}
+
+\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
 Retrieves attachment information using the GET method.
 }
 \examples{
 \dontrun{
-rt_ticket_history("https://server.name/rt/", 12345)
+# Log in to RT
+options(rt_base = "https://demo.bestpractical.com")
+rt_login(user = "guest", pass = "guest")
+
+# Get the full ticket history
+history_l <- rt_ticket_history(990)
+# View the first correspondence/comment; use cat() to display the formatting
+cat(history_l[1])
+
+# Get just the ticket ID and subject
+rt_ticket_history(990, format = "s")
 }
 }

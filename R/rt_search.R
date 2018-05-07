@@ -15,6 +15,7 @@
 #' @import dplyr
 #' @importFrom tibble tibble
 #' @import stringr
+#' @importFrom utils URLencode
 #'
 #' @examples
 #' \dontrun{
@@ -36,7 +37,7 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
     url <- paste0(url, "&format=", format)
   }
 
-  req <- httr::GET(URLencode(url))
+  req <- httr::GET(utils::URLencode(url))
 
   if (stringr::str_detect(httr::content(req), "Bad request")) {
     stop(httr::content(req), call. = FALSE)
