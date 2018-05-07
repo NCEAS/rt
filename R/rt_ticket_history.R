@@ -42,7 +42,8 @@ rt_ticket_history <- function(ticket, format = "l", rt_base = getOption("rt_base
     url <- paste0(url, "?format=l")
   }
 
-  req <- httr::GET(url)
+  req <- httr::GET(url,
+                   httr::user_agent("https://github.com/nceas/rt"))
 
   if(format == "l"){
     history <- stringr::str_split(content(req), "\\n\\n--\\n\\n")[[1]]
