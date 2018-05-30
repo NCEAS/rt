@@ -26,15 +26,16 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
   base_api <- paste(stringr::str_replace(rt_base, "\\/$", ""), # removes trailing slash from base URL just in case
                     "REST", "1.0", sep = "/")
 
-  url <- paste0(base_api, "/search/ticket?query=", query)
+  #based on httr::modify_url()
+  l <- plyr::compact(list(query = query,
+                     orderBy = orderBy,
+                     format = format))
 
-  if (!is.null(orderBy)) {
-    url <- paste0(url, "&orderBy=", orderBy)
-  }
+  params <- paste(paste0(names(l), "=", l), collapse = "&")
 
-  if (!is.null(format)) {
-    url <- paste0(url, "&format=", format)
-  }
+  url <- paste0(base_api, "/search/ticket?", params)
+
+
 
   req <- httr::GET(URLencode(url))
 
