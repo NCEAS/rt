@@ -35,8 +35,7 @@ tabularize_ticket <- function(text) {
 #' }
 
 rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt_base")) {
-  base_api <- paste(stringr::str_replace(rt_base, "\\/$", ""), # removes trailing slash from base URL just in case
-                    "REST", "1.0", sep = "/")
+  base_api <- rt_url(rt_base, "search/ticket?")
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package
@@ -46,9 +45,9 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
 
   params <- paste(paste0(names(l), "=", l), collapse = "&")
 
-  url <- paste0(base_api, "/search/ticket?", params)
+  url <- utils::URLencode(paste0(base_api, params))
 
-  req <- httr::GET(utils::URLencode(url))
+  req <- httr::GET(url)
 
   if (stringr::str_detect(httr::content(req), "Bad request")) {
     stop(httr::content(req), call. = FALSE)
