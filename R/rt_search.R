@@ -1,3 +1,13 @@
+tabularize_ticket <- function(text) {
+  # Helper function to help tabularize ticket text from search results
+  ticket_headers <- stringr::str_extract_all(text, "\\n[a-zA-Z0-9{}.]+:")[[1]] %>%
+    str_replace_all("\\n|:", "")
+  ticket_content <- stringr::str_split(text, "\\n[a-zA-Z0-9{}.]+:")[[1]][-1] %>%
+    trimws()
+
+  return(data.frame(ticket_headers, ticket_content, stringsAsFactors = FALSE))
+}
+
 #' Search RT
 #'
 #' Search RT for tickets that fit your query.
@@ -16,6 +26,7 @@
 #' @importFrom tibble tibble
 #' @import stringr
 #' @importFrom utils URLencode
+#' @importFrom plyr compact
 #'
 #' @examples
 #' \dontrun{
@@ -28,6 +39,7 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
                     "REST", "1.0", sep = "/")
 
   #based on httr::modify_url()
+  #possible TODO - turn this into its own function that can be used internally in the package
   l <- plyr::compact(list(query = query,
                      orderBy = orderBy,
                      format = format))
@@ -35,8 +47,6 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
   params <- paste(paste0(names(l), "=", l), collapse = "&")
 
   url <- paste0(base_api, "/search/ticket?", params)
-
-
 
   req <- httr::GET(utils::URLencode(url))
 
@@ -48,19 +58,14 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
     return(req)
   }
 
-  not_empty <- function(column) {
-    !all(column == "" | is.na(column))
-  }
-
   result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
-    dplyr::mutate(content = stringr::str_split(content, "\\n"),
-                  line = 1:n()) %>%
+    mutate(line = 1:n(),
+           content = lapply(content, tabularize_ticket)) %>%
     tidyr::unnest() %>%
-    dplyr::filter(content != "") %>%
-    tidyr::separate(content, c("colname", "value"), sep = ":", fill = "right", extra = "merge") %>%
-    tidyr::spread(colname, value) %>%
-    dplyr::select_if(not_empty)
+    tidyr::spread(ticket_headers, ticket_content) %>%
+    dplyr::select_if(function(column) {!all(column == "" | is.na(column))}) #not empty
 
   return(result)
 }
+
 
