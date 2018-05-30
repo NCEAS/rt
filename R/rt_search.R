@@ -5,7 +5,7 @@
 #' @param query (character) A query
 #' @param orderBy (character) How to order your search results
 #' @param format (character) Either \code{i} (ticket ID only),
-#' \code{s} (ticket ID and title), or \code{l} (full ticket metadata).
+#' \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
 #' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
@@ -15,6 +15,7 @@
 #' @import dplyr
 #' @importFrom tibble tibble
 #' @import stringr
+#' @importFrom utils URLencode
 #'
 #' @examples
 #' \dontrun{
@@ -37,7 +38,7 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
 
 
 
-  req <- httr::GET(URLencode(url))
+  req <- httr::GET(utils::URLencode(url))
 
   if (stringr::str_detect(httr::content(req), "Bad request")) {
     stop(httr::content(req), call. = FALSE)
