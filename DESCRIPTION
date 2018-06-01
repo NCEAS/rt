@@ -15,7 +15,6 @@ LazyData: true
 Depends: httr
 Imports: dplyr,
   getPass,
-  plyr,
   stringr,
   tibble,
   tidyr
