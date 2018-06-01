@@ -26,7 +26,6 @@ tabularize_ticket <- function(text) {
 #' @importFrom tibble tibble
 #' @import stringr
 #' @importFrom utils URLencode
-#' @importFrom plyr compact
 #'
 #' @examples
 #' \dontrun{
@@ -39,9 +38,10 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package
-  l <- plyr::compact(list(query = query,
-                     orderBy = orderBy,
-                     format = format))
+  l <- Filter(Negate(is.null), #remove nulls, equivalent to purrr::compact
+              list(query = query,
+                   orderBy = orderBy,
+                   format = format))
 
   params <- paste(paste0(names(l), "=", l), collapse = "&")
 
