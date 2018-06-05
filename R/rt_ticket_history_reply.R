@@ -41,8 +41,3 @@ rt_ticket_history_reply <- function(ticket_id,
 
   #not tested
 }
-
-rt_ticket_history_reply(11,
-                        "Thank you.
-
-                        Have a great day!")
