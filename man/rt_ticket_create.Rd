@@ -44,7 +44,7 @@ rt_ticket_create(queue = NULL, requestor = NULL, subject = NULL,
 \item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
-Update an existing ticket with new information.
+Create a new ticket in RT.
 }
 \examples{
 \dontrun{

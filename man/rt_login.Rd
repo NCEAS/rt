@@ -18,7 +18,7 @@ Use this to log into RT at the start of your session.
 }
 \examples{
 \dontrun{
-options(rt_base = "https://server.name/rt/")
+options(rt_base = "https://demo.bestpractical.com/")
 rt_login("my_username", "my_password")
 }
 }
