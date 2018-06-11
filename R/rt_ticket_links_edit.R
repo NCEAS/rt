@@ -24,11 +24,11 @@ rt_ticket_links_edit <- function(ticket_id,
                                  rt_base = getOption("rt_base")) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
-  params <- purrr::compact(list(ReferredToBy = referred_to_by,
-                                DependedOnBy = depended_on_by,
-                                MemberOf = member_of,
-                                RefersTo = refers_to,
-                                DependsOn = depends_on))
+  params <- compact(list(ReferredToBy = referred_to_by,
+                         DependedOnBy = depended_on_by,
+                         MemberOf = member_of,
+                         RefersTo = refers_to,
+                         DependsOn = depends_on))
   #HasMember is invalid here but used in rt_ticket_links
 
   links_edit <- paste(names(params), params, sep = ": ", collapse = "\n")

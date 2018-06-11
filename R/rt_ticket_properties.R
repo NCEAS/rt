@@ -6,8 +6,6 @@
 #' @param ticket (numeric) The ticket identifier
 #'
 #' @export
-#' 
-#' @importFrom httr GET
 #'
 #' @examples
 #' \dontrun{

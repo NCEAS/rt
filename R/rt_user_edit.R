@@ -20,22 +20,22 @@
 #' }
 
 rt_user_edit <- function(user_id,
-                           password,
-                           name = NULL,
-                           email_address = NULL,
-                           real_name = NULL,
-                           organization = NULL,
-                           privileged = NULL,
-                           disabled = NULL,
-                           rt_base = getOption("rt_base")) {
+                         password,
+                         name = NULL,
+                         email_address = NULL,
+                         real_name = NULL,
+                         organization = NULL,
+                         privileged = NULL,
+                         disabled = NULL,
+                         rt_base = getOption("rt_base")) {
 
-  params <- purrr::compact(list(Name = name,
-                                Password = password,
-                                EmailAddress = email_address,
-                                RealName = real_name,
-                                Organization = organization,
-                                Privileged = privileged,
-                                Disabled = disabled))
+  params <- compact(list(Name = name,
+                         Password = password,
+                         EmailAddress = email_address,
+                         RealName = real_name,
+                         Organization = organization,
+                         Privileged = privileged,
+                         Disabled = disabled))
   #HasMember is invalid here but used in rt_ticket_links
 
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")

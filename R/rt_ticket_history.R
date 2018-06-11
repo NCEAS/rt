@@ -10,7 +10,6 @@
 #'
 #' @export
 #'
-#' @importFrom httr GET
 #' @import stringr
 #' @importFrom tidyr separate
 #' @import dplyr

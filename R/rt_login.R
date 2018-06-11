@@ -8,12 +8,11 @@
 #'
 #' @export
 #'
-#' @import httr
 #' @import stringr
 #'
 #' @examples
 #' \dontrun{
-#' options(rt_base = "https://server.name/rt/")
+#' options(rt_base = "https://demo.bestpractical.com/")
 #' rt_login("my_username", "my_password")
 #' }
 

@@ -15,7 +15,6 @@
 #' @import dplyr
 #' @importFrom tibble tibble
 #' @import stringr
-#' @importFrom utils URLencode
 #'
 #' @examples
 #' \dontrun{
@@ -45,21 +44,21 @@ rt_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt
 
   if (format != "l") {
     return(req)
+  } else {
+    not_empty <- function(column) {
+      !all(column == "" | is.na(column))
+    }
+
+    result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
+      dplyr::mutate(content = stringr::str_split(content, "\\n"),
+                    line = 1:n()) %>%
+      tidyr::unnest() %>%
+      dplyr::filter(content != "") %>%
+      tidyr::separate(content, c("colname", "value"), sep = ":", fill = "right", extra = "merge") %>%
+      tidyr::spread(colname, value) %>%
+      dplyr::select_if(not_empty)
+
+    return(result)
   }
-
-  not_empty <- function(column) {
-    !all(column == "" | is.na(column))
-  }
-
-  result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
-    dplyr::mutate(content = stringr::str_split(content, "\\n"),
-                  line = 1:n()) %>%
-    tidyr::unnest() %>%
-    dplyr::filter(content != "") %>%
-    tidyr::separate(content, c("colname", "value"), sep = ":", fill = "right", extra = "merge") %>%
-    tidyr::spread(colname, value) %>%
-    dplyr::select_if(not_empty)
-
-  return(result)
 }
 
