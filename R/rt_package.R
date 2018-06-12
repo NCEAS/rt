@@ -13,5 +13,5 @@ NULL
 
 if(getRversion() >= "2.1.15") {
   utils::globalVariables(c(".",
-                           "colname", "value")) # for search
+                           "colname", "value", "ticket_headers", "ticket_content")) # for search
 }
