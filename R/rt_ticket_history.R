@@ -1,7 +1,6 @@
 #' Get ticket history
 #'
-#' Retrieves attachment information using the GET method.
-#'
+#' Retrieves information about the ticket history
 #'
 #' @param ticket (numeric) The ticket identifier
 #' @param format (character) Either  \code{s} (ticket ID and subject)
@@ -11,7 +10,6 @@
 #'
 #' @export
 #'
-#' @importFrom httr GET
 #' @import stringr
 #' @importFrom tidyr separate
 #' @import dplyr

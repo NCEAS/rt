@@ -8,7 +8,6 @@
 #'
 #' @export
 #'
-#' @import httr
 #' @import stringr
 #'
 #' @examples
