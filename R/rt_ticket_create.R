@@ -71,7 +71,3 @@ rt_ticket_create <- function(queue = NULL,
 
   #need to check
 }
-
-text = "some text
-and more text
-and even more text"
