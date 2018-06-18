@@ -62,7 +62,7 @@ rt_ticket_create <- function(queue = NULL,
   ticket_content <- paste(names(params), params, sep = ": ", collapse = "\n")
 
   if(exists("custom_field") && length(custom_field) > 0){
-    cf <- sprintf("CF-%s: %s", names(custom_field), custom_field)
+    cf <- sprintf("\nCF-%s: %s", names(custom_field), custom_field)
     ticket_content <- paste(ticket_content, cf)
   }
 
