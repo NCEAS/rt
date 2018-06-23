@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_attachments(12345)
+#' rt_ticket_attachments(1)
 #' }
 
 rt_ticket_attachments <- function(ticket_id,
@@ -17,5 +17,5 @@ rt_ticket_attachments <- function(ticket_id,
 
   url <- rt_url(rt_base, "ticket", ticket_id, "attachments")
 
-  httr::GET(url)
+  rt_GET(url)
 }

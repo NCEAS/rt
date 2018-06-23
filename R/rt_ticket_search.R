@@ -29,7 +29,7 @@ tabularize_ticket <- function(text) {
 #' @examples
 #' \dontrun{
 #' # To return all un-owned tickets on a queue:
-#' rt_search(query = "Queue='some_queue'AND(Owner='Nobody')")
+#' rt_ticket_search(query = "Queue='General'AND(Status='new')")
 #' }
 
 rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt_base")) {
@@ -37,8 +37,7 @@ rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base = getOpt
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package
-  l <- Filter(Negate(is.null), #remove nulls, equivalent to purrr::compact
-              list(query = query,
+  l <- compact(list(query = query,
                    orderBy = orderBy,
                    format = format))
 
@@ -46,24 +45,24 @@ rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base = getOpt
 
   url <- utils::URLencode(paste0(base_api, params))
 
-  req <- httr::GET(url)
+  rt_GET(url)
 
-  if (stringr::str_detect(httr::content(req), "Bad request")) {
-    stop(httr::content(req), call. = FALSE)
-  }
-
-  if (format != "l") {
-    return(req)
-  } else {
-    result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
-      mutate(line = 1:n(),
-             content = lapply(content, tabularize_ticket)) %>%
-      tidyr::unnest() %>%
-      tidyr::spread(ticket_headers, ticket_content) %>%
-      dplyr::select_if(function(column) {!all(column == "" | is.na(column))}) #not empty
-
-    return(result)
-  }
+  # if (stringr::str_detect(httr::content(req), "Bad request")) {
+  #   stop(httr::content(req), call. = FALSE)
+  # }
+  #
+  # if (format != "l") {
+  #   return(req)
+  # } else {
+  #   result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
+  #     mutate(line = 1:n(),
+  #            content = lapply(content, tabularize_ticket)) %>%
+  #     tidyr::unnest() %>%
+  #     tidyr::spread(ticket_headers, ticket_content) %>%
+  #     dplyr::select_if(function(column) {!all(column == "" | is.na(column))}) #not empty
+  #
+  #   return(result)
+  # }
 
 }
 

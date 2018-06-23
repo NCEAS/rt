@@ -18,5 +18,5 @@ rt_user_properties <- function(user_id, rt_base = getOption("rt_base")) {
 
   url <- rt_url(rt_base, "user", user_id)
 
-  httr::GET(url)
+  httr::GET(url, httr::user_agent("https://github.com/nceas/rt"))
 }

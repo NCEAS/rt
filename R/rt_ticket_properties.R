@@ -9,12 +9,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_properties("https://server.name/rt/", 12345)
+#' rt_ticket_properties(15)
 #' }
 
-rt_ticket_properties <- function(ticket_id, rt_base) {
-
+rt_ticket_properties <- function(ticket_id, rt_base = getOption("rt_base")) {
   url <- rt_url(rt_base, "ticket", ticket_id, "show")
-
-  httr::GET(url)
+  rt_GET(url)
 }

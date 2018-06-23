@@ -18,5 +18,5 @@ rt_ticket_links <- function(ticket_id, rt_base = getOption("rt_base")) {
 
   url <- rt_url(rt_base, "ticket", ticket_id, "links", "show")
 
-  httr::GET(url)
+  rt_GET(url)
 }

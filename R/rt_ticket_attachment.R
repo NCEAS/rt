@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_attachment(12345, 56789)
+#' rt_ticket_attachment(2, 1)
 #' }
 
 rt_ticket_attachment <- function(ticket_id,
@@ -18,5 +18,5 @@ rt_ticket_attachment <- function(ticket_id,
                                  rt_base = getOption("rt_base")) {
 
   url <- rt_url(rt_base, "ticket", ticket_id, "attachments", attachment_id)
-  httr::GET(url)
+  rt_GET(url)
 }

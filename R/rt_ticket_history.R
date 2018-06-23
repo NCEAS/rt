@@ -40,17 +40,16 @@ rt_ticket_history <- function(ticket, format = "l", rt_base = getOption("rt_base
     url <- paste0(url, "?format=l")
   }
 
-  req <- httr::GET(url,
-                   httr::user_agent("https://github.com/nceas/rt"))
-
-  if(format == "l"){
-    history <- stringr::str_split(content(req), "\\n\\n--\\n\\n")[[1]]
-    print(cat(history))
-  } else {
-    history <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n")[[1]]) %>%
-      dplyr::filter(str_detect(content, ":")) %>%
-      tidyr::separate(content, c("ticket", "subject"), sep = ": ", extra = "merge")
-  }
-
-  return(history)
+  rt_GET(url)
+#
+#   if(format == "l"){
+#     history <- stringr::str_split(content(req), "\\n\\n--\\n\\n")[[1]]
+#     print(cat(history))
+#   } else {
+#     history <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n")[[1]]) %>%
+#       dplyr::filter(str_detect(content, ":")) %>%
+#       tidyr::separate(content, c("ticket", "subject"), sep = ": ", extra = "merge")
+#   }
+#
+#   return(history)
 }
