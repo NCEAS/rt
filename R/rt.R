@@ -61,7 +61,7 @@ parse_ticket <- function(resp_cont) {
 #'
 #' Get an RT response and format it into an S3 object
 #'
-#' @param url (character) The base URL that hosts RT for your organization
+#' @param url (character) The full RT URL
 #'
 
 rt_GET <- function(url) {
