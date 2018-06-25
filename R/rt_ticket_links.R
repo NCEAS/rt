@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_links(20)
+#' rt_ticket_links(1007)
 #' }
 
 rt_ticket_links <- function(ticket_id, rt_base = getOption("rt_base")) {

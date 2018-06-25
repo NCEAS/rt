@@ -14,5 +14,7 @@ NULL
 if(getRversion() >= "2.1.15") {
   utils::globalVariables(c(".",
                            "colname", "value", "ticket_headers", "ticket_content",
-                           "fields", "values")) # for search
+                           "fields", "values", # for search
+                           "history_id", "history_name", # for history
+                           "id", "attachment_id", "attachment_name", "type_general", "type_specific", "size", "blank")) #attachment
 }
