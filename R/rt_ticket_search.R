@@ -1,13 +1,3 @@
-tabularize_ticket <- function(text) {
-  # Helper function to help tabularize ticket text from search results
-  ticket_headers <- stringr::str_extract_all(text, "\\n[a-zA-Z0-9{}.]+:")[[1]] %>%
-    str_replace_all("\\n|:", "")
-  ticket_content <- stringr::str_split(text, "\\n[a-zA-Z0-9{}.]+:")[[1]][-1] %>%
-    trimws()
-
-  return(data.frame(ticket_headers, ticket_content, stringsAsFactors = FALSE))
-}
-
 #' Search RT
 #'
 #' Search RT for tickets that fit your query.
@@ -29,42 +19,50 @@ tabularize_ticket <- function(text) {
 #' @examples
 #' \dontrun{
 #' # To return all un-owned tickets on a queue:
-#' rt_search(query = "Queue='some_queue'AND(Owner='Nobody')")
+#' rt_ticket_search(query = "Queue='General'AND(Status='new')")
 #' }
 
 rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt_base")) {
-  base_api <- rt_url(rt_base, "search/ticket?")
+  base_api <- rt_url(rt_base, "search", "ticket?")
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package
-  l <- Filter(Negate(is.null), #remove nulls, equivalent to purrr::compact
-              list(query = query,
-                   orderBy = orderBy,
-                   format = format))
+  inputs <- compact(list(query = utils::URLencode(query, reserved = TRUE),
+                         orderBy = orderBy,
+                         format = format))
 
-  params <- paste(paste0(names(l), "=", l), collapse = "&")
+  params <- paste(paste0(names(inputs), "=", inputs), collapse = "&")
 
-  url <- utils::URLencode(paste0(base_api, params))
+  url <- paste0(base_api, params)
 
-  req <- httr::GET(url)
+  out <- rt_GET(url)
 
-  if (stringr::str_detect(httr::content(req), "Bad request")) {
-    stop(httr::content(req), call. = FALSE)
+  if(format == "s"){
+    out$content <- out$content %>%
+      tidyr::gather(id, value)
   }
 
-  if (format != "l") {
-    return(req)
-  } else {
-    result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
-      mutate(line = 1:n(),
-             content = lapply(content, tabularize_ticket)) %>%
-      tidyr::unnest() %>%
-      tidyr::spread(ticket_headers, ticket_content) %>%
-      dplyr::select_if(function(column) {!all(column == "" | is.na(column))}) #not empty
-
-    return(result)
+  if(format == "i"){
+    out$content <- out$content %>%
+      stringr::str_split("\n")
   }
 
+  return(out)
+
+  # if (stringr::str_detect(httr::content(req), "Bad request")) {
+  #   stop(httr::content(req), call. = FALSE)
+  # }
+  #
+  # if (format != "l") {
+  #   return(req)
+  # } else {
+  #   result <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n--\\n")[[1]]) %>%
+  #     mutate(line = 1:n(),
+  #            content = lapply(content, tabularize_ticket)) %>%
+  #     tidyr::unnest() %>%
+  #     tidyr::spread(ticket_headers, ticket_content) %>%
+  #     dplyr::select_if(function(column) {!all(column == "" | is.na(column))}) #not empty
+  #
+  #   return(result)
+  # }
 }
-
-

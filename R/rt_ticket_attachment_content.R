@@ -1,6 +1,6 @@
-#' Get ticket attachment
+#' Get ticket attachment content
 #'
-#' Retrieves attachment metadata
+#' Retrieves attachment content
 #'
 #' @param ticket_id (numeric) The ticket identifier
 #' @param attachment_id (numeric) The attachment identifier
@@ -10,15 +10,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_attachment(2, 1)
+#' rt_ticket_attachment_content(2, 1)
 #' }
 
-rt_ticket_attachment <- function(ticket_id,
+rt_ticket_attachment_content <- function(ticket_id,
                                  attachment_id,
                                  rt_base = getOption("rt_base")) {
 
-  url <- rt_url(rt_base, "ticket", ticket_id, "attachments", attachment_id)
-  rt_GET(url)
-
-  #TODO: parse more?  currently Content & Headers catches stuff that could be split out further
+  url <- rt_url(rt_base, "ticket", ticket_id, "attachments", attachment_id, "content")
+  httr::GET(url)
+  #parse more? may be best to leave as is
 }

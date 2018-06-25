@@ -15,6 +15,5 @@
 rt_queue_properties <- function(queue_id, rt_base = getOption("rt_base")) {
   stopifnot(is.character(queue_id))
   url <- rt_url(rt_base, "queue", queue_id)
-  httr::GET(url)
-  #clean more?
+  rt_GET(url)
 }

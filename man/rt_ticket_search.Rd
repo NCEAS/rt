@@ -24,6 +24,6 @@ Search RT for tickets that fit your query.
 \examples{
 \dontrun{
 # To return all un-owned tickets on a queue:
-rt_search(query = "Queue='some_queue'AND(Owner='Nobody')")
+rt_ticket_search(query = "Queue='General'AND(Status='new')")
 }
 }

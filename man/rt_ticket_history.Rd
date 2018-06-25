@@ -4,10 +4,10 @@
 \alias{rt_ticket_history}
 \title{Get ticket history}
 \usage{
-rt_ticket_history(ticket, format = "l", rt_base = getOption("rt_base"))
+rt_ticket_history(ticket_id, format = "l", rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{ticket}{(numeric) The ticket identifier}
+\item{ticket_id}{(numeric) The ticket identifier}
 
 \item{format}{(character) Either  \code{s} (ticket ID and subject)
 or \code{l} (full ticket metadata).
@@ -25,11 +25,9 @@ options(rt_base = "https://demo.bestpractical.com")
 rt_login(user = "guest", pass = "guest")
 
 # Get the full ticket history
-history_l <- rt_ticket_history(990)
-# View the first correspondence/comment; use cat() to display the formatting
-cat(history_l[1])
-
+rt_ticket_history(992)
+#'
 # Get just the ticket ID and subject
-rt_ticket_history(990, format = "s")
+rt_ticket_history(992, format = "s")
 }
 }
