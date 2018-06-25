@@ -18,6 +18,6 @@ Retrieves attachment information using the GET method.
 }
 \examples{
 \dontrun{
-rt_ticket_attachment(12345, 56789)
+rt_ticket_attachment(2, 1)
 }
 }

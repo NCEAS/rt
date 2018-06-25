@@ -16,6 +16,6 @@ Retrieves attachment metadata using the GET method.
 }
 \examples{
 \dontrun{
-rt_ticket_attachments(12345)
+rt_ticket_attachments(1)
 }
 }

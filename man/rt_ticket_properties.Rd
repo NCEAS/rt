@@ -4,7 +4,7 @@
 \alias{rt_ticket_properties}
 \title{Get ticket properties}
 \usage{
-rt_ticket_properties(ticket_id, rt_base)
+rt_ticket_properties(ticket_id, rt_base = getOption("rt_base"))
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -16,6 +16,6 @@ Retrieves ticket properties
 }
 \examples{
 \dontrun{
-rt_ticket_properties("https://server.name/rt/", 12345)
+rt_ticket_properties(15)
 }
 }
