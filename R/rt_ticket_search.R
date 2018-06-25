@@ -27,13 +27,13 @@ rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base = getOpt
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package
-  inputs <- compact(list(query = query,
+  inputs <- compact(list(query = utils::URLencode(query, reserved = TRUE),
                          orderBy = orderBy,
                          format = format))
 
   params <- paste(paste0(names(inputs), "=", inputs), collapse = "&")
 
-  url <- utils::URLencode(paste0(base_api, params))
+  url <- paste0(base_api, params)
 
   out <- rt_GET(url)
 
