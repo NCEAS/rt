@@ -17,6 +17,6 @@ Gets the ticket links for a single ticket. If applicable, the following fields w
 }
 \examples{
 \dontrun{
-rt_ticket_links(20)
+rt_ticket_links(1007)
 }
 }

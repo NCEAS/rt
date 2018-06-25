@@ -12,10 +12,10 @@ rt_ticket_attachments(ticket_id, rt_base = getOption("rt_base"))
 \item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
-Retrieves attachment metadata using the GET method.
+Retrieves attachment metadata for a ticket
 }
 \examples{
 \dontrun{
-rt_ticket_attachments(1)
+rt_ticket_attachments(2)
 }
 }
