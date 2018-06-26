@@ -73,7 +73,7 @@ rt_GET <- function(url) {
   resp_cont <- httr::content(resp)
 
   # Since API does not return failure codes; need to parse content strings to check for errors
-  if (stringr::str_detect(resp_cont, "does not exist|Invalid")) {
+  if (!is.na(resp_cont) & stringr::str_detect(resp_cont, "does not exist|Invalid")) {
     stop(
       sprintf(
         "RT API request failed [%s]\n%s",
@@ -84,11 +84,13 @@ rt_GET <- function(url) {
     )
   }
 
-  parsed <- parse_ticket(resp_cont)
+  if(class(resp_cont) != "raw"){
+    resp_cont <- parse_ticket(resp_cont)
+  }
 
   structure(
     list(
-      content = parsed,
+      content = resp_cont,
       path = url,
       response = resp
     ),
