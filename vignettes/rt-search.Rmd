@@ -27,7 +27,7 @@ Searching through RT requires some knowledge of queries, but it's easy to do onc
 
 ## Set-up
 
-To use the `rt` R package, start by connecting to your RT instance. For the purpose of this vignette, we'll use Best Practical's [demo RT instance](https://demo.bestpractical.com/). Normally, we would use `rt_login_interactive()` rather than `rt_login()` to avoid saving your username and password in your R script.
+Load the `rt` package and connect with your RT instance.
 
 ```{r message = FALSE}
 library(rt)
@@ -36,13 +36,9 @@ options(rt_base = "https://demo.bestpractical.com/") #set your server name
 rt_login(user = "guest", pass = "guest") #generally, you'd use rt_login_interactive()
 ```
 
-Once you are successfully logged in, you can start interacting with RT!
-
-*Note: if you restart your R session, you'll have to log back into RT.*
-
 ## Writing a query
 
-The `rt_search` function makes it easy to search through your tickets. These are the fields that it will return by default, and that you can use to search through.
+The `rt_ticket_search` function makes it easy to search through your tickets. These are the fields that it will return by default, and that you can use to search through.
 
 ```{r echo = FALSE}
 c("AdminCc", "Created", "Creator", "Due", "FinalPriority", "id", "InitialPriority", "LastUpdated", "Owner", "Priority", "Queue", "Requestors", "Resolved", "Started", "Starts", "Status", "Subject", "TimeEstimated", "TimeLeft", "TimeWorked", "Told", "CF.{NAME_OF_CUSTOM_FIELD}")
@@ -73,35 +69,35 @@ To build a query, you'll want to use the following vocabulary:
 To search through your tickets, input your query as a string (enclose it in quotes). 
 
 ```{r}
-result <- rt_search(query = "Queue = 'General'")
+result <- rt_ticket_search(query = "Queue = 'General'")
 ```
 
 ```{r echo = FALSE}
-format_result(result)
+format_result(result$content)
 ```
 
 You can search multiple parameters using `AND` or `OR` to combine them.
 
 ```{r eval = FALSE}
-result <- rt_search("Queue = 'General' AND Subject LIKE 'test'")
+result <- rt_ticket_search("Queue = 'General' AND Subject LIKE 'test'")
 ```
 
 Use parentheses to group query parameters together.
 
 ```{r eval = FALSE}
-result <- rt_search(query = "(Status = 'new' OR Status = 'open') AND Queue = 'General'")
+result <- rt_ticket_search(query = "(Status = 'new' OR Status = 'open') AND Queue = 'General'")
 ```
 
 For numeric and date/time fields, you can use `>`/`>=`/`<`/`<=` in addition to `=`.
 
 ```{r eval = FALSE}
-result <- rt_search("Created > '2018-04-04'")
+result <- rt_ticket_search("Created > '2018-04-04'")
 ```
 
 You can also use special [date syntax](https://rt-wiki.bestpractical.com/wiki/TicketSQL#Date_Syntax) for more options.
 
 ```{r eval = FALSE}
-result <- rt_search("Created >= '2 days ago'")
+result <- rt_ticket_search("Created >= '2 days ago'")
 ```
 
 ## Common use-cases
@@ -109,12 +105,8 @@ result <- rt_search("Created >= '2 days ago'")
 One of the most common use-cases is searching through RT ticket content. 
 
 ```{r eval = FALSE}
-result <- rt_search("Content LIKE 'Can you please advise'")
+result <- rt_ticket_search("Content LIKE 'Can you please advise'")
 
 #how to search specific ticket
 #ticket history
 ```
-
-## Logging out
-
-placeholder until I figure it out!
