@@ -15,7 +15,7 @@ session. Keeps your log-in information private.
 }
 \examples{
 \dontrun{
-options(rt_base = "https://server.name/rt/")
+options(rt_base = "https://demo.bestpractical.com")
 rt_login_interactive()
 }
 }

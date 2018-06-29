@@ -11,9 +11,17 @@ You can install the development version from GitHub with:
 devtools::install_github("NCEAS/rt")
 ```
 
-## Development
+## Set-up
 
-TBD 
+To start using the `rt` R package, log in to your RT instance by setting the server URL in your `options` and using either the `rt_login()` or `rt_login_interactive()` functions. We recommend using `rt_login_interactive()` to avoid storing your username and password in your R script.
+
+```{r message = FALSE}
+library(rt)
+
+options(rt_base = "https://demo.bestpractical.com/") #set your server name
+rt_login(user = "guest", pass = "guest") #generally, you'd use rt_login_interactive()
+```
+Once you are successfully logged in, you can use R to read and write to RT.
 
 ## Support / Issues / Feedback
 

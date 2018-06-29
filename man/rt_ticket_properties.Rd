@@ -2,20 +2,20 @@
 % Please edit documentation in R/rt_ticket_properties.R
 \name{rt_ticket_properties}
 \alias{rt_ticket_properties}
-\title{Get ticket attachments}
+\title{Get ticket properties}
 \usage{
-rt_ticket_properties(base, ticket)
+rt_ticket_properties(ticket_id, rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{base}{(character) The base URL that hosts RT for your organization}
+\item{ticket_id}{(numeric) The ticket identifier}
 
-\item{ticket}{(numeric) The ticket identifier}
+\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
-Retrieves attachment metadata using the GET method.
+Retrieves ticket properties
 }
 \examples{
 \dontrun{
-rt_ticket_properties("https://server.name/rt/", 12345)
+rt_ticket_properties(15)
 }
 }

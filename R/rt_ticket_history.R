@@ -1,36 +1,60 @@
 #' Get ticket history
 #'
-#' Retrieves attachment information using the GET method.
+#' Retrieves information about the ticket history
 #'
-#' @param base (character) The base URL that hosts RT for your organization
-#' @param ticket (numeric) The ticket identifier
+#' @param ticket_id (numeric) The ticket identifier
+#' @param format (character) Either  \code{s} (ticket ID and subject)
+#' or \code{l} (full ticket metadata).
+#' Defaults to \code{l}.
+#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
-#' 
-#' @importFrom httr GET
+#'
 #' @import stringr
+#' @importFrom tidyr separate
+#' @import dplyr
+#' @importFrom tibble tibble
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_history("https://server.name/rt/", 12345)
+#' # Log in to RT
+#' options(rt_base = "https://demo.bestpractical.com")
+#' rt_login(user = "guest", pass = "guest")
+#'
+#' # Get the full ticket history
+#' rt_ticket_history(992)
+#' #'
+#' # Get just the ticket ID and subject
+#' rt_ticket_history(992, format = "s")
 #' }
 
-rt_ticket_history <- function(base, ticket) {
-  if (missing(ticket)) {
-    stop("'ticket' must be specified.", call. = FALSE)
+rt_ticket_history <- function(ticket_id, format = "l", rt_base = getOption("rt_base")) {
+  if (missing(ticket_id)) {
+    stop("'ticket_id' must be specified.", call. = FALSE)
   }
 
-  url <- paste0(base, "/REST/1.0/ticket/", as.character(ticket), "/history")
+  url <- rt_url(rt_base, "ticket", ticket_id, "history")
+  if(format == "l"){
+    url <- paste0(url, "?format=l")
+  }
 
-  req <- httr::GET(url)
-  history <- stringr::str_split(httr::content(req), "\\n")[[1]]
-  history <- Filter(function(x) { stringr::str_detect(x, ":")}, history)
-  transactions <- stringr::str_split(history, ": ")
-  ids <- lapply(transactions, function(x) x[1])
-  bodies <- lapply(transactions, function(x) x[2])
+  out <- rt_GET(url)
 
-  transactions_df <- data.frame(id = unlist(ids), body = unlist(bodies), stringsAsFactors = FALSE)
-  transactions_df <- transactions_df[order(transactions_df$id),]
+  if(format == "s"){
+    out$content <- out$content %>%
+      tidyr::gather(history_id, history_name)
+  }
 
-  transactions_df
+  return(out)
+
+#   if(format == "l"){
+#     history <- stringr::str_split(content(req), "\\n\\n--\\n\\n")[[1]]
+#     print(cat(history))
+#   } else {
+#     history <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n")[[1]]) %>%
+#       dplyr::filter(str_detect(content, ":")) %>%
+#       tidyr::separate(content, c("ticket", "subject"), sep = ": ", extra = "merge")
+#   }
+#
+#   return(history)
 }

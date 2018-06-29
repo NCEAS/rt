@@ -1,25 +1,18 @@
-#' Get ticket attachments
+#' Get ticket properties
 #'
-#' Retrieves attachment metadata using the GET method.
+#' Retrieves ticket properties
 #'
-#' @param base (character) The base URL that hosts RT for your organization
-#' @param ticket (numeric) The ticket identifier
+#' @param ticket_id (numeric) The ticket identifier
+#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
-#' 
-#' @importFrom httr GET
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_properties("https://server.name/rt/", 12345)
+#' rt_ticket_properties(15)
 #' }
 
-rt_ticket_properties <- function(base, ticket) {
-  if (missing(ticket)) {
-    stop("The argument 'ticket' must be specified.", call. = FALSE)
-  }
-
-  url <- paste0(base, "/REST/1.0/ticket/", as.character(ticket), "/show")
-
-  httr::GET(url)
+rt_ticket_properties <- function(ticket_id, rt_base = getOption("rt_base")) {
+  url <- rt_url(rt_base, "ticket", ticket_id, "show")
+  rt_GET(url)
 }

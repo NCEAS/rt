@@ -1,25 +1,32 @@
 #' Get ticket attachments
 #'
-#' Retrieves attachment metadata using the GET method.
+#' Retrieves attachment metadata for a ticket
 #'
-#' @param base (character) The base URL that hosts RT for your organization
-#' @param ticket (numeric) The ticket identifier
+#' @param ticket_id (numeric) The ticket identifier
+#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
-#' 
-#' @importFrom httr GET
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_attachments("https://server.name/rt/", 12345)
+#' rt_ticket_attachments(2)
 #' }
 
-rt_ticket_attachments <- function(base, ticket) {
-  if (missing(ticket)) {
-    stop("The argument 'ticket' must be specified.", call. = FALSE)
-  }
+rt_ticket_attachments <- function(ticket_id,
+                                   rt_base = getOption("rt_base")) {
+  url <- rt_url(rt_base, "ticket", ticket_id, "attachments")
+  out <- rt_GET(url)
 
-  url <- paste0(base, "/REST/1.0/ticket/", as.character(ticket), "/attachments")
+  #TODO: test how robust this is:
+  out$content <- out$content %>%
+    dplyr::mutate(Attachments = stringr::str_split(Attachments, ",\n             ")) %>%
+    tidyr::unnest(Attachments) %>%
+    tidyr::separate(Attachments, c("attachment_id", "attachment_name", "type_general", "type_specific", "size", "blank"),
+                    sep = "[^[:alnum:].]+", fill = "right") %>%
+    mutate(type = paste(type_general, type_specific, sep = "/")) %>%
+    select(attachment_id, attachment_name, type, size)
 
-  httr::GET(url)
+  return(out)
 }
+
+

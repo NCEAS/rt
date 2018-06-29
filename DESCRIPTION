@@ -12,9 +12,9 @@ Description: This package implements a number of the functions provided by the
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Depends: httr
 Imports: dplyr,
   getPass,
+  httr,
   stringr,
   tibble,
   tidyr

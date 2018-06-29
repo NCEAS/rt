@@ -8,13 +8,12 @@
 #'
 #' @export
 #'
-#' @import httr
 #' @import stringr
 #'
 #' @examples
 #' \dontrun{
-#' options(rt_base = "https://server.name/rt/")
-#' rt_login("my_username", "my_password")
+#' options(rt_base = "https://demo.bestpractical.com")
+#' rt_login(user = "guest", pass = "guest")
 #' }
 
 rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
@@ -51,7 +50,7 @@ rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
 #'
 #' @examples
 #' \dontrun{
-#' options(rt_base = "https://server.name/rt/")
+#' options(rt_base = "https://demo.bestpractical.com")
 #' rt_login_interactive()
 #' }
 
