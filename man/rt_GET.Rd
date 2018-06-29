@@ -7,7 +7,7 @@
 rt_GET(url)
 }
 \arguments{
-\item{url}{(character) The base URL that hosts RT for your organization}
+\item{url}{(character) The full RT URL}
 }
 \description{
 Get an RT response and format it into an S3 object
