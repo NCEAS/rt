@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/NCEAS/rt.svg?branch=master)](https://travis-ci.org/NCEAS/rt)
 
 # rt
-### *An R package for the [RT REST API](https://rt-wiki.bestpractical.com/wiki/REST)*
+### *An R package for the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST)*
 
 ## Installation
 
@@ -23,9 +23,25 @@ rt_login(user = "guest", pass = "guest") #generally, you'd use rt_login_interact
 ```
 Once you are successfully logged in, you can use R to read and write to RT.
 
+## `rt_api` class objects
+
+GET calls to the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST) are returned as `rt_api` objects, a list of 3 elements: 
+
+1. the `content`, generally returned as a tibble/data frame
+2. the `path` or URL that was accessed
+3. the HTTP `response` from the API.
+
+## Logging out
+
+To log out, use the `rt_logout` function or restart your R session.
+
+```{r eval = FALSE}
+rt_logout()
+```
+
 ## Support / Issues / Feedback
 
-TBD
+[Let us know](https://github.com/NCEAS/rt/issues) about any issues or bugs.
 
 ## Acknowledgements
 

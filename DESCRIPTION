@@ -18,5 +18,9 @@ Imports: dplyr,
   stringr,
   tibble,
   tidyr
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown,
+    kableExtra
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
