@@ -13,7 +13,7 @@
 #' rt_user_properties(1)
 #' }
 
-rt_user_properties <- function(user_id, rt_base = getOption("rt_base")) {
+rt_user <- function(user_id, rt_base = getOption("rt_base")) {
   stopifnot(is.character(user_id) | is.numeric(user_id))
 
   url <- rt_url(rt_base, "user", user_id)
