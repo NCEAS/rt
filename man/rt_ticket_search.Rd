@@ -8,7 +8,7 @@ rt_ticket_search(query, orderBy = NULL, format = "l",
   rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{query}{(character) A query}
+\item{query}{(character) Your query (See Details)}
 
 \item{orderBy}{(character) How to order your search results}
 
@@ -19,11 +19,11 @@ Defaults to \code{l}.}
 \item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }
 \description{
-Search RT for tickets that fit your query.
+Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
 }
 \examples{
 \dontrun{
 # To return all un-owned tickets on a queue:
-rt_ticket_search(query = "Queue='General'AND(Status='new')")
+rt_ticket_search(query = "Queue='General' AND (Status='new')")
 }
 }
