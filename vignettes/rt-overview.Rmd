@@ -1,5 +1,5 @@
 ---
-title: "Searching RT"
+title: "RT Overview"
 author: "Irene Steves and Bryce Mecum"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
