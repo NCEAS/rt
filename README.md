@@ -1,29 +1,58 @@
 [![Build Status](https://travis-ci.org/NCEAS/rt.svg?branch=master)](https://travis-ci.org/NCEAS/rt)
 
 # rt
-### *An R package for the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST)*
+
+An R package for the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST).
 
 ## Installation
 
 You can install the development version from GitHub with:
 
-```{r}
-devtools::install_github("NCEAS/rt")
+```r
+remotes::install_github("NCEAS/rt")
 ```
 
-## Set-up
+## Usage
 
-To start using the `rt` R package, log in to your RT instance by setting the server URL in your `options` and using either the `rt_login()` or `rt_login_interactive()` functions. We recommend using `rt_login_interactive()` to avoid storing your username and password in your R script.
+### Setup
 
-```{r message = FALSE}
+To start using the `rt` R package, log in to your RT instance by setting the server URL in using `Sys.setenv` and use `rt_login()` to log in and store your session locally:
+
+```r
 library(rt)
 
-options(rt_base = "https://demo.bestpractical.com/") #set your server name
-rt_login(user = "guest", pass = "guest") #generally, you'd use rt_login_interactive()
+Sys.setenv("RT_BASE_URL"="https://demo.bestpractical.com")
+rt_login()
 ```
-Once you are successfully logged in, you can use R to read and write to RT.
 
-## `rt_api` class objects
+Once you are successfully logged in, you're all set to use the package.
+The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST):
+
+- General
+  - Login: `rt_login()`
+  - Logout: `rt_logout()`
+- Tickets
+  - Ticket Properties: `rt_ticket()`
+  - Ticket Links: `rt_ticket_links()`
+  - Ticket Attachments: `rt_ticket_attachments()`
+  - Ticket Attachment: `rt_ticket_attachment()`
+  - Ticket Attachment Content: `rt_ticket_attachment_content()`
+  - Ticket History: `rt_ticket_history()`
+  - Ticket History Entry: `rt_ticket_history_entry()`
+  - Ticket Search: `rt_ticket_search()`
+  - Ticket Create: `rt_ticket_create()`
+  - Ticket Edit: `rt_ticket_edit()`
+  - Tickets History Reply: `rt_ticket_history_reply()`
+  - Ticket History Comment: `rt_ticket_history_comment()`
+  - Ticket Links Edit: `rt_ticket_links_edit()`
+- Users
+  - User Properties: `rt_user()`
+  - User Create: `rt_user_create()`
+  - User Edit: `rt_user_edit()`
+- Queues
+  - Queue Properties: `rt_queue()`
+
+### `rt_api` objects
 
 GET calls to the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST) are returned as `rt_api` objects, a list of 3 elements: 
 
@@ -31,13 +60,15 @@ GET calls to the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wik
 2. the `path` or URL that was accessed
 3. the HTTP `response` from the API.
 
-## Logging out
+### Logging out
 
-To log out, use the `rt_logout` function or restart your R session.
+To log out, use the `rt_logout` function (or restart your R session):
 
-```{r eval = FALSE}
+```r
 rt_logout()
 ```
+
+Note: Credentials for your `rt` session are stored using `httr`'s automatic re-use of cookies.
 
 ## Support / Issues / Feedback
 

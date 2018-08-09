@@ -38,12 +38,12 @@ parse_ticket <- function(resp_cont) {
   resp_processed <- tryCatch(
     lapply(resp_split,
            function(.x){
-             tibble(fields = stringr::str_extract_all(.x, "\n[^: ]+:")[[1]] %>%
+             tibble::tibble(fields = stringr::str_extract_all(.x, "\n[^: ]+:")[[1]] %>%
                       str_replace_all("\\n|:", "") %>%
                       trimws(),
                     values = stringr::str_split(.x, "\n[^: ]+:")[[1]][-1] %>%
                       trimws()) %>%
-               spread(fields, values)
+               tidyr::spread(fields, values)
            }),
     error = function(e) {NULL})
 
