@@ -6,8 +6,6 @@
 #' @param attachment_id (numeric) The attachment identifier
 #' @inheritParams rt_login
 #'
-#' @family attachments
-#'
 #' @export
 #'
 #' @examples

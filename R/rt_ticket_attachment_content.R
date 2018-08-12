@@ -4,8 +4,6 @@
 #'
 #' @inheritParams rt_ticket_attachment
 #'
-#' @family attachments
-#'
 #' @export
 #'
 #' @examples
