@@ -19,3 +19,8 @@ Retrieves attachment metadata for a ticket
 rt_ticket_attachments(2)
 }
 }
+\seealso{
+Other attachments: \code{\link{rt_ticket_attachment_content}},
+  \code{\link{rt_ticket_attachment}}
+}
+\concept{attachments}

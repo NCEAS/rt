@@ -4,7 +4,9 @@
 #'
 #' @param ticket_id (numeric) The ticket identifier
 #' @param attachment_id (numeric) The attachment identifier
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
+#' @inheritParams rt_login
+#'
+#' @family attachments
 #'
 #' @export
 #'

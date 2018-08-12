@@ -22,3 +22,8 @@ Retrieves attachment content
 rt_ticket_attachment_content(2, 1)
 }
 }
+\seealso{
+Other attachments: \code{\link{rt_ticket_attachments}},
+  \code{\link{rt_ticket_attachment}}
+}
+\concept{attachments}

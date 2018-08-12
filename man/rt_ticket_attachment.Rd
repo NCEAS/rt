@@ -4,7 +4,8 @@
 \alias{rt_ticket_attachment}
 \title{Get ticket attachment}
 \usage{
-rt_ticket_attachment(ticket_id, attachment_id, rt_base = getOption("rt_base"))
+rt_ticket_attachment(ticket_id, attachment_id,
+  rt_base = getOption("rt_base"))
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -21,3 +22,8 @@ Retrieves attachment metadata
 rt_ticket_attachment(2, 1)
 }
 }
+\seealso{
+Other attachments: \code{\link{rt_ticket_attachment_content}},
+  \code{\link{rt_ticket_attachments}}
+}
+\concept{attachments}

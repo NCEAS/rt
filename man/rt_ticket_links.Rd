@@ -7,7 +7,7 @@
 rt_ticket_links(ticket_id, rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{ticket_id}{(numeric|character) The ticket number}
+\item{ticket_id}{(numeric) The ticket identifier}
 
 \item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }

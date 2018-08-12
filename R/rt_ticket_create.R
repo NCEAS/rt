@@ -2,7 +2,7 @@
 #'
 #' Create a new ticket in RT.
 #'
-#' @param queue (character) Queue name
+#' @inheritParams rt_queue_properties
 #' @param requestor (character) Requestor email address
 #' @param subject (character) Ticket subject
 #' @param cc (character) Email address to cc
@@ -17,7 +17,7 @@
 #' @param due (character) Due date ?????
 #' @param text (character) Ticket content; if multi-line, prefix every line with a blank
 #' @param custom_field (vector) Takes a named vector of the custom field name and custom field value
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
+#' @inheritParams rt_login
 #'
 #' @export
 #'
@@ -26,7 +26,7 @@
 #' rt_ticket_create(priority = 2, custom_field = c(Description = "A description"))
 #' }
 
-rt_ticket_create <- function(queue = NULL,
+rt_ticket_create <- function(queue_id = NULL,
                            requestor = NULL,
                            subject = NULL,
                            cc = NULL,
@@ -44,7 +44,7 @@ rt_ticket_create <- function(queue = NULL,
                            rt_base = getOption("rt_base")) {
 
   params <- compact(list(id = "ticket/new",
-                         Queue = queue,
+                         Queue = queue_id,
                          Requestor = requestor,
                          Subject = subject,
                          Cc = cc,

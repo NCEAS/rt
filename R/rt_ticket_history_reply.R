@@ -2,13 +2,12 @@
 #'
 #' Add a response to an existing ticket
 #'
-#' @param ticket_id (numeric) The ticket identifier
+#' @inheritParams rt_ticket_attachment
 #' @param text (character) Text that to add as a comment
 #' @param cc (character) Email for cc
 #' @param bcc (character) Email for bcc
 #' @param time_worked (character)
 #' @param attachment_path (character) Path to a file to upload
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
 #'
