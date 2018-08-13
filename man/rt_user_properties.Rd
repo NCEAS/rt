@@ -7,7 +7,7 @@
 rt_user_properties(user_id, rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{user_id}{(numeric|character) The user id or login.}
+\item{user_id}{(numeric) The user identifier}
 
 \item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
 }

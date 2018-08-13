@@ -9,7 +9,7 @@ rt_ticket_links_edit(ticket_id, referred_to_by = NULL,
   depends_on = NULL, rt_base = getOption("rt_base"))
 }
 \arguments{
-\item{ticket_id}{(numeric|character) The ticket identifier}
+\item{ticket_id}{(numeric) The ticket identifier}
 
 \item{referred_to_by}{Tickets that are referred to}
 

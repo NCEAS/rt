@@ -4,7 +4,8 @@
 \alias{rt_ticket_history}
 \title{Get ticket history}
 \usage{
-rt_ticket_history(ticket_id, format = "l", rt_base = getOption("rt_base"))
+rt_ticket_history(ticket_id, format = "l",
+  rt_base = getOption("rt_base"))
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}

@@ -2,15 +2,7 @@
 #'
 #' Add a comment to an existing ticket
 #'
-#' @param user_id (numeric) The user identifier
-#' @param password (character) The password
-#' @param name (character) Optional. User name
-#' @param email_address (character) Optional. User email
-#' @param real_name (character) Optional. User real name
-#' @param organization (character) Optional. User organization
-#' @param privileged (numeric) Optional. User privilege status
-#' @param disabled (numeric) Optional. User disabled status
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
+#' @inheritParams rt_user_create
 #'
 #' @export
 #'

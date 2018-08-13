@@ -4,16 +4,17 @@
 \alias{rt_ticket_edit}
 \title{Edit an RT ticket}
 \usage{
-rt_ticket_edit(ticket_id, queue = NULL, requestor = NULL, subject = NULL,
-  cc = NULL, admin_cc = NULL, owner = NULL, status = NULL,
-  priority = NULL, initial_priority = NULL, final_priority = NULL,
-  time_estimated = NULL, starts = NULL, due = NULL, text = NULL,
-  custom_field = NULL, rt_base = getOption("rt_base"))
+rt_ticket_edit(ticket_id, queue_id = NULL, requestor = NULL,
+  subject = NULL, cc = NULL, admin_cc = NULL, owner = NULL,
+  status = NULL, priority = NULL, initial_priority = NULL,
+  final_priority = NULL, time_estimated = NULL, starts = NULL,
+  due = NULL, text = NULL, custom_field = NULL,
+  rt_base = getOption("rt_base"))
 }
 \arguments{
 \item{ticket_id}{(numeric|character) The ticket number}
 
-\item{queue}{(character) Queue name}
+\item{queue_id}{(character) The queue identifier}
 
 \item{requestor}{(character) Requestor email address}
 

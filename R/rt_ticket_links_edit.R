@@ -2,13 +2,12 @@
 #'
 #' Update links of an existing RT ticket.
 #'
-#' @param ticket_id (numeric|character) The ticket identifier
+#' @inheritParams rt_ticket_attachment
 #' @param referred_to_by Tickets that are referred to
 #' @param depended_on_by Tickets that are depended on
 #' @param member_of Ticket groups?
 #' @param refers_to Tickets that are referred to
 #' @param depends_on Tickets that are depended on
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
 #'
 #' @export
 #'

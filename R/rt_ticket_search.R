@@ -7,7 +7,7 @@
 #' @param format (character) Either \code{i} (ticket ID only),
 #' \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
+#' @inheritParams rt_ticket_attachment
 #'
 #' @export
 #'
