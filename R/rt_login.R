@@ -1,40 +1,64 @@
 #' Log in to RT
 #'
-#' Use this to log into RT at the start of your session.
+#' Use this to log into RT at the start of your session. Once you call this
+#' function and successfully log in, calls of other functions within this
+#' package will re-use your login information automatically.
 #'
-#' @param user (character) Your username
-#' @param pass (character) Your password
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
+#' The value of \code{rt_base_url} should be the same address you use in your
+#' web browser to log into RT (i.e., the address of the log in page).
 #'
+#' @param user (character) Your username.
+#' @param password (character) Your password.
+#' @param rt_base_url (character) The address of your RT installation.
+#'   See details.
 #' @export
-#'
-#' @import stringr
 #'
 #' @examples
 #' \dontrun{
-#' options(rt_base = "https://demo.bestpractical.com")
-#' rt_login(user = "guest", pass = "guest")
-#' }
-
-rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
-  if(!is.character(rt_base)){
-    stop('Check your base URL. Set it in your R session using option(rt_base = "https://server.name/rt/")', call. = FALSE)
-  }
-
-  base_api <- paste(stringr::str_replace(rt_base, "\\/$", ""), # removes trailing slash from base URL just in case
-                "REST", "1.0", sep = "/")
-  req <- httr::POST(base_api, body = list('user' = user, 'pass' = pass))
-
-  # Check that login worked
-
-  if(stringr::str_detect(httr::content(req), "Credentials required")){
-    invisible(FALSE)
-    stop("Your log-in was unsuccessful. Check your username, password, and base URL and try again.",
+#' # You can setup the location of your RT installation and the values for
+#' # your credentials as environmental variables
+#' Sys.setenv("RT_USER" = "user",
+#'            "RT_PASSWORD" = "password",
+#'            "RT_BASE_URL" = "https://demo.bestpractical.com")
+#'
+#' # And then log in directly like
+#' rt_login()
+#'
+#' # Or if you prefer, you can pass the values directly, like
+#' rt_login("user", "password", "https://demo.bestpractical.com")
+#'}
+rt_login <- function(user = Sys.getenv("RT_USER"),
+                     password = Sys.getenv("RT_PASSWORD"),
+                     rt_base_url = Sys.getenv("RT_BASE_URL")) {
+  if (!is.character(rt_base_url) && nchar(rt_base_url) > 0) {
+    stop("Check your base URL. ",
+         "Set it in your R session using ",
+         "Sys.setenv(RT_BASE_URL = \"https://server.name/rt/\")",
          call. = FALSE)
-  } else {
-    message("Successfully logged in.")
-    invisible(TRUE)
   }
+
+  response <- httr::POST(rt_url(rt_base_url),
+                         body = list(
+                           'user' = utils::URLencode(user,
+                                                     reserved = TRUE),
+                           'pass' = utils::URLencode(password,
+                                                     reserved = TRUE)))
+  check_login(response)
+}
+
+#' Check that the login request was successful or not
+#'
+#' @param response (httr::response) RT API login response
+#'
+#' @return (logical) TRUE if login was succesful, errors out otherwise
+check_login <- function(response) {
+  parsed <- parse_rt_response(httr::content(response))
+  if (parsed$body != "# Invalid object specification: ''\n\nid: ") {
+    stop(parsed$message, ": ", parsed$body, call. = FALSE)
+  }
+
+  message("Successfully logged in.")
+  invisible(TRUE)
 }
 
 #' Log in to RT interactively
@@ -42,7 +66,7 @@ rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
 #' Wrapper for \code{\link{rt_login}} to interactively log into RT at the start of your
 #' session. Keeps your log-in information private.
 #'
-#' @param rt_base (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}
+#' @param rt_base_url (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}
 #'
 #' @importFrom getPass getPass
 #'
@@ -50,12 +74,12 @@ rt_login <- function(user, pass, rt_base = getOption("rt_base")) {
 #'
 #' @examples
 #' \dontrun{
-#' options(rt_base = "https://demo.bestpractical.com")
+#' Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com")
 #' rt_login_interactive()
 #' }
 
-rt_login_interactive <- function(rt_base = getOption("rt_base")) {
+rt_login_interactive <- function(rt_base_url = Sys.getenv("RT_BASE")) {
   rt_login(user = readline("Enter username: "),
-           pass = getPass::getPass(),
-           rt_base = rt_base)
+           password = getPass::getPass(),
+           rt_base_url = rt_base_url)
 }
