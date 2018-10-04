@@ -32,7 +32,7 @@ The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.b
   - Login: `rt_login()`
   - Logout: `rt_logout()`
 - Tickets
-  - Ticket Properties: `rt_ticket()`
+  - Ticket Properties: `rt_ticket_properties()`
   - Ticket Links: `rt_ticket_links()`
   - Ticket Attachments: `rt_ticket_attachments()`
   - Ticket Attachment: `rt_ticket_attachment()`
@@ -46,11 +46,11 @@ The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.b
   - Ticket History Comment: `rt_ticket_history_comment()`
   - Ticket Links Edit: `rt_ticket_links_edit()`
 - Users
-  - User Properties: `rt_user()`
+  - User Properties: `rt_user_properties()`
   - User Create: `rt_user_create()`
   - User Edit: `rt_user_edit()`
 - Queues
-  - Queue Properties: `rt_queue()`
+  - Queue Properties: `rt_queue_properties()`
 
 ### `rt_api` objects
 
@@ -69,6 +69,19 @@ rt_logout()
 ```
 
 Note: Credentials for your `rt` session are stored using `httr`'s automatic re-use of cookies.
+
+## Development & Testing
+
+A Dockerfile is available at the root of the repository so it's easy to get a test installation of RT up and running.
+The tests need this to run so make sure to run the following before running the tests:
+
+```sh
+docker build . -t rt
+docker run -p 8080:80 rt
+```
+
+You can then navigate to http://localhost:8080 and log in as user `root` with password `password`.
+Be aware the tests are hard-coded against http://localhost:8080.
 
 ## Support / Issues / Feedback
 

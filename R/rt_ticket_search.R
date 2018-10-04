@@ -17,8 +17,8 @@
 #' rt_ticket_search(query = "Queue='General' AND (Status='new')")
 #' }
 
-rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base = getOption("rt_base")) {
-  base_api <- rt_url(rt_base, "search", "ticket?")
+rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base_url = Sys.getenv("RT_BASE_URL")) {
+  base_api <- rt_url(rt_base_url, "search", "ticket?")
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package

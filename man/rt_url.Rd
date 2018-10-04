@@ -4,10 +4,10 @@
 \alias{rt_url}
 \title{Generate an RT API URL}
 \usage{
-rt_url(base, ...)
+rt_url(rt_base_url, ...)
 }
 \arguments{
-\item{base}{(character) The base URL that hosts RT for your organization}
+\item{rt_base_url}{(character) The base URL that hosts RT for your organization}
 
 \item{...}{Other parameters}
 }

@@ -13,7 +13,7 @@
 #' }
 
 rt_ticket_edit <- function(ticket_id,
-                           queue_id = NULL,
+                           queue = NULL,
                            requestor = NULL,
                            subject = NULL,
                            cc = NULL,
@@ -28,11 +28,11 @@ rt_ticket_edit <- function(ticket_id,
                            due = NULL,
                            text = NULL,
                            custom_field = NULL,
-                           rt_base = getOption("rt_base")) {
+                           rt_base_url = Sys.getenv("RT_BASE_URL")) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
   params <- compact(list(id = ticket_id,
-                         Queue = queue_id,
+                         Queue = queue,
                          Requestor = requestor,
                          Subject = subject,
                          Cc = cc,
@@ -54,7 +54,7 @@ rt_ticket_edit <- function(ticket_id,
     ticket_content <- paste(ticket_content, cf)
   }
 
-  url <- rt_url(rt_base, "ticket", ticket_id, "edit")
+  url <- rt_url(rt_base_url, "ticket", ticket_id, "edit")
   httr::POST(url, body = list(content = ticket_content))
 
   #need to check

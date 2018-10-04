@@ -61,7 +61,7 @@ Best Practical (who makes RT) provide a demonstration RT installation that we'll
 ```{r load-and-connect, message = FALSE}
 library(rt)
 
-options(rt_base = "https://demo.bestpractical.com") # Your RT installation's URL (where you log in)
+Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com") # Your RT installation's URL (where you log in)
 rt_login(user = "guest", pass = "guest") # Or use rt_login_interactive()
 ```
 

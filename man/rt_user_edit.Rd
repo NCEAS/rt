@@ -6,7 +6,7 @@
 \usage{
 rt_user_edit(user_id, password, name = NULL, email_address = NULL,
   real_name = NULL, organization = NULL, privileged = NULL,
-  disabled = NULL, rt_base = getOption("rt_base"))
+  disabled = NULL, rt_base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
 \item{user_id}{(numeric) The user identifier}
@@ -25,7 +25,8 @@ rt_user_edit(user_id, password, name = NULL, email_address = NULL,
 
 \item{disabled}{(numeric) Optional. User disabled status}
 
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The address of your RT installation.
+See details.}
 }
 \description{
 Add a comment to an existing ticket

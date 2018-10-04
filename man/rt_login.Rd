@@ -4,21 +4,39 @@
 \alias{rt_login}
 \title{Log in to RT}
 \usage{
-rt_login(user, pass, rt_base = getOption("rt_base"))
+rt_login(user = Sys.getenv("RT_USER"),
+  password = Sys.getenv("RT_PASSWORD"),
+  rt_base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
-\item{user}{(character) Your username}
+\item{user}{(character) Your username.}
 
-\item{pass}{(character) Your password}
+\item{password}{(character) Your password.}
 
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The address of your RT installation.
+See details.}
 }
 \description{
-Use this to log into RT at the start of your session.
+Use this to log into RT at the start of your session. Once you call this
+function and successfully log in, calls of other functions within this
+package will re-use your login information automatically.
+}
+\details{
+The value of \code{rt_base_url} should be the same address you use in your
+web browser to log into RT (i.e., the address of the log in page).
 }
 \examples{
 \dontrun{
-options(rt_base = "https://demo.bestpractical.com")
-rt_login(user = "guest", pass = "guest")
+# You can setup the location of your RT installation and the values for
+# your credentials as environmental variables
+Sys.setenv("RT_USER" = "user",
+           "RT_PASSWORD" = "password",
+           "RT_BASE_URL" = "https://demo.bestpractical.com")
+
+# And then log in directly like
+rt_login()
+
+# Or if you prefer, you can pass the values directly, like
+rt_login("user", "password", "https://demo.bestpractical.com")
 }
 }

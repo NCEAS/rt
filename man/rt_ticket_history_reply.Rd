@@ -6,7 +6,7 @@
 \usage{
 rt_ticket_history_reply(ticket_id, text, cc = NULL, bcc = NULL,
   time_worked = NULL, attachment_path = NULL,
-  rt_base = getOption("rt_base"))
+  rt_base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -21,7 +21,8 @@ rt_ticket_history_reply(ticket_id, text, cc = NULL, bcc = NULL,
 
 \item{attachment_path}{(character) Path to a file to upload}
 
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The address of your RT installation.
+See details.}
 }
 \description{
 Add a response to an existing ticket

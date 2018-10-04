@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #' # Log in to RT
-#' options(rt_base = "https://demo.bestpractical.com")
+#' Sys.getenv("RT_BASE_URL" ="https://demo.bestpractical.com")
 #' rt_login(user = "guest", pass = "guest")
 #'
 #' # Get the full ticket history
@@ -27,12 +27,12 @@
 #' rt_ticket_history(992, format = "s")
 #' }
 
-rt_ticket_history <- function(ticket_id, format = "l", rt_base = getOption("rt_base")) {
+rt_ticket_history <- function(ticket_id, format = "l", rt_base_url = Sys.getenv("RT_BASE_URL")) {
   if (missing(ticket_id)) {
     stop("'ticket_id' must be specified.", call. = FALSE)
   }
 
-  url <- rt_url(rt_base, "ticket", ticket_id, "history")
+  url <- rt_url(rt_base_url, "ticket", ticket_id, "history")
   if(format == "l"){
     url <- paste0(url, "?format=l")
   }

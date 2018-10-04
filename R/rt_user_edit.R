@@ -19,7 +19,7 @@ rt_user_edit <- function(user_id,
                          organization = NULL,
                          privileged = NULL,
                          disabled = NULL,
-                         rt_base = getOption("rt_base")) {
+                         rt_base_url = Sys.getenv("RT_BASE_URL")) {
 
   params <- compact(list(Name = name,
                          Password = password,
@@ -32,7 +32,7 @@ rt_user_edit <- function(user_id,
 
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
 
-  url <- rt_url(rt_base, "user", "27", "edit")
+  url <- rt_url(rt_base_url, "user", "27", "edit")
   httr::POST(url, body = list(content = user_info), httr::user_agent("https://github.com/nceas/rt"))
   #TODO: make this work!
   #might need specific permissions?

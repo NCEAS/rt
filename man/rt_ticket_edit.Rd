@@ -4,17 +4,17 @@
 \alias{rt_ticket_edit}
 \title{Edit an RT ticket}
 \usage{
-rt_ticket_edit(ticket_id, queue_id = NULL, requestor = NULL,
+rt_ticket_edit(ticket_id, queue = NULL, requestor = NULL,
   subject = NULL, cc = NULL, admin_cc = NULL, owner = NULL,
   status = NULL, priority = NULL, initial_priority = NULL,
   final_priority = NULL, time_estimated = NULL, starts = NULL,
   due = NULL, text = NULL, custom_field = NULL,
-  rt_base = getOption("rt_base"))
+  rt_base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
 \item{ticket_id}{(numeric|character) The ticket number}
 
-\item{queue_id}{(character) The queue identifier}
+\item{queue}{(character) The queue}
 
 \item{requestor}{(character) Requestor email address}
 
@@ -44,7 +44,8 @@ rt_ticket_edit(ticket_id, queue_id = NULL, requestor = NULL,
 
 \item{custom_field}{(vector) Takes a named vector of the custom field name and custom field value}
 
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The address of your RT installation.
+See details.}
 }
 \description{
 Update an existing ticket with new information.

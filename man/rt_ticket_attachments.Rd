@@ -4,12 +4,13 @@
 \alias{rt_ticket_attachments}
 \title{Get ticket attachments}
 \usage{
-rt_ticket_attachments(ticket_id, rt_base = getOption("rt_base"))
+rt_ticket_attachments(ticket_id, rt_base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
 
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The address of your RT installation.
+See details.}
 }
 \description{
 Retrieves attachment metadata for a ticket
@@ -19,8 +20,3 @@ Retrieves attachment metadata for a ticket
 rt_ticket_attachments(2)
 }
 }
-\seealso{
-Other attachments: \code{\link{rt_ticket_attachment_content}},
-  \code{\link{rt_ticket_attachment}}
-}
-\concept{attachments}

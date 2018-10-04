@@ -2,7 +2,7 @@
 #'
 #' Get the data for a single queue.
 #'
-#' @param queue_id (character) The queue identifier
+#' @param queue (character) The queue
 #' @inheritParams rt_login
 #'
 #' @export
@@ -12,8 +12,8 @@
 #' rt_queue_properties("General")
 #' }
 
-rt_queue_properties <- function(queue_id, rt_base = getOption("rt_base")) {
-  stopifnot(is.character(queue_id))
-  url <- rt_url(rt_base, "queue", queue_id)
+rt_queue_properties <- function(queue, rt_base_url = Sys.getenv("RT_BASE_URL")) {
+  stopifnot(is.character(queue))
+  url <- rt_url(rt_base_url, "queue", queue)
   rt_GET(url)
 }

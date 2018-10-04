@@ -25,9 +25,9 @@ rt_ticket_history_reply <- function(ticket_id,
                                     bcc = NULL,
                                     time_worked = NULL, #unsure what the inputs are...
                                     attachment_path = NULL,
-                                    rt_base = getOption("rt_base")) {
+                                    rt_base_url = Sys.getenv("RT_BASE_URL")) {
 
-  url <- rt_url(rt_base, "ticket", ticket_id, "comment")
+  url <- rt_url(rt_base_url, "ticket", ticket_id, "comment")
 
   #account for NULLs
   params <- compact(list(id = ticket_id,

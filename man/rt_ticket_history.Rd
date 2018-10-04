@@ -5,7 +5,7 @@
 \title{Get ticket history}
 \usage{
 rt_ticket_history(ticket_id, format = "l",
-  rt_base = getOption("rt_base"))
+  rt_base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -14,7 +14,8 @@ rt_ticket_history(ticket_id, format = "l",
 or \code{l} (full ticket metadata).
 Defaults to \code{l}.}
 
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The address of your RT installation.
+See details.}
 }
 \description{
 Retrieves information about the ticket history
@@ -22,7 +23,7 @@ Retrieves information about the ticket history
 \examples{
 \dontrun{
 # Log in to RT
-options(rt_base = "https://demo.bestpractical.com")
+Sys.getenv("RT_BASE_URL" ="https://demo.bestpractical.com")
 rt_login(user = "guest", pass = "guest")
 
 # Get the full ticket history

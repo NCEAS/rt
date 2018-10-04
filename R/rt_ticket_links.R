@@ -12,10 +12,10 @@
 #' rt_ticket_links(1007)
 #' }
 
-rt_ticket_links <- function(ticket_id, rt_base = getOption("rt_base")) {
+rt_ticket_links <- function(ticket_id, rt_base_url = Sys.getenv("RT_BASE_URL")) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
-  url <- rt_url(rt_base, "ticket", ticket_id, "links", "show")
+  url <- rt_url(rt_base_url, "ticket", ticket_id, "links", "show")
 
   rt_GET(url)
 }

@@ -4,10 +4,10 @@
 \alias{rt_login_interactive}
 \title{Log in to RT interactively}
 \usage{
-rt_login_interactive(rt_base = getOption("rt_base"))
+rt_login_interactive(rt_base_url = Sys.getenv("RT_BASE"))
 }
 \arguments{
-\item{rt_base}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{options(rt_base = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}}
 }
 \description{
 Wrapper for \code{\link{rt_login}} to interactively log into RT at the start of your
@@ -15,7 +15,7 @@ session. Keeps your log-in information private.
 }
 \examples{
 \dontrun{
-options(rt_base = "https://demo.bestpractical.com")
+Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com")
 rt_login_interactive()
 }
 }
