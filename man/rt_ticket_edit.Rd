@@ -43,9 +43,6 @@ rt_ticket_edit(ticket_id, queue = NULL, requestor = NULL,
 \item{text}{(character) Ticket content; if multi-line, prefix every line with a blank}
 
 \item{custom_field}{(vector) Takes a named vector of the custom field name and custom field value}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Update an existing ticket with new information.

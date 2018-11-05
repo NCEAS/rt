@@ -49,13 +49,11 @@ rt_ticket_edit <- function(ticket_id,
 
   ticket_content <- paste(names(params), params, sep = ": ", collapse = "\n")
 
-  if(exists("custom_field") && length(custom_field) > 0){
+  if (exists("custom_field") && length(custom_field) > 0) {
     cf <- sprintf("CF-%s: %s", names(custom_field), custom_field)
     ticket_content <- paste(ticket_content, cf)
   }
 
-  url <- rt_url(rt_base_url, "ticket", ticket_id, "edit")
-  httr::POST(url, body = list(content = ticket_content))
-
-  #need to check
+  url <- rt_url("ticket", ticket_id, "edit")
+  rt_POST(url, body = list(content = ticket_content))
 }

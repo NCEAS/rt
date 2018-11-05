@@ -1,4 +1,3 @@
-
 #' Parse an RT response in its parts as a list
 #'
 #' The RT API uses overrides default HTTP behavior with their own set of status
@@ -26,15 +25,21 @@
 #' [1] "# Ticket 2 created."
 #'
 #' @param response (character) Parsed response from \code{\link[httr]{content}}
-#' @param verbose (logical) Optional, defaults to \code{TRUE}. Prints more information during parsing.
+#' @param verbose (logical) Optional, defaults to \code{TRUE}.
+#'   Prints more information during parsing.
 #'
 #' @return (list) List with named elements status, message, and body
 parse_rt_response <- function(response, verbose = FALSE) {
-  split_response <- stringr::str_split(response, "[\\n]+", n = 2)
+  body <- suppressWarnings(httr::content(response))
+
+  split_response <- stringr::str_split(body, "[\\n]+", n = 2)
 
   # Response should be a single result, with parts for the first line, and rest
-  stopifnot(length(split_response) == 1 &&
-              length(split_response[[1]] != 2))
+  if (length(split_response) != 1 ||
+      length(split_response[[1]]) != 2) {
+    message("Failed to parse RT response. Returning response directly from httr.")
+    return(response)
+  }
 
   first <- split_response[[1]][1]
   rest <- stringr::str_replace_all(split_response[[1]][2], "[\\n]+$", "")
@@ -52,9 +57,13 @@ parse_rt_response <- function(response, verbose = FALSE) {
     return(response)
   }
 
-  return(list(
-    status = as.numeric(match[1,2]),
-    message = match[1,3],
-    body = rest
-  ))
+  structure(
+    list(
+      path = response$url,
+      status = as.numeric(match[1,2]),
+      message = match[1,3],
+      body = gsub("^#[ ]+", "", rest)
+    ),
+    class = "rt_api"
+  )
 }

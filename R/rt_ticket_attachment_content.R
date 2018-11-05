@@ -12,10 +12,8 @@
 #' }
 
 rt_ticket_attachment_content <- function(ticket_id,
-                                 attachment_id,
-                                 rt_base_url = Sys.getenv("RT_BASE_URL")) {
+                                         attachment_id) {
 
-  url <- rt_url(rt_base_url, "ticket", ticket_id, "attachments", attachment_id, "content")
-  httr::GET(url)
-  #parse more? may be best to leave as is
+  url <- rt_url("ticket", ticket_id, "attachments", attachment_id, "content")
+  rt_GET(url)
 }

@@ -17,8 +17,8 @@
 #' rt_ticket_search(query = "Queue='General' AND (Status='new')")
 #' }
 
-rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base_url = Sys.getenv("RT_BASE_URL")) {
-  base_api <- rt_url(rt_base_url, "search", "ticket?")
+rt_ticket_search <- function(query, orderBy = NULL, format="l") {
+  base_api <- rt_url("search", "ticket?")
 
   #based on httr::modify_url()
   #possible TODO - turn this into its own function that can be used internally in the package
@@ -28,17 +28,25 @@ rt_ticket_search <- function(query, orderBy = NULL, format="l", rt_base_url = Sy
 
   params <- paste(paste0(names(inputs), "=", inputs), collapse = "&")
   url <- paste0(base_api, params)
-  out <- rt_GET(url)
+  response <- rt_GET(url)
 
   if (format == "s") {
-    out$content <- out$content %>%
-      tidyr::gather(id, value)
+    response$body <- tidyr::gather(response$body, id, value)
   }
 
   if (format == "i") {
-    out$content <- out$content %>%
-      stringr::str_split("\n")
+    response$body <- stringr::str_split(response$body, "\n")
   }
 
-  return(out)
+  parsed <- parse_ticket_search_body(response$body)
+
+  parsed
 }
+
+parse_ticket_search_body <- function(body) {
+  lapply(strsplit(body, "\\n\\n--\\n\\n")[[1]], parse_rt_properties)
+}
+
+
+
+

@@ -32,7 +32,7 @@ rt_user_edit <- function(user_id,
 
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
 
-  url <- rt_url(rt_base_url, "user", "27", "edit")
+  url <- rt_url("user", "27", "edit")
   httr::POST(url, body = list(content = user_info), httr::user_agent("https://github.com/nceas/rt"))
   #TODO: make this work!
   #might need specific permissions?

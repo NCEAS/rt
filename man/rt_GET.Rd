@@ -4,7 +4,7 @@
 \alias{rt_GET}
 \title{Get an RT response}
 \usage{
-rt_GET(url)
+rt_GET(url, ...)
 }
 \arguments{
 \item{url}{(character) The full RT URL}

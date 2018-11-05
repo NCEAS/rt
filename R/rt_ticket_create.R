@@ -5,11 +5,11 @@
 #' @param body (character) The ticket create response
 #'
 #' @return (numeric) The ticket ID
-parse_ticket_create_body <- function(body) {
-  match_result <- stringr::str_match(body, "# Ticket (\\d+) created\\.")
+parse_ticket_create_response <- function(response) {
+  match_result <- stringr::str_match(response$body, "Ticket (\\d+) created\\.")
 
-  if (is.na(match_result[1,1])) {
-    stop(body, call. = FALSE)
+    if (is.na(match_result[1,1])) {
+    stop(response$body, call. = FALSE)
   }
 
   as.numeric(match_result[1,2])
@@ -42,7 +42,6 @@ parse_ticket_create_body <- function(body) {
 #' \dontrun{
 #' rt_ticket_create(priority = 2, custom_field = c(Description = "A description"))
 #' }
-
 rt_ticket_create <- function(queue = NULL,
                              requestor = NULL,
                              subject = NULL,
@@ -58,7 +57,7 @@ rt_ticket_create <- function(queue = NULL,
                              due = NULL,
                              text = NULL,
                              custom_field = NULL,
-                             rt_base_url = Sys.getenv("RT_BASE_URL")) {
+                             ...) {
 
   params <- compact(list(id = "ticket/new",
                          Queue = queue,
@@ -83,11 +82,8 @@ rt_ticket_create <- function(queue = NULL,
     ticket_content <- paste(ticket_content, cf)
   }
 
-  url <- rt_url(rt_base_url, "ticket", "new")
-  response <- httr::POST(url, body = list(content = ticket_content))
-  parsed <- parse_rt_response(httr::content(response))
-
-  stop_for_status(parsed$status)
-  parse_ticket_create_body(parsed$body)
+  url <- rt_url("ticket", "new")
+  response <- rt_POST(url, body = list(content = ticket_content))
+  parse_ticket_create_response(response)
 }
 

@@ -11,21 +11,23 @@
 #' rt_ticket_attachments(2)
 #' }
 
-rt_ticket_attachments <- function(ticket_id,
-                                   rt_base_url = Sys.getenv("RT_BASE_URL")) {
-  url <- rt_url(rt_base_url, "ticket", ticket_id, "attachments")
+rt_ticket_attachments <- function(ticket_id) {
+  url <- rt_url("ticket", ticket_id, "attachments")
   out <- rt_GET(url)
 
-  #TODO: test how robust this is:
-  out$content <- out$content %>%
-    dplyr::mutate(Attachments = stringr::str_split(Attachments, ",\n             ")) %>%
-    tidyr::unnest(Attachments) %>%
-    tidyr::separate(Attachments, c("attachment_id", "attachment_name", "type_general", "type_specific", "size", "blank"),
-                    sep = "[^[:alnum:].]+", fill = "right") %>%
-    mutate(type = paste(type_general, type_specific, sep = "/")) %>%
-    select(attachment_id, attachment_name, type, size)
+  location <- stringr::str_locate(out$body, "Attachments: ")
 
-  return(out)
+  if (all(dim(location) != c(1,2))) {
+    stop("Error while processing response from RT.")
+  }
+
+  rest <- stringr::str_sub(out$body, location[1,2] + 1, nchar(out$body))
+  attachments <- parse_rt_properties(rest)
+
+  lapply(attachments, function(attachment) {
+    props <- as.list(stringr::str_match(attachment, "\\(?(.+)\\) \\((.+) \\/ (.+)\\)")[1,(2:4)])
+    names(props) <- c("Name", "Type", "Size")
+    props
+  })
 }
-
 

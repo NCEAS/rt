@@ -39,7 +39,7 @@ rt_user_create <- function(user_id,
 
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
 
-  url <- rt_url(rt_base_url, "user", "new")
+  url <- rt_url("user", "new")
   httr::POST(url, body = list(content = user_info))
   #TODO: make this work!
   #might need specific permissions?

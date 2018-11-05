@@ -12,8 +12,11 @@
 #' rt_queue_properties("General")
 #' }
 
-rt_queue_properties <- function(queue, rt_base_url = Sys.getenv("RT_BASE_URL")) {
+rt_queue_properties <- function(queue) {
   stopifnot(is.character(queue))
-  url <- rt_url(rt_base_url, "queue", queue)
-  rt_GET(url)
+  url <- rt_url("queue", queue)
+  response <- rt_GET(url)
+
+  parse_rt_properties(response$body)
 }
+

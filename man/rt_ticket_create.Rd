@@ -8,7 +8,7 @@ rt_ticket_create(queue = NULL, requestor = NULL, subject = NULL,
   cc = NULL, admin_cc = NULL, owner = NULL, status = NULL,
   priority = NULL, initial_priority = NULL, final_priority = NULL,
   time_estimated = NULL, starts = NULL, due = NULL, text = NULL,
-  custom_field = NULL, rt_base_url = Sys.getenv("RT_BASE_URL"))
+  custom_field = NULL, ...)
 }
 \arguments{
 \item{queue}{(character) The queue}
@@ -40,9 +40,6 @@ rt_ticket_create(queue = NULL, requestor = NULL, subject = NULL,
 \item{text}{(character) Ticket content; if multi-line, prefix every line with a blank}
 
 \item{custom_field}{(vector) Takes a named vector of the custom field name and custom field value}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Create a new ticket in RT.

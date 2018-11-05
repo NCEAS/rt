@@ -9,7 +9,8 @@ parse_rt_response(response, verbose = FALSE)
 \arguments{
 \item{response}{(character) Parsed response from \code{\link[httr]{content}}}
 
-\item{verbose}{(logical) Optional, defaults to \code{TRUE}. Prints more information during parsing.}
+\item{verbose}{(logical) Optional, defaults to \code{TRUE}.
+Prints more information during parsing.}
 }
 \value{
 (list) List with named elements status, message, and body

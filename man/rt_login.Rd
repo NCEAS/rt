@@ -5,8 +5,7 @@
 \title{Log in to RT}
 \usage{
 rt_login(user = Sys.getenv("RT_USER"),
-  password = Sys.getenv("RT_PASSWORD"),
-  rt_base_url = Sys.getenv("RT_BASE_URL"))
+  password = Sys.getenv("RT_PASSWORD"), ...)
 }
 \arguments{
 \item{user}{(character) Your username.}

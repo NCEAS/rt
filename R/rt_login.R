@@ -29,20 +29,15 @@
 #'}
 rt_login <- function(user = Sys.getenv("RT_USER"),
                      password = Sys.getenv("RT_PASSWORD"),
-                     rt_base_url = Sys.getenv("RT_BASE_URL")) {
-  if (!is.character(rt_base_url) && nchar(rt_base_url) > 0) {
-    stop("Check your base URL. ",
-         "Set it in your R session using ",
-         "Sys.setenv(RT_BASE_URL = \"https://server.name/rt/\")",
-         call. = FALSE)
-  }
-
-  response <- httr::POST(rt_url(rt_base_url),
-                         body = list(
-                           'user' = utils::URLencode(user,
-                                                     reserved = TRUE),
-                           'pass' = utils::URLencode(password,
-                                                     reserved = TRUE)))
+                     ...) {
+  url <- rt_url()
+  response <- rt_POST(url,
+                      body = list(
+                        'user' = utils::URLencode(user,
+                                                  reserved = TRUE),
+                        'pass' = utils::URLencode(password,
+                                                  reserved = TRUE)),
+                      ...)
   check_login(response)
 }
 
@@ -52,9 +47,9 @@ rt_login <- function(user = Sys.getenv("RT_USER"),
 #'
 #' @return (logical) TRUE if login was succesful, errors out otherwise
 check_login <- function(response) {
-  parsed <- parse_rt_response(httr::content(response))
-  if (parsed$body != "# Invalid object specification: ''\n\nid: ") {
-    stop(parsed$message, ": ", parsed$body, call. = FALSE)
+  if (response$body != "Invalid object specification: ''\n\nid: ") {
+    stop("Login failed: ", response$message, " (", response$body, ")",
+         call. = FALSE)
   }
 
   message("Successfully logged in.")

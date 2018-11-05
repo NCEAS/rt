@@ -4,8 +4,7 @@
 \alias{rt_ticket_history}
 \title{Get ticket history}
 \usage{
-rt_ticket_history(ticket_id, format = "l",
-  rt_base_url = Sys.getenv("RT_BASE_URL"))
+rt_ticket_history(ticket_id, format = "l")
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -13,9 +12,6 @@ rt_ticket_history(ticket_id, format = "l",
 \item{format}{(character) Either  \code{s} (ticket ID and subject)
 or \code{l} (full ticket metadata).
 Defaults to \code{l}.}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Retrieves information about the ticket history

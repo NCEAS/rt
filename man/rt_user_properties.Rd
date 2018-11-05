@@ -4,13 +4,10 @@
 \alias{rt_user_properties}
 \title{Get RT user properties}
 \usage{
-rt_user_properties(user_id, rt_base_url = Sys.getenv("RT_BASE_URL"))
+rt_user_properties(user_id)
 }
 \arguments{
 \item{user_id}{(numeric) The user identifier}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Gets the ticket links for a single ticket. If applicable, the following fields will be returned: \code{HasMember},

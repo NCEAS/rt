@@ -27,12 +27,12 @@
 #' rt_ticket_history(992, format = "s")
 #' }
 
-rt_ticket_history <- function(ticket_id, format = "l", rt_base_url = Sys.getenv("RT_BASE_URL")) {
+rt_ticket_history <- function(ticket_id, format = "l") {
   if (missing(ticket_id)) {
     stop("'ticket_id' must be specified.", call. = FALSE)
   }
 
-  url <- rt_url(rt_base_url, "ticket", ticket_id, "history")
+  url <- rt_url("ticket", ticket_id, "history")
   if(format == "l"){
     url <- paste0(url, "?format=l")
   }

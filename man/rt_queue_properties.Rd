@@ -4,13 +4,10 @@
 \alias{rt_queue_properties}
 \title{Get queue properties}
 \usage{
-rt_queue_properties(queue, rt_base_url = Sys.getenv("RT_BASE_URL"))
+rt_queue_properties(queue)
 }
 \arguments{
 \item{queue}{(character) The queue}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Get the data for a single queue.

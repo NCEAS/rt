@@ -32,6 +32,6 @@ rt_ticket_links_edit <- function(ticket_id,
 
   links_edit <- paste(names(params), params, sep = ": ", collapse = "\n")
 
-  url <- rt_url(rt_base_url, "ticket", ticket_id, "links")
+  url <- rt_url("ticket", ticket_id, "links")
   httr::POST(url, body = list(content = links_edit))
 }

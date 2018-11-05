@@ -4,12 +4,12 @@
 \alias{rt_url}
 \title{Generate an RT API URL}
 \usage{
-rt_url(rt_base_url, ...)
+rt_url(..., base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
-\item{rt_base_url}{(character) The base URL that hosts RT for your organization}
-
 \item{...}{Other parameters}
+
+\item{rt_base_url}{(character) The base URL that hosts RT for your organization}
 }
 \description{
 Create an RT API URL based on the server URL and any arguments provided

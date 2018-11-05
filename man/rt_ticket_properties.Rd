@@ -4,13 +4,10 @@
 \alias{rt_ticket_properties}
 \title{Get ticket properties}
 \usage{
-rt_ticket_properties(ticket_id, rt_base_url = Sys.getenv("RT_BASE_URL"))
+rt_ticket_properties(ticket_id)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Retrieves ticket properties

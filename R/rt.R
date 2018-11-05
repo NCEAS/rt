@@ -6,9 +6,13 @@
 #' @param ... Other parameters
 #'
 
-rt_url <- function(rt_base_url, ...) {
-  stopifnot(nchar(rt_base_url) > 0)
-  paste(gsub("\\/$", "", rt_base_url), # Removes trailing slash from base URL just in case
+rt_url <- function(..., base_url = Sys.getenv("RT_BASE_URL")) {
+  if (!is.character(base_url) || nchar(base_url) <= 0) {
+    stop("Invalid RT base URL: ",
+         "See ?rt for information on how to get started. ",
+         call. = FALSE)
+  }
+  paste(gsub("\\/$", "", base_url), # Removes trailing slash from base URL just in case
         "REST",
         "1.0",
         paste(c(...), collapse = "/"),
@@ -59,49 +63,85 @@ parse_ticket <- function(resp_cont) {
   }
 }
 
+
+rt_handle_response <- function(response) {
+  if (httr::http_type(response) != "text/plain") {
+    stop("API did not return text/plain", call. = FALSE)
+  }
+
+  body <- httr::content(response)
+
+  # Since API does not return failure codes; need to parse content strings to check for errors
+  if (!is.na(body) & stringr::str_detect(body, "does not exist|Invalid")) {
+    stop(
+      sprintf(
+        "RT API request failed [%s]\n%s",
+        httr::status_code(response),
+        body
+      ),
+      call. = FALSE
+    )
+  }
+
+  if(class(body) != "raw"){
+    body <- parse_ticket(body)
+  }
+
+  structure(
+    list(
+      content = body,
+      path = url,
+      response = response
+    ),
+    class = "rt_api"
+  )
+}
+
+
 #' Get an RT response
 #'
 #' Get an RT response and format it into an S3 object
 #'
 #' @param url (character) The full RT URL
 #'
-
-rt_GET <- function(url) {
-  resp <- httr::GET(url, httr::user_agent("http://github.com/nceas/rt"))
-  if (httr::http_type(resp) != "text/plain") {
-    stop("API did not return text/plain", call. = FALSE)
-  }
-
-  resp_cont <- httr::content(resp)
-
-  # Since API does not return failure codes; need to parse content strings to check for errors
-  if (!is.na(resp_cont) & stringr::str_detect(resp_cont, "does not exist|Invalid")) {
-    stop(
-      sprintf(
-        "RT API request failed [%s]\n%s",
-        httr::status_code(resp),
-        resp_cont
-      ),
-      call. = FALSE
-    )
-  }
-
-  if(class(resp_cont) != "raw"){
-    resp_cont <- parse_ticket(resp_cont)
-  }
-
-  structure(
-    list(
-      content = resp_cont,
-      path = url,
-      response = resp
-    ),
-    class = "rt_api"
-  )
+rt_GET <- function(url, ...) {
+  response <- httr::GET(url, ..., httr::user_agent("http://github.com/nceas/rt"))
+  parse_rt_response(response)
 }
 
-print.rt_api <- function(x, ...) {
+rt_POST <- function(url, ...) {
+  response <- httr::POST(url, ..., httr::user_agent("http://github.com/nceas/rt"))
+  parse_rt_response(response)
+}
+
+
+print.rt_api <- function(x, max.lines = 10, width = getOption("width")) {
   cat("<RT ", x$path, ">\n", sep = "")
-  utils::str(x$content) #is this better than print(x$content)?
+  cat("  Status: ", x$status, "\n", sep = "")
+  cat("  Message: ", x$message, "\n", sep = "")
+  cat(x$body, "\n", sep = "")
+
   invisible(x)
+}
+
+#' Parse typical RT properties as contained in an RT response body
+#'
+#' The code gives a basic idea of the format but it's basically
+#' newline-separated key-value pairs with a ': ' between them. e.g.,
+#'
+#'   id: queue/1
+#'   Name: General
+#'
+#' @param response (rt_response)
+#'
+#' @return List of properties
+parse_rt_properties <- function(body) {
+  parsed <- lapply(strsplit(body, "\\n")[[1]], function(x) {
+    strsplit(x, ": ")
+  })
+
+  result <- lapply(parsed, function(x) { x[[1]][2]})
+  names(result) <- vapply(parsed, function(x){ trimws(x[[1]][1]) }, "")
+
+  result
 }

@@ -4,8 +4,7 @@
 \alias{rt_ticket_search}
 \title{Search RT}
 \usage{
-rt_ticket_search(query, orderBy = NULL, format = "l",
-  rt_base_url = Sys.getenv("RT_BASE_URL"))
+rt_ticket_search(query, orderBy = NULL, format = "l")
 }
 \arguments{
 \item{query}{(character) Your query (See Details)}
@@ -15,9 +14,6 @@ rt_ticket_search(query, orderBy = NULL, format = "l",
 \item{format}{(character) Either \code{i} (ticket ID only),
 \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
 Defaults to \code{l}.}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
