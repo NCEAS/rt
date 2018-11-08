@@ -3,8 +3,7 @@
 #' Use this to log out of RT at the end of your session.
 #' Note: restarting your R session will also log you out.
 #'
-#' @param rt_base (character) The base URL that hosts RT for your organization.
-#' Set the base URL in your R session using \code{Sys.getenv("RT_BASE_URL" ="https://server.name/rt/")}
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @export
 #'
@@ -13,7 +12,7 @@
 #' rt_logout()
 #' }
 
-rt_logout <- function() {
+rt_logout <- function(...) {
   url <- rt_url("logout")
   response <- rt_POST(url, body = NULL)
 

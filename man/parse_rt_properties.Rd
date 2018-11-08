@@ -7,7 +7,7 @@
 parse_rt_properties(body)
 }
 \arguments{
-\item{response}{(rt_response)}
+\item{body}{(character) Response body from an \code{rt_response}}
 }
 \value{
 List of properties

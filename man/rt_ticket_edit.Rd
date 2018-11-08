@@ -8,8 +8,7 @@ rt_ticket_edit(ticket_id, queue = NULL, requestor = NULL,
   subject = NULL, cc = NULL, admin_cc = NULL, owner = NULL,
   status = NULL, priority = NULL, initial_priority = NULL,
   final_priority = NULL, time_estimated = NULL, starts = NULL,
-  due = NULL, text = NULL, custom_field = NULL,
-  rt_base_url = Sys.getenv("RT_BASE_URL"))
+  due = NULL, text = NULL, custom_field = NULL, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric|character) The ticket number}
@@ -43,6 +42,8 @@ rt_ticket_edit(ticket_id, queue = NULL, requestor = NULL,
 \item{text}{(character) Ticket content; if multi-line, prefix every line with a blank}
 
 \item{custom_field}{(vector) Takes a named vector of the custom field name and custom field value}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Update an existing ticket with new information.

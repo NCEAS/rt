@@ -7,9 +7,9 @@
 rt_url(..., base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
-\item{...}{Other parameters}
+\item{...}{Parts of the URL to be joined by "/"}
 
-\item{rt_base_url}{(character) The base URL that hosts RT for your organization}
+\item{base_url}{(character) The base URL that hosts RT for your organization}
 }
 \description{
 Create an RT API URL based on the server URL and any arguments provided

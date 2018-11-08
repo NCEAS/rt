@@ -26,8 +26,7 @@ rt_user_create <- function(user_id,
                            real_name = NULL,
                            organization = NULL,
                            privileged = NULL,
-                           disabled = NULL,
-                           rt_base_url = Sys.getenv("RT_BASE_URL")) {
+                           disabled = NULL) {
 
   params <- compact(list(Name = name,
                          Password = password,

@@ -5,8 +5,7 @@
 \title{Add ticket history reply}
 \usage{
 rt_ticket_history_reply(ticket_id, text, cc = NULL, bcc = NULL,
-  time_worked = NULL, attachment_path = NULL,
-  rt_base_url = Sys.getenv("RT_BASE_URL"))
+  time_worked = NULL, attachment_path = NULL)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -20,9 +19,6 @@ rt_ticket_history_reply(ticket_id, text, cc = NULL, bcc = NULL,
 \item{time_worked}{(character)}
 
 \item{attachment_path}{(character) Path to a file to upload}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Add a response to an existing ticket

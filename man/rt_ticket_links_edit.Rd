@@ -6,7 +6,7 @@
 \usage{
 rt_ticket_links_edit(ticket_id, referred_to_by = NULL,
   depended_on_by = NULL, member_of = NULL, refers_to = NULL,
-  depends_on = NULL, rt_base_url = Sys.getenv("RT_BASE_URL"))
+  depends_on = NULL)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -20,9 +20,6 @@ rt_ticket_links_edit(ticket_id, referred_to_by = NULL,
 \item{refers_to}{Tickets that are referred to}
 
 \item{depends_on}{Tickets that are depended on}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Update links of an existing RT ticket.

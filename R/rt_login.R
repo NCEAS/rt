@@ -9,8 +9,8 @@
 #'
 #' @param user (character) Your username.
 #' @param password (character) Your password.
-#' @param rt_base_url (character) The address of your RT installation.
-#'   See details.
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
+#'
 #' @export
 #'
 #' @examples

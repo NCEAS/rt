@@ -31,6 +31,7 @@
 #' @return (list) List with named elements status, message, and body
 parse_rt_response <- function(response, verbose = FALSE) {
   body <- suppressWarnings(httr::content(response))
+  message(body)
 
   split_response <- stringr::str_split(body, "[\\n]+", n = 2)
 

@@ -4,16 +4,12 @@
 \alias{rt_ticket_attachment}
 \title{Get ticket attachment}
 \usage{
-rt_ticket_attachment(ticket_id, attachment_id,
-  rt_base_url = Sys.getenv("RT_BASE_URL"))
+rt_ticket_attachment(ticket_id, attachment_id)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
 
 \item{attachment_id}{(numeric) The attachment identifier}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Retrieves attachment metadata

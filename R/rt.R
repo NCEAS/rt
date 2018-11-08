@@ -2,8 +2,8 @@
 #'
 #' Create an RT API URL based on the server URL and any arguments provided
 #'
-#' @param rt_base_url (character) The base URL that hosts RT for your organization
-#' @param ... Other parameters
+#' @param ... Parts of the URL to be joined by "/"
+#' @param base_url (character) The base URL that hosts RT for your organization
 #'
 
 rt_url <- function(..., base_url = Sys.getenv("RT_BASE_URL")) {
@@ -103,12 +103,20 @@ rt_handle_response <- function(response) {
 #' Get an RT response and format it into an S3 object
 #'
 #' @param url (character) The full RT URL
+#' @param ... Other arguments passed to \code{\link[httr]{GET}}
 #'
+#' @return (rt_api) The parsed response from RT
 rt_GET <- function(url, ...) {
   response <- httr::GET(url, ..., httr::user_agent("http://github.com/nceas/rt"))
   parse_rt_response(response)
 }
 
+#' POST an RT request
+#'
+#' @param url (character) The full RT URL
+#' @param ... Other arguments passed to \code{\link[httr]{POST}}
+#'
+#' @return (rt_api) The parsed response from RT
 rt_POST <- function(url, ...) {
   response <- httr::POST(url, ..., httr::user_agent("http://github.com/nceas/rt"))
   parse_rt_response(response)
@@ -132,7 +140,7 @@ print.rt_api <- function(x, max.lines = 10, width = getOption("width")) {
 #'   id: queue/1
 #'   Name: General
 #'
-#' @param response (rt_response)
+#' @param body (character) Response body from an \code{rt_response}
 #'
 #' @return List of properties
 parse_rt_properties <- function(body) {

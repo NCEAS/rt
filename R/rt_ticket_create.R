@@ -2,14 +2,14 @@
 #'
 #' This function essential parses the text:
 #'   "# Ticket 1 created."
-#' @param body (character) The ticket create response
+#' @param body (character) The ticket create response body
 #'
 #' @return (numeric) The ticket ID
-parse_ticket_create_response <- function(response) {
-  match_result <- stringr::str_match(response$body, "Ticket (\\d+) created\\.")
+parse_ticket_create_body <- function(body) {
+  match_result <- stringr::str_match(body, "Ticket (\\d+) created\\.")
 
     if (is.na(match_result[1,1])) {
-    stop(response$body, call. = FALSE)
+    stop(body, call. = FALSE)
   }
 
   as.numeric(match_result[1,2])
@@ -35,6 +35,8 @@ parse_ticket_create_response <- function(response) {
 #' @param text (character) Ticket content; if multi-line, prefix every line with a blank
 #' @param custom_field (vector) Takes a named vector of the custom field name and custom field value
 #' @inheritParams rt_login
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
+
 #'
 #' @export
 #'
@@ -83,7 +85,7 @@ rt_ticket_create <- function(queue = NULL,
   }
 
   url <- rt_url("ticket", "new")
-  response <- rt_POST(url, body = list(content = ticket_content))
-  parse_ticket_create_response(response)
+  response <- rt_POST(url, body = list(content = ticket_content), ...)
+  parse_ticket_create_body(response$body)
 }
 

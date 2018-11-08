@@ -12,8 +12,7 @@ rt_login(user = Sys.getenv("RT_USER"),
 
 \item{password}{(character) Your password.}
 
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Use this to log into RT at the start of your session. Once you call this

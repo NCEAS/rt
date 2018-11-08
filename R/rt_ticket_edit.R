@@ -4,7 +4,8 @@
 #'
 #' @param ticket_id (numeric|character) The ticket number
 #' @inheritParams rt_ticket_create
-#'
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
+
 #' @export
 #'
 #' @examples
@@ -28,7 +29,7 @@ rt_ticket_edit <- function(ticket_id,
                            due = NULL,
                            text = NULL,
                            custom_field = NULL,
-                           rt_base_url = Sys.getenv("RT_BASE_URL")) {
+                           ...) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
   params <- compact(list(id = ticket_id,
@@ -55,5 +56,5 @@ rt_ticket_edit <- function(ticket_id,
   }
 
   url <- rt_url("ticket", ticket_id, "edit")
-  rt_POST(url, body = list(content = ticket_content))
+  rt_POST(url, body = list(content = ticket_content), ...)
 }

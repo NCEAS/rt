@@ -6,7 +6,7 @@
 \usage{
 rt_user_create(user_id, password, name = NULL, email_address = NULL,
   real_name = NULL, organization = NULL, privileged = NULL,
-  disabled = NULL, rt_base_url = Sys.getenv("RT_BASE_URL"))
+  disabled = NULL)
 }
 \arguments{
 \item{user_id}{(numeric) The user identifier}
@@ -24,9 +24,6 @@ rt_user_create(user_id, password, name = NULL, email_address = NULL,
 \item{privileged}{(numeric) Optional. User privilege status}
 
 \item{disabled}{(numeric) Optional. User disabled status}
-
-\item{rt_base_url}{(character) The address of your RT installation.
-See details.}
 }
 \description{
 Add a new RT user

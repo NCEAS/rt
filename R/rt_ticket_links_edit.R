@@ -19,8 +19,7 @@
 
 rt_ticket_links_edit <- function(ticket_id,
                                  referred_to_by = NULL, depended_on_by = NULL,
-                                 member_of = NULL, refers_to = NULL, depends_on = NULL,
-                                 rt_base_url = Sys.getenv("RT_BASE_URL")) {
+                                 member_of = NULL, refers_to = NULL, depends_on = NULL) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
   params <- compact(list(ReferredToBy = referred_to_by,

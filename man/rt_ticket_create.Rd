@@ -40,6 +40,8 @@ rt_ticket_create(queue = NULL, requestor = NULL, subject = NULL,
 \item{text}{(character) Ticket content; if multi-line, prefix every line with a blank}
 
 \item{custom_field}{(vector) Takes a named vector of the custom field name and custom field value}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Create a new ticket in RT.
