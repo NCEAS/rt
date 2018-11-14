@@ -4,16 +4,20 @@
 \alias{rt_ticket_search}
 \title{Search RT}
 \usage{
-rt_ticket_search(query, orderBy = NULL, format = "l")
+rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL)
 }
 \arguments{
 \item{query}{(character) Your query (See Details)}
 
-\item{orderBy}{(character) How to order your search results}
+\item{orderby}{(character) How to order your search results. Should be a
+ticket property name preceeded by either a + or a - character.}
 
 \item{format}{(character) Either \code{i} (ticket ID only),
 \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
 Defaults to \code{l}.}
+
+\item{fields}{(character) Comma-separated list of fields to include in the
+results.}
 }
 \description{
 Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
@@ -21,6 +25,8 @@ Search RT for tickets using RT's query syntax. Queries are specified using RT's 
 \examples{
 \dontrun{
 # To return all un-owned tickets on a queue:
-rt_ticket_search(query = "Queue='General' AND (Status='new')")
+rt_ticket_search("Queue='General' AND (Status='new')")
+rt_ticket_search("Queue='General' AND (Status='new')",
+                 orderBy = "+Created")
 }
 }

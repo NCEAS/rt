@@ -1,8 +1,21 @@
+#' Parse the response body from a call to \code{\link{rt_user_create}}
+#'
+#' @param body (character)
+#' @return (numeric) The user ID
+parse_user_create_body <- function(body) {
+  id <- stringr::str_extract(body, "\\d+")
+
+  if (is.na(id)) {
+    stop("Failed to parse response body from call to rt_user_create.")
+  }
+
+  as.numeric(id)
+}
+
 #' Create new user
 #'
-#' Add a new RT user
+#' Create a new RT user
 #'
-#' @param user_id (numeric) The user identifier
 #' @param password (character) The password
 #' @param name (character) Optional. User name
 #' @param email_address (character) Optional. User email
@@ -10,6 +23,7 @@
 #' @param organization (character) Optional. User organization
 #' @param privileged (numeric) Optional. User privilege status
 #' @param disabled (numeric) Optional. User disabled status
+#'
 #' @inheritParams rt_ticket_attachment
 #'
 #' @export
@@ -19,9 +33,8 @@
 #' rt_user_create()
 #' }
 
-rt_user_create <- function(user_id,
-                           password,
-                           name = NULL,
+rt_user_create <- function(name = NULL,
+                           password = NULL,
                            email_address = NULL,
                            real_name = NULL,
                            organization = NULL,
@@ -39,7 +52,14 @@ rt_user_create <- function(user_id,
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
 
   url <- rt_url("user", "new")
-  httr::POST(url, body = list(content = user_info))
-  #TODO: make this work!
-  #might need specific permissions?
+  response <- rt_POST(url, body = list(content = user_info))
+
+  if (stringr::str_detect(response$body, "Could not create user.")) {
+    stop("Could not create user ",
+         name,
+         ". Check that properties such as Name and EmailAddress ",
+         "are unique for the user.", call. = FALSE)
+  }
+
+    parse_user_create_body(response$body)
 }

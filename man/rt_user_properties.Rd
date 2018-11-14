@@ -7,11 +7,10 @@
 rt_user_properties(user_id)
 }
 \arguments{
-\item{user_id}{(numeric) The user identifier}
+\item{user_id}{(numeric) The ID of the User to edit}
 }
 \description{
-Gets the ticket links for a single ticket. If applicable, the following fields will be returned: \code{HasMember},
-\code{ReferredToBy}, \code{DependedOnBy}, \code{MemberOf}, \code{RefersTo}, and \code{DependsOn}.
+Get RT user properties
 }
 \examples{
 \dontrun{

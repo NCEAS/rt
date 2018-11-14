@@ -3,48 +3,59 @@
 #' Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
 #'
 #' @param query (character) Your query (See Details)
-#' @param orderBy (character) How to order your search results
+#' @param orderby (character) How to order your search results. Should be a
+#' ticket property name preceeded by either a + or a - character.
 #' @param format (character) Either \code{i} (ticket ID only),
 #' \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
-#' @inheritParams rt_ticket_attachment
+#' @param fields (character) Comma-separated list of fields to include in the
+#' results.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # To return all un-owned tickets on a queue:
-#' rt_ticket_search(query = "Queue='General' AND (Status='new')")
+#' rt_ticket_search("Queue='General' AND (Status='new')")
+#' rt_ticket_search("Queue='General' AND (Status='new')",
+#'                  orderBy = "+Created")
 #' }
-
-rt_ticket_search <- function(query, orderBy = NULL, format="l") {
+rt_ticket_search <- function(query, orderby = NULL, format="l", fields = NULL) {
   base_api <- rt_url("search", "ticket?")
 
-  #based on httr::modify_url()
-  #possible TODO - turn this into its own function that can be used internally in the package
   inputs <- compact(list(query = utils::URLencode(query, reserved = TRUE),
-                         orderBy = orderBy,
-                         format = format))
+                         orderby = orderby,
+                         format = format,
+                         fields = fields))
 
   params <- paste(paste0(names(inputs), "=", inputs), collapse = "&")
   url <- paste0(base_api, params)
   response <- rt_GET(url)
 
+  # Handle bad request. Not sure how comprehensive this is.
+  if (response$status >= 400) {
+    stop(response)
+  }
+
   if (format == "s") {
-    response$body <- tidyr::gather(response$body, id, value)
+    result <- lapply(
+      strsplit(response$body, "\\n")[[1]],
+      parse_rt_properties)
+  } else if (format == "i") {
+    result <- stringr::str_split(response$body, "\n")[[1]]
+  } else if (format == "l" ) {
+    result <- lapply(
+      strsplit(response$body, "\\n\\n--\\n\\n")[[1]],
+      parse_rt_properties)
+  } else {
+    stop("Invalid choice of format '", format, "'. Valid options are l, s, or i.")
   }
 
-  if (format == "i") {
-    response$body <- stringr::str_split(response$body, "\n")
-  }
-
-  parsed <- parse_ticket_search_body(response$body)
-
-  parsed
+  result
 }
 
 parse_ticket_search_body <- function(body) {
-  lapply(strsplit(body, "\\n\\n--\\n\\n")[[1]], parse_rt_properties)
+
 }
 
 

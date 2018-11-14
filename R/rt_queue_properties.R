@@ -17,6 +17,11 @@ rt_queue_properties <- function(queue) {
   url <- rt_url("queue", queue)
   response <- rt_GET(url)
 
+  # Handle queue not found
+  if (stringr::str_detect(response$body, "No queue named")) {
+    stop("No queue named ", queue, " exists.", call. = FALSE)
+  }
+
   parse_rt_properties(response$body)
 }
 

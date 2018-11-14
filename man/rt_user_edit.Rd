@@ -4,12 +4,12 @@
 \alias{rt_user_edit}
 \title{Edit user information}
 \usage{
-rt_user_edit(user_id, password, name = NULL, email_address = NULL,
-  real_name = NULL, organization = NULL, privileged = NULL,
-  disabled = NULL)
+rt_user_edit(user_id, password = NULL, name = NULL,
+  email_address = NULL, real_name = NULL, organization = NULL,
+  privileged = NULL, disabled = NULL)
 }
 \arguments{
-\item{user_id}{(numeric) The user identifier}
+\item{user_id}{(numeric) The ID of the User to edit}
 
 \item{password}{(character) The password}
 
@@ -26,7 +26,7 @@ rt_user_edit(user_id, password, name = NULL, email_address = NULL,
 \item{disabled}{(numeric) Optional. User disabled status}
 }
 \description{
-Add a comment to an existing ticket
+Edit user information
 }
 \examples{
 \dontrun{

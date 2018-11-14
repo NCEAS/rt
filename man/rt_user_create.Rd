@@ -4,16 +4,14 @@
 \alias{rt_user_create}
 \title{Create new user}
 \usage{
-rt_user_create(user_id, password, name = NULL, email_address = NULL,
+rt_user_create(name = NULL, password = NULL, email_address = NULL,
   real_name = NULL, organization = NULL, privileged = NULL,
   disabled = NULL)
 }
 \arguments{
-\item{user_id}{(numeric) The user identifier}
+\item{name}{(character) Optional. User name}
 
 \item{password}{(character) The password}
-
-\item{name}{(character) Optional. User name}
 
 \item{email_address}{(character) Optional. User email}
 
@@ -26,7 +24,7 @@ rt_user_create(user_id, password, name = NULL, email_address = NULL,
 \item{disabled}{(numeric) Optional. User disabled status}
 }
 \description{
-Add a new RT user
+Create a new RT user
 }
 \examples{
 \dontrun{
