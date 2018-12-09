@@ -133,8 +133,8 @@ rt_handle_response <- function(response) {
 #'
 #' @return (rt_api) The parsed response from RT
 rt_GET <- function(url, ...) {
-  parse_rt_response(response)
   response <- httr::GET(url, ...,  httr::user_agent(rt_user_agent()))
+  rt_parse_response(response)
 }
 
 #' POST an RT request
@@ -144,8 +144,8 @@ rt_GET <- function(url, ...) {
 #'
 #' @return (rt_api) The parsed response from RT
 rt_POST <- function(url, ...) {
-  parse_rt_response(response)
   response <- httr::POST(url, ..., httr::user_agent(rt_user_agent()))
+  rt_parse_response(response)
 }
 
 
