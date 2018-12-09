@@ -26,10 +26,17 @@ rt_ticket_search <- function(query,
                              format="l",
                              fields = NULL,
                              ...) {
-  params <- compact(list(query = utils::URLencode(query, reserved = TRUE),
-                         orderby = orderby,
-                         format = format,
-                         fields = fields))
+  if (!(format %in% c("l", "s", "i"))) {
+      stop(call. = FALSE,
+           "Invalid choice of format, '",
+           format,
+           "'. Valid options are l (long), s (short), or i.")
+  }
+
+  params <- list(query = query,
+                 orderby = orderby,
+                 format = format,
+                 fields = fields)
 
   url <- rt_url("search", "ticket", query_params = params)
   response <- rt_GET(url, ...)
@@ -49,8 +56,6 @@ rt_ticket_search <- function(query,
     result <- lapply(
       strsplit(response$body, "\\n\\n--\\n\\n")[[1]],
       parse_rt_properties)
-  } else {
-    stop("Invalid choice of format '", format, "'. Valid options are l, s, or i.")
   }
 
   result
