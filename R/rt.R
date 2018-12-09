@@ -107,8 +107,8 @@ rt_handle_response <- function(response) {
 #'
 #' @return (rt_api) The parsed response from RT
 rt_GET <- function(url, ...) {
-  response <- httr::GET(url, ..., httr::user_agent("http://github.com/nceas/rt"))
   parse_rt_response(response)
+  response <- httr::GET(url, ...,  httr::user_agent(rt_user_agent()))
 }
 
 #' POST an RT request
@@ -118,8 +118,8 @@ rt_GET <- function(url, ...) {
 #'
 #' @return (rt_api) The parsed response from RT
 rt_POST <- function(url, ...) {
-  response <- httr::POST(url, ..., httr::user_agent("http://github.com/nceas/rt"))
   parse_rt_response(response)
+  response <- httr::POST(url, ..., httr::user_agent(rt_user_agent()))
 }
 
 
@@ -152,4 +152,46 @@ parse_rt_properties <- function(body) {
   names(result) <- vapply(parsed, function(x){ trimws(x[[1]][1]) }, "")
 
   result
+}
+
+#' Get the version of the currently installed version of this package as a
+#' character vector
+#'
+#' @return (character) The version is a character vector, e.g. "1.2.3"
+#' @examples
+#' get_package_version_string()
+rt_version_string <- function() {
+  path <- system.file("DESCRIPTION", package = "rt")
+
+  if (!file.exists(path)) {
+    return("")
+  }
+
+  description <- readLines(path)
+  index <- grep("Version", description)
+
+  if (length(index) != 1) {
+    return("")
+  }
+
+  version_string <- gsub("Version: ", "", description[index])
+
+  if (nchar(version_string) <= 0) {
+    return("")
+  }
+
+  version_string
+}
+
+#' Get the user agent for the package.
+#'
+#' This is used by \link{\code{rt_GET}} and \link{\code{rt_POST}} to provide
+#' HTTP requests with an appropriate user agent.
+#'
+#' @return (character) The user agent string for the package
+#'
+#' @examples
+#' rt_user_agent()
+rt_user_agent <- function() {
+  paste0("https://github.com/nceas/rt (v", rt_version_string(), ")")
 }
