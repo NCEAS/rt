@@ -21,15 +21,12 @@
 #'                  orderBy = "+Created")
 #' }
 rt_ticket_search <- function(query, orderby = NULL, format="l", fields = NULL) {
-  base_api <- rt_url("search", "ticket?")
-
-  inputs <- compact(list(query = utils::URLencode(query, reserved = TRUE),
+  params <- compact(list(query = utils::URLencode(query, reserved = TRUE),
                          orderby = orderby,
                          format = format,
                          fields = fields))
 
-  params <- paste(paste0(names(inputs), "=", inputs), collapse = "&")
-  url <- paste0(base_api, params)
+  url <- rt_url("search", "ticket", query_params = params)
   response <- rt_GET(url)
 
   # Handle bad request. Not sure how comprehensive this is.

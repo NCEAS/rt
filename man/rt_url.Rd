@@ -4,10 +4,14 @@
 \alias{rt_url}
 \title{Generate an RT API URL}
 \usage{
-rt_url(..., base_url = Sys.getenv("RT_BASE_URL"))
+rt_url(..., query_params = NULL, base_url = Sys.getenv("RT_BASE_URL"))
 }
 \arguments{
 \item{...}{Parts of the URL to be joined by "/"}
+
+\item{query_params}{(list) A named list of query parameters where the names
+of the list map to the query parameter names and the values of the list map
+to the query parameter values. e.g., \code{list(a=1)} maps to \code{"?a=1"}.}
 
 \item{base_url}{(character) The base URL that hosts RT for your organization}
 }

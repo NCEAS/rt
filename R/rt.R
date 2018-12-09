@@ -3,20 +3,46 @@
 #' Create an RT API URL based on the server URL and any arguments provided
 #'
 #' @param ... Parts of the URL to be joined by "/"
+#' @param query_params (list) A named list of query parameters where the names
+#' of the list map to the query parameter names and the values of the list map
+#' to the query parameter values. e.g., \code{list(a=1)} maps to \code{"?a=1"}.
 #' @param base_url (character) The base URL that hosts RT for your organization
-#'
-
-rt_url <- function(..., base_url = Sys.getenv("RT_BASE_URL")) {
+rt_url <- function(...,
+                   query_params=NULL,
+                   base_url = Sys.getenv("RT_BASE_URL")) {
   if (!is.character(base_url) || nchar(base_url) <= 0) {
     stop("Invalid RT base URL: ",
          "See ?rt for information on how to get started. ",
          call. = FALSE)
   }
-  paste(gsub("\\/$", "", base_url), # Removes trailing slash from base URL just in case
+
+  # Form the first part of the URL
+  url <- paste(gsub("\\/$", "", base_url), # Removes trailing slash from base
+                                           # URL just in case
         "REST",
         "1.0",
         paste(c(...), collapse = "/"),
         sep = "/")
+
+  # Add in query parameters
+  query_params_clean <- compact(query_params)
+
+  # Create a string of query params
+  # Converts to char and URL encode values along the way
+  query_params_string <- paste(
+    paste(
+      names(query_params_clean),
+      vapply(
+        vapply(query_params_clean,
+               as.character,
+               ""),
+        utils::URLencode,
+        "",
+        reserved = TRUE),
+      sep = "="),
+    collapse = "&")
+
+  paste(url, query_params_string, sep = "?")
 }
 
 #' Compact list.
