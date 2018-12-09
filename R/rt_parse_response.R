@@ -29,7 +29,7 @@
 #'   Prints more information during parsing.
 #'
 #' @return (list) List with named elements status, message, and body
-parse_rt_response <- function(response, verbose = FALSE) {
+rt_parse_response <- function(response, verbose = FALSE) {
   body <- suppressWarnings(httr::content(response))
   message(body)
 
