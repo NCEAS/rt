@@ -4,10 +4,12 @@
 \alias{rt_ticket_attachments}
 \title{Get ticket attachments}
 \usage{
-rt_ticket_attachments(ticket_id)
+rt_ticket_attachments(ticket_id, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Retrieves attachment metadata for a ticket

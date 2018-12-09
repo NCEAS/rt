@@ -4,10 +4,12 @@
 \alias{rt_ticket_links}
 \title{Get RT ticket links}
 \usage{
-rt_ticket_links(ticket_id)
+rt_ticket_links(ticket_id, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Gets the ticket links for a single ticket. If applicable, the following fields will be returned: \code{HasMember},

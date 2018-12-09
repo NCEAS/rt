@@ -18,6 +18,7 @@ warn_user_edit_warnings <- function(body) {
 #'
 #' @param user_id (numeric) The ID of the User to edit
 #' @inheritParams rt_user_create
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @export
 #'
@@ -33,7 +34,8 @@ rt_user_edit <- function(user_id,
                          real_name = NULL,
                          organization = NULL,
                          privileged = NULL,
-                         disabled = NULL) {
+                         disabled = NULL,
+                         ...) {
 
   params <- compact(list(Name = name,
                          Password = password,
@@ -46,7 +48,7 @@ rt_user_edit <- function(user_id,
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
 
   url <- rt_url("user", user_id, "edit")
-  response <- rt_POST(url, body = list(content = user_info))
+  response <- rt_POST(url, body = list(content = user_info), ...)
 
   # I'm not sure how to make this fail so we we just return TRUE invisibly when
   # it succeeds

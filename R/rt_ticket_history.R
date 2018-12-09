@@ -6,6 +6,7 @@
 #' @param format (character) The format of the ticket history response. Either
 #' \code{s} (ticket ID and subject) or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
+#' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
 #' @export
 #'
@@ -22,7 +23,7 @@
 #' rt_ticket_history(992, format = "s")
 #' }
 
-rt_ticket_history <- function(ticket_id, format = "l") {
+rt_ticket_history <- function(ticket_id, format = "l", ...) {
   if (missing(ticket_id)) {
     stop("'ticket_id' must be specified.", call. = FALSE)
   }
@@ -34,5 +35,5 @@ rt_ticket_history <- function(ticket_id, format = "l") {
 
   #' TODO: Improve parsing here. I'm not sure what the most useful return value
   #' is though.
-  rt_GET(url)
+  rt_GET(url, ...)
 }

@@ -4,10 +4,12 @@
 \alias{rt_queue_properties}
 \title{Get queue properties}
 \usage{
-rt_queue_properties(queue)
+rt_queue_properties(queue, ...)
 }
 \arguments{
 \item{queue}{(character) The queue}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Get the data for a single queue.

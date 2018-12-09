@@ -3,7 +3,7 @@
 #' Get the data for a single queue.
 #'
 #' @param queue (character) The queue
-#' @inheritParams rt_login
+#' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
 #' @export
 #'
@@ -12,10 +12,10 @@
 #' rt_queue_properties("General")
 #' }
 
-rt_queue_properties <- function(queue) {
+rt_queue_properties <- function(queue, ...) {
   stopifnot(is.character(queue))
   url <- rt_url("queue", queue)
-  response <- rt_GET(url)
+  response <- rt_GET(url, ...)
 
   # Handle queue not found
   if (stringr::str_detect(response$body, "No queue named")) {

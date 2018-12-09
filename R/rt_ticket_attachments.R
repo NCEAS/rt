@@ -3,6 +3,7 @@
 #' Retrieves attachment metadata for a ticket
 #'
 #' @inheritParams rt_ticket_attachment
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @export
 #'
@@ -11,9 +12,9 @@
 #' rt_ticket_attachments(2)
 #' }
 
-rt_ticket_attachments <- function(ticket_id) {
+rt_ticket_attachments <- function(ticket_id, ...) {
   url <- rt_url("ticket", ticket_id, "attachments")
-  out <- rt_GET(url)
+  out <- rt_GET(url, ...)
 
   location <- stringr::str_locate(out$body, "Attachments: ")
 

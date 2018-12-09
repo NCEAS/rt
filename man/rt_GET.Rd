@@ -4,10 +4,13 @@
 \alias{rt_GET}
 \title{Get an RT response}
 \usage{
-rt_GET(url, ...)
+rt_GET(url, raw = FALSE, ...)
 }
 \arguments{
 \item{url}{(character) The full RT URL}
+
+\item{raw}{(logical) Whether or not to return the raw response from \
+code{\link[httr]{GET}} (\code{TRUE}) or not (\code{FALSE})}
 
 \item{...}{Other arguments passed to \code{\link[httr]{GET}}}
 }

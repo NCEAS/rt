@@ -6,7 +6,7 @@
 \usage{
 rt_user_create(name = NULL, password = NULL, email_address = NULL,
   real_name = NULL, organization = NULL, privileged = NULL,
-  disabled = NULL)
+  disabled = NULL, ...)
 }
 \arguments{
 \item{name}{(character) Optional. User name}
@@ -22,6 +22,8 @@ rt_user_create(name = NULL, password = NULL, email_address = NULL,
 \item{privileged}{(numeric) Optional. User privilege status}
 
 \item{disabled}{(numeric) Optional. User disabled status}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Create a new RT user

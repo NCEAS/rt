@@ -4,10 +4,12 @@
 \alias{rt_ticket_properties}
 \title{Get ticket properties}
 \usage{
-rt_ticket_properties(ticket_id)
+rt_ticket_properties(ticket_id, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Retrieves ticket properties

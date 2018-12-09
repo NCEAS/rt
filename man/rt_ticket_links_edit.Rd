@@ -6,7 +6,7 @@
 \usage{
 rt_ticket_links_edit(ticket_id, referred_to_by = NULL,
   depended_on_by = NULL, member_of = NULL, refers_to = NULL,
-  depends_on = NULL)
+  depends_on = NULL, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -20,6 +20,8 @@ rt_ticket_links_edit(ticket_id, referred_to_by = NULL,
 \item{refers_to}{Tickets that are referred to}
 
 \item{depends_on}{Tickets that are depended on}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Update links of an existing RT ticket.

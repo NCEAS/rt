@@ -23,6 +23,7 @@ parse_user_create_body <- function(body) {
 #' @param organization (character) Optional. User organization
 #' @param privileged (numeric) Optional. User privilege status
 #' @param disabled (numeric) Optional. User disabled status
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @inheritParams rt_ticket_attachment
 #'
@@ -39,7 +40,8 @@ rt_user_create <- function(name = NULL,
                            real_name = NULL,
                            organization = NULL,
                            privileged = NULL,
-                           disabled = NULL) {
+                           disabled = NULL,
+                           ...) {
 
   params <- compact(list(Name = name,
                          Password = password,
@@ -52,7 +54,7 @@ rt_user_create <- function(name = NULL,
   user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
 
   url <- rt_url("user", "new")
-  response <- rt_POST(url, body = list(content = user_info))
+  response <- rt_POST(url, body = list(content = user_info), ...)
 
   if (stringr::str_detect(response$body, "Could not create user.")) {
     stop("Could not create user ",

@@ -8,6 +8,7 @@
 #' @param bcc (character) Email for bcc
 #' @param time_worked (character)
 #' @param attachment_path (character) Path to a file to upload
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @export
 #'
@@ -25,7 +26,8 @@ rt_ticket_history_reply <- function(ticket_id,
                                     bcc = NULL,
                                     time_worked = NULL, # unsure what the inputs
                                                         # are...
-                                    attachment_path = NULL) {
+                                    attachment_path = NULL,
+                                    ...) {
 
   params <- list(id = ticket_id,
                  Action = "correspond",
@@ -38,5 +40,5 @@ rt_ticket_history_reply <- function(ticket_id,
   url <- rt_url("ticket", ticket_id, "comment", query_params = params)
   reply <- paste(names(params), params, sep = ": ", collapse = "\n")
   browser()
-  httr::POST(url, body = list(content = reply))
+  httr::POST(url, body = list(content = reply), ...)
 }

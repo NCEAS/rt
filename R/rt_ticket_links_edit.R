@@ -8,6 +8,7 @@
 #' @param member_of Ticket groups?
 #' @param refers_to Tickets that are referred to
 #' @param depends_on Tickets that are depended on
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @export
 #'
@@ -18,8 +19,12 @@
 #'
 
 rt_ticket_links_edit <- function(ticket_id,
-                                 referred_to_by = NULL, depended_on_by = NULL,
-                                 member_of = NULL, refers_to = NULL, depends_on = NULL) {
+                                 referred_to_by = NULL,
+                                 depended_on_by = NULL,
+                                 member_of = NULL,
+                                 refers_to = NULL,
+                                 depends_on = NULL,
+                                 ...) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
   # HasMember is invalid here but used in rt_ticket_links
@@ -32,5 +37,5 @@ rt_ticket_links_edit <- function(ticket_id,
   links_edit <- paste(names(params), params, sep = ": ", collapse = "\n")
 
   url <- rt_url("ticket", ticket_id, "links")
-  httr::POST(url, body = list(content = links_edit))
+  httr::POST(url, body = list(content = links_edit), ...)
 }

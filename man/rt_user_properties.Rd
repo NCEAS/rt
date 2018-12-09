@@ -4,10 +4,12 @@
 \alias{rt_user_properties}
 \title{Get RT user properties}
 \usage{
-rt_user_properties(user_id)
+rt_user_properties(user_id, ...)
 }
 \arguments{
 \item{user_id}{(numeric) The ID of the User to edit}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Get RT user properties

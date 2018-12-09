@@ -6,7 +6,7 @@
 \usage{
 rt_user_edit(user_id, password = NULL, name = NULL,
   email_address = NULL, real_name = NULL, organization = NULL,
-  privileged = NULL, disabled = NULL)
+  privileged = NULL, disabled = NULL, ...)
 }
 \arguments{
 \item{user_id}{(numeric) The ID of the User to edit}
@@ -24,6 +24,8 @@ rt_user_edit(user_id, password = NULL, name = NULL,
 \item{privileged}{(numeric) Optional. User privilege status}
 
 \item{disabled}{(numeric) Optional. User disabled status}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Edit user information

@@ -4,12 +4,14 @@
 \alias{rt_ticket_attachment_content}
 \title{Get ticket attachment content}
 \usage{
-rt_ticket_attachment_content(ticket_id, attachment_id)
+rt_ticket_attachment_content(ticket_id, attachment_id, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
 
 \item{attachment_id}{(numeric) The attachment identifier}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Retrieves attachment content

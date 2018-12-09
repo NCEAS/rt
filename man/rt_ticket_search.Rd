@@ -4,7 +4,8 @@
 \alias{rt_ticket_search}
 \title{Search RT}
 \usage{
-rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL)
+rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL,
+  ...)
 }
 \arguments{
 \item{query}{(character) Your query (See Details)}
@@ -18,6 +19,8 @@ Defaults to \code{l}.}
 
 \item{fields}{(character) Comma-separated list of fields to include in the
 results.}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.

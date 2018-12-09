@@ -4,7 +4,7 @@
 \alias{rt_ticket_history}
 \title{Get ticket history}
 \usage{
-rt_ticket_history(ticket_id, format = "l")
+rt_ticket_history(ticket_id, format = "l", ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
@@ -12,6 +12,8 @@ rt_ticket_history(ticket_id, format = "l")
 \item{format}{(character) The format of the ticket history response. Either
 \code{s} (ticket ID and subject) or \code{l} (full ticket metadata).
 Defaults to \code{l}.}
+
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
 Retrieves information about the ticket history

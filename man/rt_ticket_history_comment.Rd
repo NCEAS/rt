@@ -4,12 +4,14 @@
 \alias{rt_ticket_history_comment}
 \title{Add ticket history comment}
 \usage{
-rt_ticket_history_comment(ticket_id, comment_text)
+rt_ticket_history_comment(ticket_id, comment_text, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
 
 \item{comment_text}{(character) Text that to add as a comment}
+
+\item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
 Add a comment to an existing ticket

@@ -10,6 +10,7 @@
 #' Defaults to \code{l}.
 #' @param fields (character) Comma-separated list of fields to include in the
 #' results.
+#' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
 #' @export
 #'
@@ -20,14 +21,18 @@
 #' rt_ticket_search("Queue='General' AND (Status='new')",
 #'                  orderBy = "+Created")
 #' }
-rt_ticket_search <- function(query, orderby = NULL, format="l", fields = NULL) {
+rt_ticket_search <- function(query,
+                             orderby = NULL,
+                             format="l",
+                             fields = NULL,
+                             ...) {
   params <- compact(list(query = utils::URLencode(query, reserved = TRUE),
                          orderby = orderby,
                          format = format,
                          fields = fields))
 
   url <- rt_url("search", "ticket", query_params = params)
-  response <- rt_GET(url)
+  response <- rt_GET(url, ...)
 
   # Handle bad request. Not sure how comprehensive this is.
   if (response$status >= 400) {
