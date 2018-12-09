@@ -133,22 +133,36 @@ rt_handle_response <- function(response) {
 #' Get an RT response and format it into an S3 object
 #'
 #' @param url (character) The full RT URL
+#' @param raw (logical) Whether or not to return the raw response from \
+#' code{\link[httr]{GET}} (\code{TRUE}) or not (\code{FALSE})
 #' @param ... Other arguments passed to \code{\link[httr]{GET}}
 #'
 #' @return (rt_api) The parsed response from RT
-rt_GET <- function(url, ...) {
+rt_GET <- function(url, raw = FALSE, ...) {
   response <- httr::GET(url, ...,  httr::user_agent(rt_user_agent()))
+
+  if (raw) {
+    return(response)
+  }
+
   rt_parse_response(response)
 }
 
 #' POST an RT request
 #'
 #' @param url (character) The full RT URL
+#' @param raw (logical) Whether or not to return the raw response from \
+#' code{\link[httr]{POST}} (\code{TRUE}) or not (\code{FALSE})
 #' @param ... Other arguments passed to \code{\link[httr]{POST}}
 #'
 #' @return (rt_api) The parsed response from RT
-rt_POST <- function(url, ...) {
+rt_POST <- function(url, raw = FALSE, ...) {
   response <- httr::POST(url, ..., httr::user_agent(rt_user_agent()))
+
+  if (raw) {
+    return(response)
+  }
+
   rt_parse_response(response)
 }
 
