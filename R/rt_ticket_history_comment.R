@@ -21,7 +21,4 @@ rt_ticket_history_comment <- function(ticket_id, comment_text, ...) {
                      comment_text)
 
   httr::POST(url, body = list(content = comment), ...)
-
-  #' TODO: implement attachment
-  #' https://rt-wiki.bestpractical.com/wiki/REST#Ticket_History_Comment
 }

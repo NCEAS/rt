@@ -75,7 +75,7 @@ parse_ticket <- function(resp_cont) {
     lapply(resp_split,
            function(.x){
              tibble::tibble(fields = stringr::str_extract_all(.x, "\n[^: ]+:")[[1]] %>%
-                      str_replace_all("\\n|:", "") %>%
+                      stringr::str_replace_all("\\n|:", "") %>%
                       trimws(),
                     values = stringr::str_split(.x, "\n[^: ]+:")[[1]][-1] %>%
                       trimws()) %>%
@@ -202,8 +202,6 @@ parse_rt_properties <- function(body) {
 #' character vector
 #'
 #' @return (character) The version is a character vector, e.g. "1.2.3"
-#' @examples
-#' get_package_version_string()
 rt_version_string <- function() {
   path <- system.file("DESCRIPTION", package = "rt")
 
@@ -229,13 +227,10 @@ rt_version_string <- function() {
 
 #' Get the user agent for the package.
 #'
-#' This is used by \link{\code{rt_GET}} and \link{\code{rt_POST}} to provide
+#' This is used by \code{\link{rt_GET}} and \code{\link{rt_POST}} to provide
 #' HTTP requests with an appropriate user agent.
 #'
 #' @return (character) The user agent string for the package
-#'
-#' @examples
-#' rt_user_agent()
 rt_user_agent <- function() {
   paste0("https://github.com/nceas/rt (v", rt_version_string(), ")")
 }

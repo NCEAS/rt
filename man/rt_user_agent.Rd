@@ -10,9 +10,6 @@ rt_user_agent()
 (character) The user agent string for the package
 }
 \description{
-This is used by \link{\code{rt_GET}} and \link{\code{rt_POST}} to provide
+This is used by \code{\link{rt_GET}} and \code{\link{rt_POST}} to provide
 HTTP requests with an appropriate user agent.
-}
-\examples{
-rt_user_agent()
 }

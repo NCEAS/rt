@@ -14,6 +14,3 @@ rt_version_string()
 Get the version of the currently installed version of this package as a
 character vector
 }
-\examples{
-get_package_version_string()
-}

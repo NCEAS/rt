@@ -17,8 +17,8 @@ c("AdminCc", "Created", "Creator", "Due", "FinalPriority", "id", "InitialPriorit
 ## ----load-and-connect, message = FALSE-----------------------------------
 library(rt)
 
-Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com") # Your RT installation's URL (where you log in)
-rt_login(user = "guest", pass = "guest") # Or use rt_login_interactive()
+Sys.setenv(RT_BASE_URL = "http://localhost:8080") # Your RT installation's URL (where you log in)
+rt_login(user = "root", pass = "password") # Or use rt_login_interactive()
 
 ## ----first-query---------------------------------------------------------
 result <- rt_ticket_search("Queue = 'General'")
