@@ -3,16 +3,11 @@
 #' Retrieves information about the ticket history
 #'
 #' @inheritParams rt_ticket_attachment
-#' @param format (character) Either  \code{s} (ticket ID and subject)
-#' or \code{l} (full ticket metadata).
+#' @param format (character) The format of the ticket history response. Either
+#' \code{s} (ticket ID and subject) or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
 #'
 #' @export
-#'
-#' @import stringr
-#' @importFrom tidyr separate
-#' @import dplyr
-#' @importFrom tibble tibble
 #'
 #' @examples
 #' \dontrun{
@@ -32,28 +27,12 @@ rt_ticket_history <- function(ticket_id, format = "l") {
     stop("'ticket_id' must be specified.", call. = FALSE)
   }
 
-  url <- rt_url("ticket", ticket_id, "history")
-  if(format == "l"){
-    url <- paste0(url, "?format=l")
-  }
+  url <- rt_url("ticket",
+                ticket_id,
+                "history",
+                query_params = list(format = format))
 
-  out <- rt_GET(url)
-
-  if(format == "s"){
-    out$content <- out$content %>%
-      tidyr::gather(history_id, history_name)
-  }
-
-  return(out)
-
-#   if(format == "l"){
-#     history <- stringr::str_split(content(req), "\\n\\n--\\n\\n")[[1]]
-#     print(cat(history))
-#   } else {
-#     history <- tibble::tibble(content = stringr::str_split(httr::content(req), "\\n")[[1]]) %>%
-#       dplyr::filter(str_detect(content, ":")) %>%
-#       tidyr::separate(content, c("ticket", "subject"), sep = ": ", extra = "merge")
-#   }
-#
-#   return(history)
+  #' TODO: Improve parsing here. I'm not sure what the most useful return value
+  #' is though.
+  rt_GET(url)
 }

@@ -22,12 +22,12 @@ rt_ticket_links_edit <- function(ticket_id,
                                  member_of = NULL, refers_to = NULL, depends_on = NULL) {
   stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
 
+  # HasMember is invalid here but used in rt_ticket_links
   params <- compact(list(ReferredToBy = referred_to_by,
                          DependedOnBy = depended_on_by,
                          MemberOf = member_of,
                          RefersTo = refers_to,
                          DependsOn = depends_on))
-  #HasMember is invalid here but used in rt_ticket_links
 
   links_edit <- paste(names(params), params, sep = ": ", collapse = "\n")
 

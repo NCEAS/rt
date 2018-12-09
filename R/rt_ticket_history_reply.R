@@ -23,23 +23,20 @@ rt_ticket_history_reply <- function(ticket_id,
                                     text,
                                     cc = NULL,
                                     bcc = NULL,
-                                    time_worked = NULL, #unsure what the inputs are...
+                                    time_worked = NULL, # unsure what the inputs
+                                                        # are...
                                     attachment_path = NULL) {
 
-  url <- rt_url("ticket", ticket_id, "comment")
+  params <- list(id = ticket_id,
+                 Action = "correspond",
+                 Text = text,
+                 CC = cc,
+                 Bcc = bcc,
+                 TimeWorked = time_worked,
+                 Attachment = attachment_path)
 
-  #account for NULLs
-  params <- compact(list(id = ticket_id,
-                         Action = "correspond",
-                         Text = text,
-                         CC = cc,
-                         Bcc = bcc,
-                         TimeWorked = time_worked,
-                         Attachment = attachment_path))
-
+  url <- rt_url("ticket", ticket_id, "comment", query_params = params)
   reply <- paste(names(params), params, sep = ": ", collapse = "\n")
-
+  browser()
   httr::POST(url, body = list(content = reply))
-
-  #not tested
 }

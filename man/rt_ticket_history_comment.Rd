@@ -16,6 +16,8 @@ Add a comment to an existing ticket
 }
 \examples{
 \dontrun{
-rt_ticket_history_comment()
+rt_ticket_history_comment(1, "Your comment here...")
 }
+TODO: implement attachment
+https://rt-wiki.bestpractical.com/wiki/REST#Ticket_History_Comment
 }

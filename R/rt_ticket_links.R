@@ -13,7 +13,7 @@
 #' }
 
 rt_ticket_links <- function(ticket_id) {
-  stopifnot(is.character(ticket_id) | is.numeric(ticket_id))
+  stopifnot(is.character(ticket_id) || is.numeric(ticket_id))
 
   url <- rt_url("ticket", ticket_id, "links", "show")
 
