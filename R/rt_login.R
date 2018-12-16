@@ -82,6 +82,7 @@ check_login <- function(response) {
 #' @param rt_base_url (character) The base URL that hosts RT for your
 #' organization. Set the base URL in your R session using
 #' \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}
+#' @param ... Other arguments passed to \code{\link{rt_do_login}}
 #'
 #' @importFrom getPass getPass
 #'

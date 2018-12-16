@@ -4,14 +4,18 @@
 \alias{rt_login_interactive}
 \title{Log in to RT interactively}
 \usage{
-rt_login_interactive(rt_base_url = Sys.getenv("RT_BASE"))
+rt_login_interactive(rt_base_url = Sys.getenv("RT_BASE"), ...)
 }
 \arguments{
-\item{rt_base_url}{(character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}}
+\item{rt_base_url}{(character) The base URL that hosts RT for your
+organization. Set the base URL in your R session using
+\code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}}
+
+\item{...}{Other arguments passed to \code{\link{rt_do_login}}}
 }
 \description{
-Wrapper for \code{\link{rt_login}} to interactively log into RT at the start of your
-session. Keeps your log-in information private.
+Wrapper for \code{\link{rt_login}} to interactively log into RT at the start
+of your session. Keeps your log-in information private.
 }
 \examples{
 \dontrun{

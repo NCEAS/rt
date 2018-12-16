@@ -1,4 +1,4 @@
-context("rt_url")
+context("rt")
 
 test_that("can construct URLs", {
   expect_equal(rt_url("a"),

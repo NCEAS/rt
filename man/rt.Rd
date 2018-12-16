@@ -4,10 +4,14 @@
 \name{rt}
 \alias{rt}
 \alias{rt-package}
-\title{\code{rt} package}
+\title{The \code{rt} package}
 \description{
-Request Tracker R API
+\code{rt} provides a programming interface to the
+\href{https://rt-wiki.bestpractical.com/wiki/REST}{Request Tracker API}.
 }
 \details{
-See \href{https://github.com/NCEAS/rt}{GitHub}
+Everything should be implemented and all functions should return a reasonably
+useful result that's suitable for programming with.
+
+See \href{https://github.com/NCEAS/rt}{GitHub} for more information.
 }
