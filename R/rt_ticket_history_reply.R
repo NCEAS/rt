@@ -24,8 +24,7 @@ rt_ticket_history_reply <- function(ticket_id,
                                     text,
                                     cc = NULL,
                                     bcc = NULL,
-                                    time_worked = NULL, # unsure what the inputs
-                                                        # are...
+                                    time_worked = "0",
                                     attachment_path = NULL,
                                     ...) {
 
@@ -38,7 +37,10 @@ rt_ticket_history_reply <- function(ticket_id,
                  Attachment = attachment_path)
 
   url <- rt_url("ticket", ticket_id, "comment", query_params = params)
-  reply <- paste(names(params), params, sep = ": ", collapse = "\n")
-  browser()
-  httr::POST(url, body = list(content = reply), ...)
+
+  # Construct reply body, :-separated key-valye pairs of params
+  params <- compact(params)
+  reply_body <- paste(names(params), params, sep = ": ", collapse = "\n")
+
+  httr::POST(url, body = list(content = reply_body), ...)
 }
