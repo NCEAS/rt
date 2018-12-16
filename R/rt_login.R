@@ -30,10 +30,10 @@
 rt_login <- function(user = Sys.getenv("RT_USER"),
                      password = Sys.getenv("RT_PASSWORD"),
                      ...) {
-  if (interactive()) {
+  if ((user == "" || password == "") && interactive()) {
     rt_login_interactive(...)
   } else {
-    rt_do_login()
+    rt_do_login(user, password)
   }
 }
 
