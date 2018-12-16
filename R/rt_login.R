@@ -30,6 +30,24 @@
 rt_login <- function(user = Sys.getenv("RT_USER"),
                      password = Sys.getenv("RT_PASSWORD"),
                      ...) {
+  if (interactive()) {
+    rt_login_interactive(...)
+  } else {
+    rt_do_login()
+  }
+}
+
+#' Actually do the logging in part of logging in
+#'
+#' Called by \code{\link{rt_login}} and \code{\link{rt_login_interactive}} to
+#' do the work of logging in
+#'
+#' @param user (character) Your username.
+#' @param password (character) Your password.
+#' @param ... Other arguments passed to \code{\link{rt_POST}}
+#'
+#' @return (logical) Either returns \code{TRUE} if successfull or errors out
+rt_do_login <- function(user, password, ...) {
   url <- rt_url()
   response <- rt_POST(url,
                       body = list(
@@ -58,10 +76,12 @@ check_login <- function(response) {
 
 #' Log in to RT interactively
 #'
-#' Wrapper for \code{\link{rt_login}} to interactively log into RT at the start of your
-#' session. Keeps your log-in information private.
+#' Wrapper for \code{\link{rt_login}} to interactively log into RT at the start
+#' of your session. Keeps your log-in information private.
 #'
-#' @param rt_base_url (character) The base URL that hosts RT for your organization. Set the base URL in your R session using \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}
+#' @param rt_base_url (character) The base URL that hosts RT for your
+#' organization. Set the base URL in your R session using
+#' \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}
 #'
 #' @importFrom getPass getPass
 #'
@@ -72,9 +92,9 @@ check_login <- function(response) {
 #' Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com")
 #' rt_login_interactive()
 #' }
-
-rt_login_interactive <- function(rt_base_url = Sys.getenv("RT_BASE")) {
-  rt_login(user = readline("Enter username: "),
-           password = getPass::getPass(),
-           rt_base_url = rt_base_url)
+rt_login_interactive <- function(rt_base_url = Sys.getenv("RT_BASE"), ...) {
+  rt_do_login(user = readline("Enter username: "),
+              password = getPass::getPass(),
+              rt_base_url = rt_base_url,
+              ...)
 }
