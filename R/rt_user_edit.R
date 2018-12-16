@@ -26,7 +26,6 @@ warn_user_edit_warnings <- function(body) {
 #' \dontrun{
 #' rt_user_create()
 #' }
-
 rt_user_edit <- function(user_id,
                          password = NULL,
                          name = NULL,
@@ -36,7 +35,6 @@ rt_user_edit <- function(user_id,
                          privileged = NULL,
                          disabled = NULL,
                          ...) {
-
   params <- compact(list(Name = name,
                          Password = password,
                          EmailAddress = email_address,
@@ -45,7 +43,7 @@ rt_user_edit <- function(user_id,
                          Privileged = privileged,
                          Disabled = disabled))
 
-  user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
+  user_info <- construct_newline_pairs(params)
 
   url <- rt_url("user", user_id, "edit")
   response <- rt_POST(url, body = list(content = user_info), ...)

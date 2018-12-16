@@ -18,18 +18,11 @@
 #' # Get just the ticket ID and subject
 #' rt_ticket_history(992, format = "s")
 #' }
-
 rt_ticket_history <- function(ticket_id, format = "l", ...) {
-  if (missing(ticket_id)) {
-    stop("'ticket_id' must be specified.", call. = FALSE)
-  }
-
   url <- rt_url("ticket",
                 ticket_id,
                 "history",
                 query_params = list(format = format))
 
-  #' TODO: Improve parsing here. I'm not sure what the most useful return value
-  #' is though.
   rt_GET(url, ...)
 }

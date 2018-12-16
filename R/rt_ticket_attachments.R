@@ -11,7 +11,6 @@
 #' \dontrun{
 #' rt_ticket_attachments(2)
 #' }
-
 rt_ticket_attachments <- function(ticket_id, ...) {
   url <- rt_url("ticket", ticket_id, "attachments")
   out <- rt_GET(url, ...)

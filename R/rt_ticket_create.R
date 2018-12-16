@@ -60,7 +60,6 @@ rt_ticket_create <- function(queue = NULL,
                              text = NULL,
                              custom_field = NULL,
                              ...) {
-
   params <- compact(list(id = "ticket/new",
                          Queue = queue,
                          Requestor = requestor,
@@ -77,7 +76,7 @@ rt_ticket_create <- function(queue = NULL,
                          Due = due,
                          Text = text))
 
-  ticket_content <- paste(names(params), params, sep = ": ", collapse = "\n")
+  ticket_content <- construct_newline_pairs(params)
 
   if (exists("custom_field") && length(custom_field) > 0) {
     cf <- sprintf("\nCF-%s: %s", names(custom_field), custom_field)

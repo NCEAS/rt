@@ -10,7 +10,6 @@
 #' \dontrun{
 #' rt_ticket_properties(15)
 #' }
-
 rt_ticket_properties <- function(ticket_id, ...) {
   url <- rt_url("ticket", ticket_id, "show")
   response <- rt_GET(url, ...)

@@ -12,7 +12,6 @@
 #' \dontrun{
 #' rt_ticket_links(1007)
 #' }
-
 rt_ticket_links <- function(ticket_id, ...) {
   stopifnot(is.character(ticket_id) || is.numeric(ticket_id))
 

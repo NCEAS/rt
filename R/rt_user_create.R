@@ -33,7 +33,6 @@ parse_user_create_body <- function(body) {
 #' \dontrun{
 #' rt_user_create()
 #' }
-
 rt_user_create <- function(name = NULL,
                            password = NULL,
                            email_address = NULL,
@@ -51,7 +50,7 @@ rt_user_create <- function(name = NULL,
                          Privileged = privileged,
                          Disabled = disabled))
 
-  user_info <- paste(names(params), params, sep = ": ", collapse = "\n")
+  user_info <- construct_newline_pairs(params)
 
   url <- rt_url("user", "new")
   response <- rt_POST(url, body = list(content = user_info), ...)

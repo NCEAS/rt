@@ -12,7 +12,6 @@
 #' \dontrun{
 #' rt_ticket_edit(20, priority = 2, custom_field = c(Description = "A description"))
 #' }
-
 rt_ticket_edit <- function(ticket_id,
                            queue = NULL,
                            requestor = NULL,
@@ -48,7 +47,7 @@ rt_ticket_edit <- function(ticket_id,
                          Due = due,
                          Text = text))
 
-  ticket_content <- paste(names(params), params, sep = ": ", collapse = "\n")
+  ticket_content <- construct_newline_pairs(params)
 
   if (exists("custom_field") && length(custom_field) > 0) {
     cf <- sprintf("CF-%s: %s", names(custom_field), custom_field)

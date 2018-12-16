@@ -17,7 +17,6 @@
 #' rt_ticket_edit(20, "Priority: 2")
 #' }
 #'
-
 rt_ticket_links_edit <- function(ticket_id,
                                  referred_to_by = NULL,
                                  depended_on_by = NULL,
@@ -34,8 +33,8 @@ rt_ticket_links_edit <- function(ticket_id,
                          RefersTo = refers_to,
                          DependsOn = depends_on))
 
-  links_edit <- paste(names(params), params, sep = ": ", collapse = "\n")
+  links_edit <- construct_newline_pairs(params)
 
   url <- rt_url("ticket", ticket_id, "links")
-  httr::POST(url, body = list(content = links_edit), ...)
+  rt_POST(url, body = list(content = links_edit), ...)
 }

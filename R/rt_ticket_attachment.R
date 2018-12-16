@@ -12,7 +12,6 @@
 #' \dontrun{
 #' rt_ticket_attachment(2, 1)
 #' }
-
 rt_ticket_attachment <- function(ticket_id,
                                  attachment_id,
                                  ...) {

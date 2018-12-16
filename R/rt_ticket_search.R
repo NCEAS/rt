@@ -61,10 +61,5 @@ rt_ticket_search <- function(query,
   result
 }
 
-parse_ticket_search_body <- function(body) {
-
-}
-
-
 
 

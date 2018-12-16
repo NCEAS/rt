@@ -56,6 +56,19 @@ rt_url <- function(...,
 #' @param l list
 compact <- function(l) Filter(Negate(is.null), l)
 
+#' Construct a string for params suitable for passing into an RT request
+#'
+#' RT's API, in a few cases, takes a body of key value pairs that are colon
+#' separated and each key value pair is newline separated. Each pair is also
+#' run through \code{\link{compact}} to remove \code{NULL} elements.
+#'
+#' @param params (list) One or more key value pairs
+#'
+#' @return (character)
+construct_newline_pairs <- function(params) {
+  params_clean <- compact(params)
+  paste(names(params_clean), params_clean, sep = ": ", collapse = "\n")
+}
 
 #' Parse an RT response
 #'

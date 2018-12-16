@@ -11,7 +11,6 @@
 #' \dontrun{
 #' rt_queue_properties("General")
 #' }
-
 rt_queue_properties <- function(queue, ...) {
   stopifnot(is.character(queue))
   url <- rt_url("queue", queue)
