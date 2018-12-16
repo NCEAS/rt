@@ -5,7 +5,7 @@
 \title{Add ticket history reply}
 \usage{
 rt_ticket_history_reply(ticket_id, text, cc = NULL, bcc = NULL,
-  time_worked = NULL, attachment_path = NULL, ...)
+  time_worked = "0", attachment_path = NULL, ...)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}

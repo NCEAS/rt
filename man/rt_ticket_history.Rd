@@ -18,3 +18,12 @@ Defaults to \code{l}.}
 \description{
 Retrieves information about the ticket history
 }
+\examples{
+\dontrun{
+# Get the full ticket history
+rt_ticket_history(992)
+
+# Get just the ticket ID and subject
+rt_ticket_history(992, format = "s")
+}
+}
