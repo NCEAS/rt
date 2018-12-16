@@ -50,7 +50,7 @@ rt_parse_response <- function(response, verbose = FALSE) {
   # Stop, helpfully, if we failed to get what we expected from the regex
   if (!all(dim(match) == c(1, 3))) {
     if (verbose) {
-      message(content)
+      message(body)
     }
 
     message("Failed to parse RT response. Returning response directly from httr.")
