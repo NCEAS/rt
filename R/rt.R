@@ -76,7 +76,6 @@ construct_newline_pairs <- function(params) {
 #'
 #' @param resp_cont (character) The RT ticket response content
 #'
-
 parse_ticket <- function(resp_cont) {
   #clean/split response
   resp_split <- resp_cont %>%
