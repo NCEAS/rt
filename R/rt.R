@@ -43,10 +43,10 @@ rt_url <- function(...,
     collapse = "&")
 
   if (nchar(query_params_string) > 0) {
-    return(paste(url, query_params_string, sep = "?"))
-  } else {
-    return(url)
+    url <- paste(url, query_params_string, sep = "?")
   }
+
+  url
 }
 
 #' Compact list.
