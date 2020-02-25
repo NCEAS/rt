@@ -55,3 +55,36 @@ test_that("we handle having no search results well", {
     rt_ticket_search("Queue = 'NOTFOUND'", format = "i"),
     "character")
 })
+
+test_that("try_tibble works as expected", {
+  testthat::expect_is(try_tibble(data.frame(), FALSE), "data.frame")
+
+  if (requireNamespace("tibble")) {
+    testthat::expect_is(try_tibble(data.frame()), "tbl_df")
+  } else {
+    testthat::expect_is(try_tibble(data.frame()), "data.frame")
+  }
+})
+
+test_that("tidy_long_search_result works as expected", {
+  testthat::expect_is(tidy_long_search_result(
+    list(list("id" = 1))),
+    "data.frame")
+
+  testthat::expect_is(tidy_long_search_result(
+    list(list("id" = 1)),
+    FALSE),
+    "data.frame")
+
+  testthat::expect_is(tidy_long_search_result(
+    list(
+      list("id" = 1, "Subject" = "Foo"),
+      list("id" = 2, "Subject" = "Foo")
+      )),
+    "data.frame")
+
+  # Test sanitization of ticket ids
+  result <- tidy_long_search_result(list(list("id" = "ticket/1")))
+  testthat::expect_is(result, "data.frame")
+  testthat::expect_true(result$id[1] == "1")
+})
