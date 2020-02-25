@@ -12,15 +12,13 @@ Description: This package implements a number of the functions provided by the
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr,
-  getPass,
-  httr,
-  stringr,
-  tibble,
-  tidyr
-Suggests: testthat,
-    knitr,
-    rmarkdown,
-    kableExtra
+Imports: httr,
+  stringr
+Suggests: askpass,
+  knitr,
+  kableExtra,
+  rmarkdown,
+  testthat,
+  tibble
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr

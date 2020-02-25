@@ -84,8 +84,6 @@ check_login <- function(response) {
 #' \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}
 #' @param ... Other arguments passed to \code{\link{rt_do_login}}
 #'
-#' @importFrom getPass getPass
-#'
 #' @export
 #'
 #' @examples
@@ -94,8 +92,18 @@ check_login <- function(response) {
 #' rt_login_interactive()
 #' }
 rt_login_interactive <- function(rt_base_url = Sys.getenv("RT_BASE"), ...) {
-  rt_do_login(user = readline("Enter username: "),
-              password = getPass::getPass(),
+  if (!requireNamespace("askpass")) {
+    stop(call. = FALSE,
+         paste(
+           "The 'askpass' is required when enter your password interactively.",
+           'Install it with install.packages("askpass").',
+           '\nYou can also set your password with',
+           'Sys.getenv(RT_PASSWORD="your password").',
+           "See ?rt for more details."))
+  }
+
+  rt_do_login(user = trimws(readline("Enter username: ")),
+              password = trimws(askpass::askpass()),
               rt_base_url = rt_base_url,
               ...)
 }

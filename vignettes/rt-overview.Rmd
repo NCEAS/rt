@@ -15,11 +15,18 @@ library(knitr)
 library(kableExtra)
 
 format_result <- function(query_result) {
-  query_result %>% 
-    knitr::kable(format = "html") %>% 
-    kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% 
-    kableExtra::scroll_box(width = "100%",
-                           height = "400px") #display concisely
+  result <- knitr::kable(query_result, format = "html")
+
+  kableExtra::kable_styling(result,
+                            bootstrap_options = c("striped",
+                                                  "hover",
+                                                  "condensed"))
+
+  kableExtra::scroll_box(result,
+                         width = "100%",
+                         height = "400px") #display concisely
+
+  result
 }
 ```
 
@@ -73,7 +80,7 @@ To search for all tickets in the "General" queue, we'd run the following:
 result <- rt_ticket_search("Queue = 'General'")
 ```
 
-By default, `rt_ticket_search` returns a list with names `content`, `path`, and `response`. Also by default, `result$content` will be a turned into a `tibble`. Let's look at that in a formatted table:
+By default, `rt_ticket_search` returns a list with names `content`, `path`, and `response`. Also by default, `result$content` will be a turned into a `data.frame` or `tibble` (if installed). Let's look at that in a formatted table:
 
 ```{r formatted-first-query, echo = FALSE}
 format_result(result$content)
