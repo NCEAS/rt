@@ -25,8 +25,6 @@ parse_user_create_body <- function(body) {
 #' @param disabled (numeric) Optional. User disabled status
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
-#' @inheritParams rt_ticket_attachment
-#'
 #' @export
 #'
 #' @examples
