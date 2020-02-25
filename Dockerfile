@@ -1,1 +1,0 @@
-FROM netsandbox/request-tracker

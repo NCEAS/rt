@@ -76,8 +76,7 @@ A Dockerfile is available at the root of the repository so it's easy to get a te
 The tests need this to run so make sure to run the following before running the tests:
 
 ```sh
-docker build . -t rt
-docker run -p 8080:80 rt
+docker run -d --name rt -p 8080:80 netsandbox/request-tracker
 ```
 
 You can then navigate to http://localhost:8080 and log in as user `root` with password `password`.
