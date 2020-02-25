@@ -4,7 +4,14 @@
 \alias{rt_ticket_search}
 \title{Search RT}
 \usage{
-rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL, ...)
+rt_ticket_search(
+  query,
+  orderby = NULL,
+  format = "l",
+  fields = NULL,
+  coerce_tibble = TRUE,
+  ...
+)
 }
 \arguments{
 \item{query}{(character) Your query (See Details)}
@@ -19,16 +26,32 @@ Defaults to \code{l}.}
 \item{fields}{(character) Comma-separated list of fields to include in the
 results.}
 
+\item{coerce_tibble}{(logical) Whether or not to make the result when
+\code{format} is \code{l} or \code{s} into a \code{tibble}. Defaults to \code{TRUE} and only works
+when the \code{tibble} package is installed.}
+
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+Either a data.frame/tibble (when format is \code{l} or \code{s}) or a numeric
+vector when its \code{i}.
+}
 \description{
-Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
+Search RT for tickets using RT's query syntax which is documented at
+\url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
 }
 \examples{
 \dontrun{
 # To return all un-owned tickets on a queue:
 rt_ticket_search("Queue='General' AND (Status='new')")
+
+# We can sort by date created, increasing
 rt_ticket_search("Queue='General' AND (Status='new')",
-                 orderBy = "+Created")
+                 orderby = "+Created")
+
+# If we just need a vector of ticket ids
+rt_ticket_search("Queue='General' AND (Status='new')",
+                 orderby = "+Created",
+                 format = "i")
 }
 }

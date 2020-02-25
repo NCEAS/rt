@@ -80,7 +80,8 @@ To search for all tickets in the "General" queue, we'd run the following:
 result <- rt_ticket_search("Queue = 'General'")
 ```
 
-By default, `rt_ticket_search` returns a list with names `content`, `path`, and `response`. Also by default, `result$content` will be a turned into a `data.frame` or `tibble` (if installed). Let's look at that in a formatted table:
+By default, `rt_ticket_search` returns a`data.frame` or `tibble` (if installed). 
+Let's look at that in a formatted table:
 
 ```{r formatted-first-query, echo = FALSE}
 format_result(result$content)

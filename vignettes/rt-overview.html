@@ -366,7 +366,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h2>Example queries</h2>
 <p>To search for all tickets in the “General” queue, we’d run the following:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Queue = &#39;General&#39;&quot;</span>)</span></code></pre></div>
-<p>By default, <code>rt_ticket_search</code> returns a list with names <code>content</code>, <code>path</code>, and <code>response</code>. Also by default, <code>result$content</code> will be a turned into a <code>data.frame</code> or <code>tibble</code> (if installed). Let’s look at that in a formatted table:</p>
+<p>By default, <code>rt_ticket_search</code> returns a<code>data.frame</code> or <code>tibble</code> (if installed). Let’s look at that in a formatted table:</p>
+<pre><code>## Warning: Unknown or uninitialised column: &#39;content&#39;.</code></pre>
 <table>
 <tbody>
 <tr>
@@ -374,18 +375,18 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </tbody>
 </table>
 <p>You can search against multiple fields using <code>AND</code> or <code>OR</code> to combine them.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Queue = &#39;General&#39; AND Subject LIKE &#39;test&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Queue = &#39;General&#39; AND Subject LIKE &#39;test&#39;&quot;</span>)</span></code></pre></div>
 <p>Use parentheses to group query parameters together for more advanced logic.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;(Status = &#39;new&#39; OR Status = &#39;open&#39;) AND Queue = &#39;General&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;(Status = &#39;new&#39; OR Status = &#39;open&#39;) AND Queue = &#39;General&#39;&quot;</span>)</span></code></pre></div>
 <p>For numeric and date/time fields, you can use <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, and <code>&lt;=</code> in addition to <code>=</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Created &gt; &#39;2018-04-04&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Created &gt; &#39;2018-04-04&#39;&quot;</span>)</span></code></pre></div>
 <p>You can also use special <a href="https://rt-wiki.bestpractical.com/wiki/TicketSQL#Date_Syntax">date syntax</a> for more options.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Created &gt;= &#39;2 days ago&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Created &gt;= &#39;2 days ago&#39;&quot;</span>)</span></code></pre></div>
 </div>
 <div id="common-use-cases" class="section level2">
 <h2>Common use-cases</h2>
 <p>One of the most common use-cases is searching through RT ticket content.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Content LIKE &#39;Can you please advise&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Content LIKE &#39;Can you please advise&#39;&quot;</span>)</span></code></pre></div>
 </div>
 
 
