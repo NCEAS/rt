@@ -17,8 +17,12 @@ test_that("we can search in different formats", {
   rt_ticket_create("General", "formattest@example.com", "Test")
 
   results_default <- rt_ticket_search("Requestor='formattest@example.com'")
-  results_s <- rt_ticket_search("Requestor='formattest@example.com'", format = "s")
-  results_i <- rt_ticket_search("Requestor='formattest@example.com'", format = "i")
+  results_s <- rt_ticket_search(
+    "Requestor='formattest@example.com'",
+    format = "s")
+  results_i <- rt_ticket_search(
+    "Requestor='formattest@example.com'",
+    format = "i")
 
   testthat::expect_is(results_default, "data.frame")
   testthat::expect_gte(nrow(results_default), 3)
