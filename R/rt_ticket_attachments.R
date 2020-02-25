@@ -18,17 +18,21 @@ rt_ticket_attachments <- function(ticket_id, ...) {
 
   location <- stringr::str_locate(out$body, "Attachments: ")
 
-  if (all(dim(location) != c(1,2))) {
+  if (all(dim(location) != c(1, 2))) {
     stop("Error while processing response from RT.")
   }
 
-  rest <- stringr::str_sub(out$body, location[1,2] + 1, nchar(out$body))
+  rest <- stringr::str_sub(out$body, location[1, 2] + 1, nchar(out$body))
   attachments <- parse_rt_properties(rest)
 
   lapply(attachments, function(attachment) {
-    props <- as.list(stringr::str_match(attachment, "\\(?(.+)\\) \\((.+) \\/ (.+)\\)")[1,(2:4)])
+    props <- as.list(
+      stringr::str_match(
+        attachment,
+        "\\(?(.+)\\) \\((.+) \\/ (.+)\\)")[1, (2:4)]
+    )
+
     names(props) <- c("Name", "Type", "Size")
     props
   })
 }
-

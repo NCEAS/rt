@@ -8,11 +8,11 @@
 parse_ticket_create_body <- function(body) {
   match_result <- stringr::str_match(body, "Ticket (\\d+) created\\.")
 
-    if (is.na(match_result[1,1])) {
+    if (is.na(match_result[1, 1])) {
     stop(body, call. = FALSE)
   }
 
-  as.numeric(match_result[1,2])
+  as.numeric(match_result[1, 2])
 }
 
 #' Create an RT ticket
@@ -25,15 +25,18 @@ parse_ticket_create_body <- function(body) {
 #' @param cc (character) Email address to cc
 #' @param admin_cc (character) Admin email address to cc
 #' @param owner (character) Owner username or email
-#' @param status (character) Ticket status; typically "open", "new", "stalled", or "resolved"
+#' @param status (character) Ticket status; typically "open", "new", "stalled",
+#'  or "resolved"
 #' @param priority (numeric) Ticket priority
 #' @param initial_priority (numeric) Ticket initial priority
 #' @param final_priority (numeric) Ticket final priority
 #' @param time_estimated (character) Time estimated ?????
 #' @param starts (character) Starts ?????
 #' @param due (character) Due date ?????
-#' @param text (character) Ticket content; if multi-line, prefix every line with a blank
-#' @param custom_field (vector) Takes a named vector of the custom field name and custom field value
+#' @param text (character) Ticket content; if multi-line, prefix every line with
+#'  a blank
+#' @param custom_field (vector) Takes a named vector of the custom field name
+#' and custom field value
 #' @inheritParams rt_login
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 
@@ -42,7 +45,8 @@ parse_ticket_create_body <- function(body) {
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_create(priority = 2, custom_field = c(Description = "A description"))
+#' rt_ticket_create(priority = 2,
+#'                  custom_field = c(Description = "A description"))
 #' }
 rt_ticket_create <- function(queue = NULL,
                              requestor = NULL,

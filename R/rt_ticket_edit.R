@@ -10,7 +10,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_edit(20, priority = 2, custom_field = c(Description = "A description"))
+#' rt_ticket_edit(20,
+#'                priority = 2,
+#'                custom_field = c(Description = "A description"))
 #' }
 rt_ticket_edit <- function(ticket_id,
                            queue = NULL,

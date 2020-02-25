@@ -83,6 +83,7 @@ construct_newline_pairs <- function(params) {
 #' @return (rt_api) The parsed response from RT
 rt_GET <- function(url, raw = FALSE, ...) {
   response <- httr::GET(url, ...,  httr::user_agent(rt_user_agent()))
+  stopforstatus(response)
 
   if (raw) {
     return(response)
@@ -101,6 +102,7 @@ rt_GET <- function(url, raw = FALSE, ...) {
 #' @return (rt_api) The parsed response from RT
 rt_POST <- function(url, raw = FALSE, ...) {
   response <- httr::POST(url, ..., httr::user_agent(rt_user_agent()))
+  stopforstatus(response)
 
   if (raw) {
     return(response)
@@ -136,7 +138,7 @@ parse_rt_properties <- function(body) {
   })
 
   result <- lapply(parsed, function(x) { x[[1]][2]})
-  names(result) <- vapply(parsed, function(x){ trimws(x[[1]][1]) }, "")
+  names(result) <- vapply(parsed, function(x) { trimws(x[[1]][1]) }, "")
 
   result
 }

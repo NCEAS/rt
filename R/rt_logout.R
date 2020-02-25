@@ -20,6 +20,8 @@ rt_logout <- function(...) {
     stop("Can't log out: You aren't logged in.", call. = FALSE)
   }
 
+  stopforstatus(response)
+
   message("You are now logged out.")
   invisible(response)
 }

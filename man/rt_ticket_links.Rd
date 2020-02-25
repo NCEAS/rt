@@ -12,8 +12,10 @@ rt_ticket_links(ticket_id, ...)
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
-Gets the ticket links for a single ticket. If applicable, the following fields will be returned: \code{HasMember},
-\code{ReferredToBy}, \code{DependedOnBy}, \code{MemberOf}, \code{RefersTo}, and \code{DependsOn}.
+Gets the ticket links for a single ticket. If applicable, the following
+fields will be returned: \code{HasMember},
+\code{ReferredToBy}, \code{DependedOnBy}, \code{MemberOf}, \code{RefersTo},
+and \code{DependsOn}.
 }
 \examples{
 \dontrun{

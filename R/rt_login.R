@@ -53,12 +53,13 @@ rt_do_login <- function(user, password, ...) {
   url <- rt_url()
   response <- rt_POST(url,
                       body = list(
-                        'user' = utils::URLencode(user,
-                                                  reserved = TRUE),
-                        'pass' = utils::URLencode(password,
-                                                  reserved = TRUE)),
+                      "user" = utils::URLencode(user, reserved = TRUE),
+                      "pass" = utils::URLencode(password, reserved = TRUE)),
                       ...)
-  check_login(response)
+  result <- check_login(response)
+  stopforstatus(response)
+
+  invisible(result)
 }
 
 #' Check that the login request was successful or not
@@ -99,7 +100,7 @@ rt_login_interactive <- function(rt_base_url = Sys.getenv("RT_BASE"), ...) {
          paste(
            "The 'askpass' is required when enter your password interactively.",
            'Install it with install.packages("askpass").',
-           '\nYou can also set your password with',
+           "\nYou can also set your password with",
            'Sys.getenv(RT_PASSWORD="your password").',
            "See ?rt for more details."))
   }

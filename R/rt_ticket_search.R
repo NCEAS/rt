@@ -53,9 +53,16 @@ tidy_long_search_result <- function(result, coerce_tibble = TRUE) {
 #' Search RT for tickets using RT's query syntax which is documented at
 #' \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
 #'
+#' The `query` parameter comforms to RT's
+#' [query syntax](https://docs.bestpractical.com/rt/4.4.3/query_builder.htm)
+#' and requires you to build the query yourself. A query will have one or more
+#' parameters of the form `$FIELD='$VALUE'` where `$FIELD` is an RT ticket
+#' property like Subject, Requestor, etc and `$VALUE` (surrounded by single
+#' quotes) is the value to filter by. See Examples for examples.
+#'
 #' @param query (character) Your query (See Details)
 #' @param orderby (character) How to order your search results. Should be a
-#' ticket property name preceeded by either a + or a - character.
+#' ticket property name preceded by either a + or a - character.
 #' @param format (character) Either \code{i} (ticket ID only),
 #' \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
 #' Defaults to \code{l}.
@@ -117,7 +124,9 @@ rt_ticket_search <- function(query,
       result <- try_tibble(data.frame())
     } else {
       result <- data.frame(id = unlist(lapply(result, names)),
-                           Subject = unlist(lapply(result, unlist, use.names = FALSE)),
+                           Subject = unlist(lapply(result,
+                                                   unlist,
+                                                   use.names = FALSE)),
                            stringsAsFactors = FALSE)
       names(result) <- c("id", "Subject")
 
@@ -125,9 +134,11 @@ rt_ticket_search <- function(query,
     }
   } else if (format == "i") {
     result <- stringr::str_split(response$body, "\n")[[1]]
-    result <- Filter(function(r) { nchar(r) > 0 }, result) # Handle no results
+    result <- Filter(function(r) {
+      nchar(r) > 0
+    }, result) # Handle no results
     result <- gsub("ticket/", "", result) # Remove "ticket/"
-  } else if (format == "l" ) {
+  } else if (format == "l") {
     result <- lapply(
       strsplit(response$body, "\\n\\n--\\n\\n")[[1]],
       parse_rt_properties)
@@ -137,6 +148,3 @@ rt_ticket_search <- function(query,
 
   result
 }
-
-
-

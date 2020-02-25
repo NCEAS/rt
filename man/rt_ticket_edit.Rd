@@ -39,7 +39,8 @@ rt_ticket_edit(
 
 \item{owner}{(character) Owner username or email}
 
-\item{status}{(character) Ticket status; typically "open", "new", "stalled", or "resolved"}
+\item{status}{(character) Ticket status; typically "open", "new", "stalled",
+or "resolved"}
 
 \item{priority}{(numeric) Ticket priority}
 
@@ -53,9 +54,11 @@ rt_ticket_edit(
 
 \item{due}{(character) Due date ?????}
 
-\item{text}{(character) Ticket content; if multi-line, prefix every line with a blank}
+\item{text}{(character) Ticket content; if multi-line, prefix every line with
+a blank}
 
-\item{custom_field}{(vector) Takes a named vector of the custom field name and custom field value}
+\item{custom_field}{(vector) Takes a named vector of the custom field name
+and custom field value}
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
@@ -64,6 +67,8 @@ Update an existing ticket with new information.
 }
 \examples{
 \dontrun{
-rt_ticket_edit(20, priority = 2, custom_field = c(Description = "A description"))
+rt_ticket_edit(20,
+               priority = 2,
+               custom_field = c(Description = "A description"))
 }
 }
