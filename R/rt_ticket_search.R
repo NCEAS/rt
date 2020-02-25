@@ -117,7 +117,7 @@ rt_ticket_search <- function(query,
     }
   } else if (format == "i") {
     result <- stringr::str_split(response$body, "\n")[[1]]
-    result <- Filter(function (r) { nchar(r) > 0 }, result) # Handle no results
+    result <- Filter(function(r) { nchar(r) > 0 }, result) # Handle no results
     result <- gsub("ticket/", "", result) # Remove "ticket/"
   } else if (format == "l" ) {
     result <- lapply(
