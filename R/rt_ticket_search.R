@@ -14,8 +14,8 @@ try_tibble <- function(df) {
 #'
 #' @return A `data.frame` or `tbl_df`
 tidy_long_search_result <- function(result, coerce_tibble = TRUE) {
-  if (length(result) == 1) {
-    return(data.frame())
+  if (length(result) == 1 && names(result[[1]]) == "No matching results.") {
+    return(try_tibble(data.frame(), coerce_tibble))
   }
 
   # Turn into a list of data.frames with cleaner names
