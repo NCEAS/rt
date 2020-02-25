@@ -1,4 +1,16 @@
-try_tibble <- function(df) {
+#' Try to make a tibble
+#'
+#' @param df (data.frame) The `data.frame` to try attempt to coerce to a
+#' `tibble`
+#' @param coerce (logical) Whether or not to try coercion. Provided for upstream
+#' calling functions.
+#'
+#' @return Either a `data.frame` or a `tibble`
+try_tibble <- function(df, coerce = TRUE) {
+  if (!coerce) {
+    return(df)
+  }
+
   if (!requireNamespace("tibble")) {
     return(df)
   }
