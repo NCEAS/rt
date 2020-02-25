@@ -11,6 +11,62 @@
 \details{
 Everything should be implemented and all functions should return a reasonably
 useful result that's suitable for programming with.
+\subsection{Setup}{
+
+Before you can do anything useful with this package, you'll need to do three
+things:
+\enumerate{
+\item Determine your base URL. In most cases, this will be the same as the URL
+of the page you use to log in.
+\item Determine and set your credentials. You can skip setting them if you like
+and skip to step 3 or you can set them using the \code{RT_USER} and \code{RT_PASSWORD}
+environmental variables via \code{Sys.setenv}. See \code{\link{rt_login}} for
+more.
+\item Log in using R by calling \code{rt_login}. See \code{\link{rt_login}} for more.
+}
 
 See \href{https://github.com/NCEAS/rt}{GitHub} for more information.
+}
+
+\subsection{Available Functions}{
+\subsection{General}{
+\itemize{
+\item \code{\link{rt_login}}
+\item \code{\link{rt_logout}}
+}
+}
+
+\subsection{Tickets}{
+\itemize{
+\item \code{\link{rt_ticket_search}}
+\item \code{\link{rt_ticket_create}}
+\item \code{\link{rt_ticket_edit}}
+\item \code{\link{rt_ticket_history}}
+\item \code{\link{rt_ticket_history_comment}}
+\item \code{\link{rt_ticket_history_reply}}
+\item \code{\link{rt_ticket_links}}
+\item \code{\link{rt_ticket_links_edit}}
+\item \code{\link{rt_ticket_merge}}
+\item \code{\link{rt_ticket_properties}}
+\item \code{\link{rt_ticket_attachments}}
+\item \code{\link{rt_ticket_attachment}}
+\item \code{\link{rt_ticket_attachment_content}}
+}
+}
+
+\subsection{Users}{
+\itemize{
+\item \code{\link{rt_user_create}}
+\item \code{\link{rt_user_edit}}
+\item \code{\link{rt_user_properties}}
+}
+}
+
+\subsection{Queues}{
+\itemize{
+\item \code{\link{rt_queue_properties}}
+}
+}
+
+}
 }

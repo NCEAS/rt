@@ -22,17 +22,12 @@ implementation and presents it into something that's easier to build a
 package with.
 }
 \details{
-For example, a response like:
-
-"RT/4.4.3 200 Ok
+For example, a response like:\preformatted{"RT/4.4.3 200 Ok
 
 # Ticket 2 created.
+}
 
-"
-
-is turned into the list:
-
-$status
+is turned into the list:\preformatted{$status
 [1] 200
 
 $message
@@ -40,4 +35,5 @@ $message
 
 $body
 [1] "# Ticket 2 created."
+}
 }

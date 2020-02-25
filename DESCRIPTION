@@ -20,5 +20,6 @@ Suggests: askpass,
   rmarkdown,
   testthat,
   tibble
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr

@@ -366,7 +366,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h2>Example queries</h2>
 <p>To search for all tickets in the “General” queue, we’d run the following:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>result &lt;-<span class="st"> </span><span class="kw">rt_ticket_search</span>(<span class="st">&quot;Queue = &#39;General&#39;&quot;</span>)</span></code></pre></div>
-<p>By default, <code>rt_ticket_search</code> returns a list with names <code>content</code>, <code>path</code>, and <code>response</code>. Also by default, <code>result$content</code> will be a turned into a <code>tibble</code>. Let’s look at that in a formatted table:</p>
+<p>By default, <code>rt_ticket_search</code> returns a list with names <code>content</code>, <code>path</code>, and <code>response</code>. Also by default, <code>result$content</code> will be a turned into a <code>data.frame</code> or <code>tibble</code> (if installed). Let’s look at that in a formatted table:</p>
 <table>
 <tbody>
 <tr>

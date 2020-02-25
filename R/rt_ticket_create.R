@@ -1,7 +1,7 @@
 #' Parse an RT ticket create response body and return the ticket ID
 #'
 #' This function essential parses the text:
-#'   "# Ticket 1 created."
+#' `"# Ticket 1 created."`
 #' @param body (character) The ticket create response body
 #'
 #' @return (numeric) The ticket ID

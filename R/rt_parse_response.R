@@ -7,14 +7,16 @@
 #'
 #' For example, a response like:
 #'
+#' ```
 #' "RT/4.4.3 200 Ok
 #'
 #' # Ticket 2 created.
+#' ````
 #'
-#' "
 #'
 #' is turned into the list:
 #'
+#' ```
 #' $status
 #' [1] 200
 #'
@@ -23,6 +25,7 @@
 #'
 #' $body
 #' [1] "# Ticket 2 created."
+#' ```
 #'
 #' @param response (character) Parsed response from \code{\link[httr]{content}}
 #' @param verbose (logical) Optional, defaults to \code{TRUE}.
