@@ -14,6 +14,7 @@
 rt_ticket_attachments <- function(ticket_id, ...) {
   url <- rt_url("ticket", ticket_id, "attachments")
   out <- rt_GET(url, ...)
+  stopforstatus(out)
 
   location <- stringr::str_locate(out$body, "Attachments: ")
 

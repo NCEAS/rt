@@ -105,11 +105,7 @@ rt_ticket_search <- function(query,
 
   url <- rt_url("search", "ticket", query_params = params)
   response <- rt_GET(url, ...)
-
-  # Handle bad request. Not sure how comprehensive this is.
-  if (response$status >= 400) {
-    stop(response)
-  }
+  stopforstatus(response)
 
   if (format == "s") {
     result <- lapply(

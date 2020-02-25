@@ -19,5 +19,8 @@ rt_ticket_history_comment <- function(ticket_id, comment_text, ...) {
                      ticket_id,
                      comment_text)
 
-  rt_POST(url, body = list(content = comment), ...)
+  response <- rt_POST(url, body = list(content = comment), ...)
+  stopforstatus(response)
+
+  response
 }

@@ -24,5 +24,8 @@ rt_ticket_history <- function(ticket_id, format = "l", ...) {
                 "history",
                 query_params = list(format = format))
 
-  rt_GET(url, ...)
+  response <- rt_GET(url, ...)
+  stopforstatus(response)
+
+  response
 }

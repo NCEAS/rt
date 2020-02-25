@@ -36,5 +36,8 @@ rt_ticket_links_edit <- function(ticket_id,
   links_edit <- construct_newline_pairs(params)
 
   url <- rt_url("ticket", ticket_id, "links")
-  rt_POST(url, body = list(content = links_edit), ...)
+  response <- rt_POST(url, body = list(content = links_edit), ...)
+  stopforstatus(response)
+
+  response
 }

@@ -85,6 +85,9 @@ rt_ticket_create <- function(queue = NULL,
 
   url <- rt_url("ticket", "new")
   response <- rt_POST(url, body = list(content = ticket_content), ...)
-  parse_ticket_create_body(response$body)
-}
 
+  parsed <- parse_ticket_create_body(response$body)
+  stopforstatus(response)
+
+  parsed
+}

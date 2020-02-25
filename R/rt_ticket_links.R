@@ -17,5 +17,8 @@ rt_ticket_links <- function(ticket_id, ...) {
 
   url <- rt_url("ticket", ticket_id, "links", "show")
 
-  rt_GET(url, ...)
+  response <- rt_GET(url, ...)
+  stopforstatus(response)
+
+  response
 }

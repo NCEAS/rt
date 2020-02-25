@@ -15,5 +15,8 @@ rt_ticket_attachment_content <- function(ticket_id,
                                          attachment_id,
                                          ...) {
   url <- rt_url("ticket", ticket_id, "attachments", attachment_id, "content")
-  rt_GET(url, ...)
+  response <- rt_GET(url, ...)
+  stopforstatus(response)
+
+  response
 }

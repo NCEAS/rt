@@ -18,5 +18,7 @@ rt_ticket_properties <- function(ticket_id, ...) {
     stop(response$body)
   }
 
+  stopforstatus(response)
+
   parse_rt_properties(response$body)
 }

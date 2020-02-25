@@ -38,5 +38,8 @@ rt_ticket_history_reply <- function(ticket_id,
   url <- rt_url("ticket", ticket_id, "comment", query_params = params)
   reply_body <- construct_newline_pairs(params)
 
-  rt_POST(url, body = list(content = reply_body), ...)
+  response <- rt_POST(url, body = list(content = reply_body), ...)
+  stopforstatus(response)
+
+  response
 }

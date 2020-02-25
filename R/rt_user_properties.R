@@ -18,5 +18,7 @@ rt_user_properties <- function(user_id, ...) {
     stop("User ", user_id, " does not exist.", call. = FALSE)
   }
 
+  stopforstatus(response)
+
   parse_rt_properties(response$body)
 }

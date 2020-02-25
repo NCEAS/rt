@@ -60,5 +60,7 @@ rt_user_create <- function(name = NULL,
          "are unique for the user.", call. = FALSE)
   }
 
-    parse_user_create_body(response$body)
+  stopforstatus(response)
+
+  parse_user_create_body(response$body)
 }

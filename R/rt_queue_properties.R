@@ -21,6 +21,7 @@ rt_queue_properties <- function(queue, ...) {
     stop("No queue named ", queue, " exists.", call. = FALSE)
   }
 
+  stopforstatus(response)
+
   parse_rt_properties(response$body)
 }
-

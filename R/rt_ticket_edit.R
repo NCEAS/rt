@@ -55,5 +55,8 @@ rt_ticket_edit <- function(ticket_id,
   }
 
   url <- rt_url("ticket", ticket_id, "edit")
-  rt_POST(url, body = list(content = ticket_content), ...)
+  response <- rt_POST(url, body = list(content = ticket_content), ...)
+  stopforstatus(response)
+
+  response
 }
