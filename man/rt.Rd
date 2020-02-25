@@ -3,7 +3,6 @@
 \docType{package}
 \name{rt}
 \alias{rt}
-\alias{rt-package}
 \title{The \code{rt} package}
 \description{
 \code{rt} provides a programming interface to the

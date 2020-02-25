@@ -4,8 +4,7 @@
 \alias{rt_ticket_search}
 \title{Search RT}
 \usage{
-rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL,
-  ...)
+rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL, ...)
 }
 \arguments{
 \item{query}{(character) Your query (See Details)}

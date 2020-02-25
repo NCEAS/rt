@@ -4,9 +4,17 @@
 \alias{rt_user_edit}
 \title{Edit user information}
 \usage{
-rt_user_edit(user_id, password = NULL, name = NULL,
-  email_address = NULL, real_name = NULL, organization = NULL,
-  privileged = NULL, disabled = NULL, ...)
+rt_user_edit(
+  user_id,
+  password = NULL,
+  name = NULL,
+  email_address = NULL,
+  real_name = NULL,
+  organization = NULL,
+  privileged = NULL,
+  disabled = NULL,
+  ...
+)
 }
 \arguments{
 \item{user_id}{(numeric) The ID of the User to edit}

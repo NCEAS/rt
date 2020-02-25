@@ -4,9 +4,16 @@
 \alias{rt_user_create}
 \title{Create new user}
 \usage{
-rt_user_create(name = NULL, password = NULL, email_address = NULL,
-  real_name = NULL, organization = NULL, privileged = NULL,
-  disabled = NULL, ...)
+rt_user_create(
+  name = NULL,
+  password = NULL,
+  email_address = NULL,
+  real_name = NULL,
+  organization = NULL,
+  privileged = NULL,
+  disabled = NULL,
+  ...
+)
 }
 \arguments{
 \item{name}{(character) Optional. User name}

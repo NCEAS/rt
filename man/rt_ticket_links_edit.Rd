@@ -4,9 +4,15 @@
 \alias{rt_ticket_links_edit}
 \title{Edit an RT ticket link}
 \usage{
-rt_ticket_links_edit(ticket_id, referred_to_by = NULL,
-  depended_on_by = NULL, member_of = NULL, refers_to = NULL,
-  depends_on = NULL, ...)
+rt_ticket_links_edit(
+  ticket_id,
+  referred_to_by = NULL,
+  depended_on_by = NULL,
+  member_of = NULL,
+  refers_to = NULL,
+  depends_on = NULL,
+  ...
+)
 }
 \arguments{
 \item{ticket_id}{(numeric) The ticket identifier}
