@@ -1,3 +1,11 @@
+try_tibble <- function(df) {
+  if (!requireNamespace("tibble")) {
+    return(df)
+  }
+
+  tibble::as_tibble(df)
+}
+
 #' tidy_long_search_result
 #'
 #' @param result (list) List of lists from search results
@@ -6,6 +14,10 @@
 #'
 #' @return A `data.frame` or `tbl_df`
 tidy_long_search_result <- function(result, coerce_tibble = TRUE) {
+  if (length(result) == 1) {
+    return(data.frame())
+  }
+
   # Turn into a list of data.frames with cleaner names
   dfs <- lapply(result, function(r) {
     rdf <- data.frame(t(unlist(r)), stringsAsFactors = FALSE)
@@ -21,12 +33,7 @@ tidy_long_search_result <- function(result, coerce_tibble = TRUE) {
   # Remove "ticket/" from `id` column since ids should always be numbers
   all_dfs$id <- gsub("ticket/", "", all_dfs$id)
 
-  # Coerce to tibble if appropriate
-  if (coerce_tibble && requireNamespace("tibble")) {
-    all_dfs <- tibble::as_tibble(all_dfs)
-  }
-
-  all_dfs
+  try_tibble(all_dfs)
 }
 
 #' Search RT
@@ -97,16 +104,20 @@ rt_ticket_search <- function(query,
       strsplit(response$body, "\\n")[[1]],
       parse_rt_properties)
 
-    result <- data.frame(id = unlist(lapply(result, names)),
-                         Subject = unlist(lapply(result, unlist, use.names = FALSE)),
-                         stringsAsFactors = FALSE)
-    names(result) <- c("id", "Subject")
+    # Special behavior to handle RT returning zero results
+    if (length(result) == 1 & names(result[[1]]) == "No matching results.") {
+      result <- try_tibble(data.frame())
+    } else {
+      result <- data.frame(id = unlist(lapply(result, names)),
+                           Subject = unlist(lapply(result, unlist, use.names = FALSE)),
+                           stringsAsFactors = FALSE)
+      names(result) <- c("id", "Subject")
 
-    if (coerce_tibble && requireNamespace("tibble")) {
-      result <- tibble::as_tibble(result)
+      result <- try_tibble(result)
     }
   } else if (format == "i") {
     result <- stringr::str_split(response$body, "\n")[[1]]
+    result <- Filter(function (r) { nchar(r) > 0 }, result) # Handle no results
     result <- gsub("ticket/", "", result) # Remove "ticket/"
   } else if (format == "l" ) {
     result <- lapply(

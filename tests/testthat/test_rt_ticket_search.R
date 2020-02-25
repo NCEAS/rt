@@ -38,3 +38,17 @@ test_that("asking for specific fields works", {
 
   testthat::expect_equal(names(results), c("id", "Subject"))
 })
+
+test_that("we handle having no search results well", {
+  testthat::expect_is(
+    rt_ticket_search("Queue = 'NOTFOUND'", format = "l"),
+    "data.frame")
+
+  testthat::expect_is(
+    rt_ticket_search("Queue = 'NOTFOUND'", format = "s"),
+    "data.frame")
+
+  testthat::expect_is(
+    rt_ticket_search("Queue = 'NOTFOUND'", format = "i"),
+    "character")
+})
