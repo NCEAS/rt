@@ -37,8 +37,7 @@ test_that("we can search in different formats", {
 test_that("asking for specific fields works", {
   rt_ticket_create("General", "fieldstest@example.com", "Test")
 
-  results <- rt_ticket_search("Requestor='fieldstest@example.com'",
-                              fields = "Subject")
+  results <- rt_ticket_search("Queue='General'", fields = "Subject")
 
   testthat::expect_equal(names(results), c("id", "Subject"))
 })
