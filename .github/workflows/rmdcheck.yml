@@ -10,7 +10,7 @@ jobs:
         ports:
           - 80:80
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
 
     strategy:
       fail-fast: false
