@@ -34,7 +34,7 @@ rt_ticket_edit <- function(ticket_id,
 
   params <- compact(list(id = ticket_id,
                          Queue = queue,
-                         Requestor = requestor,
+                         Requestors = requestor,
                          Subject = subject,
                          Cc = cc,
                          AdminCc = admin_cc,
