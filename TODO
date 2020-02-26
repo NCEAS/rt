@@ -1,8 +1,4 @@
-repo todos
+TODO
 
-- put rt_login and rt_login_interactive into one fn and use interactive() inside to switch behaviors
-- give all vignette chunks names
-- in rt_ticket_search, figure out what "i" format is and annotate the error message with that
-- Implement raw=FALSE where appropriate
-- Try to remove dplyr and %>% from deps
-- Check that all functions have an example
+- Give all vignette chunks names
+- Check over examples
