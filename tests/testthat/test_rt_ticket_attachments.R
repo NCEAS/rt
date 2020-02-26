@@ -34,5 +34,5 @@ test_that("we can get an attachment's content", {
 
   # Test happy path: Returns the attachment as requested
   content <- rt_ticket_attachment_content(ticket_id, attachments$id[3])
-  testthat::expect_is(content, "rt_api")
+  testthat::expect_is(content, "response")
 })
