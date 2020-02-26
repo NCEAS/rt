@@ -40,7 +40,9 @@ rt_parse_response <- function(response, verbose = FALSE) {
   # Response should be a single result, with parts for the first line, and rest
   if (length(split_response) != 1 ||
       length(split_response[[1]]) != 2) {
-    message("Failed to parse RT response. Returning response directly from httr.")
+    message(
+      "Failed to parse RT response. Returning response directly from httr."
+    )
     return(response)
   }
 
@@ -56,7 +58,9 @@ rt_parse_response <- function(response, verbose = FALSE) {
       message(body)
     }
 
-    message("Failed to parse RT response. Returning response directly from httr.")
+    message(
+      "Failed to parse RT response. Returning response directly from httr."
+      )
     return(response)
   }
 

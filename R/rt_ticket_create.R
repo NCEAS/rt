@@ -39,7 +39,6 @@ parse_ticket_create_body <- function(body) {
 #' and custom field value
 #' @inheritParams rt_login
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
-
 #'
 #' @export
 #'

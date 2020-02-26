@@ -5,7 +5,6 @@
 #' @param ticket_id (numeric|character) The ticket number
 #' @inheritParams rt_ticket_create
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
-
 #' @export
 #'
 #' @examples
