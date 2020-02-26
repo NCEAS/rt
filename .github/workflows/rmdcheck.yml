@@ -7,8 +7,8 @@ jobs:
     services:
       rt:
         image: netsandbox/request-tracker
-        ports: 
-          - 8080:80
+        ports:
+          - 80:80
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -27,4 +27,3 @@ jobs:
 
       - name: Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
-
