@@ -16,3 +16,8 @@ if (!testthat:::on_cran() && Sys.getenv("RT_INTEGRATION") == TRUE) {
              RT_PASSWORD = "password")
   rt_login()
 }
+
+# Skip helper to control whether integration tests are run or not
+skip_unless_integration <- function() {
+  testthat::skip_if(Sys.getenv("RT_INTEGRATION") != TRUE)
+}

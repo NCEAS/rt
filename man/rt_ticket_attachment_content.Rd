@@ -13,11 +13,25 @@ rt_ticket_attachment_content(ticket_id, attachment_id, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(response) A \code{response} object with the response
+}
 \description{
-Get the content of an attachment
+Gets the content of the specified attachment for further processing or
+manipulation. You'll almost always want to call a second function like
+\code{\link[httr]{content}} to make the content of the
+attachment usable from R.
 }
 \examples{
 \dontrun{
-rt_ticket_attachment_content(2, 1)
+# First, get the attachment content which gives is the raw response
+att <- rt_ticket_attachment_content(2, 1)
+
+# Then process it directly in R
+httr::content(att)
+
+# Or write it to disk
+out_path <- tempfile()
+writeBin(httr::content(x, as = 'raw'), out_path)
 }
 }

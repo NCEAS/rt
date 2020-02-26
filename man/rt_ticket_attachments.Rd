@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_attachments.R
 \name{rt_ticket_attachments}
 \alias{rt_ticket_attachments}
-\title{Get ticket attachments}
+\title{Get a ticket's attachments}
 \usage{
 rt_ticket_attachments(ticket_id, ...)
 }
@@ -11,11 +11,15 @@ rt_ticket_attachments(ticket_id, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+Either a \code{data.frame} or \code{tibble} of the attachments.
+}
 \description{
-Retrieves attachment metadata for a ticket
+Retrieves attachment metadata for a ticket in a tabular form.
 }
 \examples{
 \dontrun{
+# Given a ticket exists with id '2', we can get its attachments as a table
 rt_ticket_attachments(2)
 }
 }
