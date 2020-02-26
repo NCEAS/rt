@@ -1,6 +1,8 @@
 context("ticket/attachments")
 
 test_that("we can get a list of attachments", {
+  testthat::skip_on_cran()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Attachment test")
   attachments <- rt_ticket_attachments(ticket_id)
 
@@ -9,6 +11,8 @@ test_that("we can get a list of attachments", {
 })
 
 test_that("we can get an attachment", {
+  testthat::skip_on_cran()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Attachment test")
   attachments <- rt_ticket_attachments(ticket_id)
 
@@ -19,6 +23,8 @@ test_that("we can get an attachment", {
 })
 
 test_that("we can get an attachment's content", {
+  testthat::skip_on_cran()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Attachment test")
   attachments <- rt_ticket_attachments(ticket_id)
 

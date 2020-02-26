@@ -1,6 +1,8 @@
 context("ticket/search")
 
 test_that("we can search for a ticket we just created", {
+  testthat::skip_on_cran()
+
   rt_ticket_create("General", "testuser@example.com", "Test")
   rt_ticket_create("General", "testuser@example.com", "Test")
   rt_ticket_create("General", "testuser@example.com", "Test")
@@ -12,6 +14,8 @@ test_that("we can search for a ticket we just created", {
 })
 
 test_that("we can search in different formats", {
+  testthat::skip_on_cran()
+
   rt_ticket_create("General", "formattest@example.com", "Test")
   rt_ticket_create("General", "formattest@example.com", "Test")
   rt_ticket_create("General", "formattest@example.com", "Test")
@@ -35,6 +39,8 @@ test_that("we can search in different formats", {
 })
 
 test_that("asking for specific fields works", {
+  testthat::skip_on_cran()
+
   rt_ticket_create("General", "fieldstest@example.com", "Test")
 
   results <- rt_ticket_search("Queue='General'", fields = "Subject")
@@ -43,6 +49,8 @@ test_that("asking for specific fields works", {
 })
 
 test_that("we handle having no search results well", {
+  testthat::skip_on_cran()
+
   testthat::expect_is(
     rt_ticket_search("Queue = 'NOTFOUND'", format = "l"),
     "data.frame")

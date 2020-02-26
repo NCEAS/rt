@@ -1,6 +1,8 @@
 context("ticket/properties")
 
 test_that("we can get properties of a ticket", {
+  testthat::skip_on_cran()
+
   ticket <- rt_ticket_create("General")
   props <- rt_ticket_properties(ticket)
 
@@ -9,5 +11,7 @@ test_that("we can get properties of a ticket", {
 })
 
 test_that("trying to get properties of a non-existent ticket errors", {
+  testthat::skip_on_cran()
+
   testthat::expect_error(rt_ticket_properties(9999), "does not exist")
 })
