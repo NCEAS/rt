@@ -1,17 +1,22 @@
-#' Edit an RT ticket
+#' Edit a ticket
 #'
-#' Update an existing ticket with new information.
+#' Updates an existing ticket with new information.
 #'
 #' @param ticket_id (numeric|character) The ticket number
 #' @inheritParams rt_ticket_create
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_edit(20,
-#'                priority = 2,
-#'                custom_field = c(Description = "A description"))
+#' # First, create a ticket
+#' ticket <- rt_ticket_create("General")
+#'
+#' # Then we can update its fields
+#' rt_ticket_edit(ticket,
+#'                requestor = "me@example.com",
+#'                subject = "My subject")
 #' }
 rt_ticket_edit <- function(ticket_id,
                            queue = NULL,

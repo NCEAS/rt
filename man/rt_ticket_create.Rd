@@ -2,10 +2,10 @@
 % Please edit documentation in R/rt_ticket_create.R
 \name{rt_ticket_create}
 \alias{rt_ticket_create}
-\title{Create an RT ticket}
+\title{Create a ticket}
 \usage{
 rt_ticket_create(
-  queue = NULL,
+  queue,
   requestor = NULL,
   subject = NULL,
   cc = NULL,
@@ -45,11 +45,11 @@ or "resolved"}
 
 \item{final_priority}{(numeric) Ticket final priority}
 
-\item{time_estimated}{(character) Time estimated ?????}
+\item{time_estimated}{(character) Time estimated}
 
-\item{starts}{(character) Starts ?????}
+\item{starts}{(character) Starts}
 
-\item{due}{(character) Due date ?????}
+\item{due}{(character) Due date}
 
 \item{text}{(character) Ticket content; if multi-line, prefix every line with
 a blank}
@@ -60,11 +60,16 @@ and custom field value}
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
-Create a new ticket in RT.
+Create a ticket
 }
 \examples{
 \dontrun{
-rt_ticket_create(priority = 2,
-                 custom_field = c(Description = "A description"))
+# We can create an empty ticket
+rt_ticket_create("General")
+
+# Or we can provide some of the fields
+rt_ticket_create("General",
+                 requestor = "requestor@example.com",
+                 subject = "An example ticket")
 }
 }

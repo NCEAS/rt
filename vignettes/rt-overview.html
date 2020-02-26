@@ -12,7 +12,7 @@
 
 <meta name="author" content="Irene Steves and Bryce Mecum" />
 
-<meta name="date" content="2020-02-24" />
+<meta name="date" content="2020-02-25" />
 
 <title>RT Overview</title>
 
@@ -315,7 +315,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">RT Overview</h1>
 <h4 class="author">Irene Steves and Bryce Mecum</h4>
-<h4 class="date">2020-02-24</h4>
+<h4 class="date">2020-02-25</h4>
 
 
 
@@ -359,7 +359,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Before we can run queries, we need to load the <code>rt</code> package and provide basic details about the RT installation we want to query. Best Practical (who makes RT) provide a demonstration RT installation that we’ll be using for this vignette but in all likelihood you’ll be using different values in your scripts.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(rt)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">Sys.setenv</span>(<span class="dt">RT_BASE_URL =</span> <span class="st">&quot;http://localhost:8080&quot;</span>) <span class="co"># Your RT installation&#39;s URL (where you log in)</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">Sys.setenv</span>(<span class="dt">RT_BASE_URL =</span> <span class="st">&quot;http://localhost&quot;</span>) <span class="co"># Your RT installation&#39;s URL (where you log in)</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="kw">rt_login</span>(<span class="dt">user =</span> <span class="st">&quot;root&quot;</span>, <span class="dt">pass =</span> <span class="st">&quot;password&quot;</span>) <span class="co"># Or use rt_login_interactive()</span></span></code></pre></div>
 </div>
 <div id="example-queries" class="section level2">

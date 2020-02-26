@@ -15,9 +15,7 @@ parse_ticket_create_body <- function(body) {
   as.numeric(match_result[1, 2])
 }
 
-#' Create an RT ticket
-#'
-#' Create a new ticket in RT.
+#' Create a ticket
 #'
 #' @inheritParams rt_queue_properties
 #' @param requestor (character) Requestor email address
@@ -30,9 +28,9 @@ parse_ticket_create_body <- function(body) {
 #' @param priority (numeric) Ticket priority
 #' @param initial_priority (numeric) Ticket initial priority
 #' @param final_priority (numeric) Ticket final priority
-#' @param time_estimated (character) Time estimated ?????
-#' @param starts (character) Starts ?????
-#' @param due (character) Due date ?????
+#' @param time_estimated (character) Time estimated
+#' @param starts (character) Starts
+#' @param due (character) Due date
 #' @param text (character) Ticket content; if multi-line, prefix every line with
 #'  a blank
 #' @param custom_field (vector) Takes a named vector of the custom field name
@@ -44,10 +42,15 @@ parse_ticket_create_body <- function(body) {
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_create(priority = 2,
-#'                  custom_field = c(Description = "A description"))
+#' # We can create an empty ticket
+#' rt_ticket_create("General")
+#'
+#' # Or we can provide some of the fields
+#' rt_ticket_create("General",
+#'                  requestor = "requestor@example.com",
+#'                  subject = "An example ticket")
 #' }
-rt_ticket_create <- function(queue = NULL,
+rt_ticket_create <- function(queue,
                              requestor = NULL,
                              subject = NULL,
                              cc = NULL,

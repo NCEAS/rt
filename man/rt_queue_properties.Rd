@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_queue_properties.R
 \name{rt_queue_properties}
 \alias{rt_queue_properties}
-\title{Get queue properties}
+\title{Get the properties of a queue}
 \usage{
 rt_queue_properties(queue, ...)
 }
@@ -12,10 +12,12 @@ rt_queue_properties(queue, ...)
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
-Get the data for a single queue.
+Get the properties of a queue
 }
 \examples{
 \dontrun{
+# By default, RT installations come with a General queue
+# We can get its properties like this
 rt_queue_properties("General")
 }
 }

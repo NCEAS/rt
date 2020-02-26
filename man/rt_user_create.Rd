@@ -2,10 +2,10 @@
 % Please edit documentation in R/rt_user_create.R
 \name{rt_user_create}
 \alias{rt_user_create}
-\title{Create new user}
+\title{Create a user}
 \usage{
 rt_user_create(
-  name = NULL,
+  name,
   password = NULL,
   email_address = NULL,
   real_name = NULL,
@@ -33,7 +33,7 @@ rt_user_create(
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
-Create a new RT user
+Create a user
 }
 \examples{
 \dontrun{

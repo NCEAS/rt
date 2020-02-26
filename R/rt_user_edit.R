@@ -14,7 +14,9 @@ warn_user_edit_warnings <- function(body) {
   }
 }
 
-#' Edit user information
+#' Edit a user
+#'
+#' Edit a user's information.
 #'
 #' @param user_id (numeric) The ID of the User to edit
 #' @inheritParams rt_user_create
@@ -24,7 +26,11 @@ warn_user_edit_warnings <- function(body) {
 #'
 #' @examples
 #' \dontrun{
-#' rt_user_create()
+#' # First, create a user
+#' user_id <- rt_user_create("Example", "password", "me@example.com")
+#'
+#' # Then we can edit it
+#' rt_user_edit(user_id, real_name = "Example User")
 #' }
 rt_user_edit <- function(user_id,
                          password = NULL,

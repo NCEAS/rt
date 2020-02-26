@@ -12,9 +12,7 @@ parse_user_create_body <- function(body) {
   as.numeric(id)
 }
 
-#' Create new user
-#'
-#' Create a new RT user
+#' Create a user
 #'
 #' @param password (character) The password
 #' @param name (character) Optional. User name
@@ -31,7 +29,7 @@ parse_user_create_body <- function(body) {
 #' \dontrun{
 #' rt_user_create()
 #' }
-rt_user_create <- function(name = NULL,
+rt_user_create <- function(name,
                            password = NULL,
                            email_address = NULL,
                            real_name = NULL,
@@ -39,7 +37,6 @@ rt_user_create <- function(name = NULL,
                            privileged = NULL,
                            disabled = NULL,
                            ...) {
-
   params <- compact(list(Name = name,
                          Password = password,
                          EmailAddress = email_address,

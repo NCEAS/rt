@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_properties.R
 \name{rt_ticket_properties}
 \alias{rt_ticket_properties}
-\title{Get ticket properties}
+\title{Get a ticket's properties}
 \usage{
 rt_ticket_properties(ticket_id, ...)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_history.R
 \name{rt_ticket_history}
 \alias{rt_ticket_history}
-\title{Get ticket history}
+\title{Get a ticket's history}
 \usage{
 rt_ticket_history(ticket_id, format = "l", ...)
 }
@@ -16,7 +16,7 @@ Defaults to \code{l}.}
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
-Retrieves information about the ticket history
+Get a ticket's history
 }
 \examples{
 \dontrun{

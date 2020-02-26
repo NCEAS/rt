@@ -1,9 +1,10 @@
-#' Get ticket properties
+#' Get a ticket's properties
 #'
 #' Retrieves ticket properties
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
+#'
 #' @export
 #'
 #' @examples

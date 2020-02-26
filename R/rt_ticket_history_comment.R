@@ -1,6 +1,4 @@
-#' Add ticket history comment
-#'
-#' Add a comment to an existing ticket
+#' Comment on a ticket
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param comment_text (character) Text that to add as a comment

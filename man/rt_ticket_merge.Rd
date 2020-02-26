@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_merge.R
 \name{rt_ticket_merge}
 \alias{rt_ticket_merge}
-\title{Mege one ticket into another}
+\title{Merge two tickets}
 \usage{
 rt_ticket_merge(origin, into)
 }
@@ -15,7 +15,7 @@ rt_ticket_merge(origin, into)
 (rt_api) The response
 }
 \description{
-Mege one ticket into another
+Merge two tickets
 }
 \examples{
 \dontrun{

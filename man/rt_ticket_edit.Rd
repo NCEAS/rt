@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_edit.R
 \name{rt_ticket_edit}
 \alias{rt_ticket_edit}
-\title{Edit an RT ticket}
+\title{Edit a ticket}
 \usage{
 rt_ticket_edit(
   ticket_id,
@@ -48,11 +48,11 @@ or "resolved"}
 
 \item{final_priority}{(numeric) Ticket final priority}
 
-\item{time_estimated}{(character) Time estimated ?????}
+\item{time_estimated}{(character) Time estimated}
 
-\item{starts}{(character) Starts ?????}
+\item{starts}{(character) Starts}
 
-\item{due}{(character) Due date ?????}
+\item{due}{(character) Due date}
 
 \item{text}{(character) Ticket content; if multi-line, prefix every line with
 a blank}
@@ -63,12 +63,16 @@ and custom field value}
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
-Update an existing ticket with new information.
+Updates an existing ticket with new information.
 }
 \examples{
 \dontrun{
-rt_ticket_edit(20,
-               priority = 2,
-               custom_field = c(Description = "A description"))
+# First, create a ticket
+ticket <- rt_ticket_create("General")
+
+# Then we can update its fields
+rt_ticket_edit(ticket,
+               requestor = "me@example.com",
+               subject = "My subject")
 }
 }

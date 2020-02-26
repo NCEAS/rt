@@ -1,6 +1,4 @@
-#' Add ticket history reply
-#'
-#' Add a response to an existing ticket
+#' Reply to a ticket
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param text (character) Text that to add as a comment

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_links.R
 \name{rt_ticket_links}
 \alias{rt_ticket_links}
-\title{Get RT ticket links}
+\title{Get a ticket's links}
 \usage{
 rt_ticket_links(ticket_id, ...)
 }

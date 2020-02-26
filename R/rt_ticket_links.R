@@ -1,4 +1,4 @@
-#' Get RT ticket links
+#' Get a ticket's links
 #'
 #' Gets the ticket links for a single ticket. If applicable, the following
 #' fields will be returned: \code{HasMember},

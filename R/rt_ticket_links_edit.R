@@ -1,6 +1,4 @@
-#' Edit an RT ticket link
-#'
-#' Update links of an existing RT ticket.
+#' Edit the links on a ticket
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param referred_to_by Tickets that are referred to

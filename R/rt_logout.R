@@ -9,6 +9,10 @@
 #'
 #' @examples
 #' \dontrun{
+#' # First, log in
+#' rt_login()
+#'
+#' # Then logout
 #' rt_logout()
 #' }
 

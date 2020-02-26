@@ -1,6 +1,4 @@
-#' Get ticket attachment content
-#'
-#' Retrieves attachment content
+#' Get the content of an attachment
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param ... Other arguments passed to \code{\link{rt_GET}}

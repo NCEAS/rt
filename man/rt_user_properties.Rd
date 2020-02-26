@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_user_properties.R
 \name{rt_user_properties}
 \alias{rt_user_properties}
-\title{Get RT user properties}
+\title{Get a user's properties}
 \usage{
 rt_user_properties(user_id, ...)
 }
@@ -12,7 +12,7 @@ rt_user_properties(user_id, ...)
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
-Get RT user properties
+Get a user's properties
 }
 \examples{
 \dontrun{

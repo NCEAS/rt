@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_history_comment.R
 \name{rt_ticket_history_comment}
 \alias{rt_ticket_history_comment}
-\title{Add ticket history comment}
+\title{Comment on a ticket}
 \usage{
 rt_ticket_history_comment(ticket_id, comment_text, ...)
 }
@@ -14,7 +14,7 @@ rt_ticket_history_comment(ticket_id, comment_text, ...)
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \description{
-Add a comment to an existing ticket
+Comment on a ticket
 }
 \examples{
 \dontrun{

@@ -15,6 +15,10 @@ Note: restarting your R session will also log you out.
 }
 \examples{
 \dontrun{
+# First, log in
+rt_login()
+
+# Then logout
 rt_logout()
 }
 }

@@ -1,9 +1,10 @@
-#' Mege one ticket into another
+#' Merge two tickets
 #'
 #' @param origin (character|numeric) Ticket ID to merge into \code{into}
 #' @param into (character|numeric) Ticket ID to merge \code{origin} into
 #'
 #' @return (rt_api) The response
+#'
 #' @export
 #'
 #' @examples

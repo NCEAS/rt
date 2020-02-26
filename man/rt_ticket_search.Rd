@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_search.R
 \name{rt_ticket_search}
 \alias{rt_ticket_search}
-\title{Search RT}
+\title{Search for tickets}
 \usage{
 rt_ticket_search(
   query,

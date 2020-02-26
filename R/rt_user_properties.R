@@ -1,7 +1,8 @@
-#' Get RT user properties
+#' Get a user's properties
 #'
 #' @param user_id (numeric) The ID of the User to edit
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
+#'
 #' @export
 #'
 #' @examples

@@ -48,7 +48,7 @@ tidy_long_search_result <- function(result, coerce_tibble = TRUE) {
   try_tibble(all_dfs)
 }
 
-#' Search RT
+#' Search for tickets
 #'
 #' Search RT for tickets using RT's query syntax which is documented at
 #' \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
