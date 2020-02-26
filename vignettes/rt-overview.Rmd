@@ -4,7 +4,7 @@ author: "Irene Steves and Bryce Mecum"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{RT Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -68,8 +68,8 @@ Best Practical (who makes RT) provide a demonstration RT installation that we'll
 ```{r load-and-connect, message = FALSE}
 library(rt)
 
-Sys.setenv(RT_BASE_URL = "http://localhost") # Your RT installation's URL (where you log in)
-rt_login(user = "root", pass = "password") # Or use rt_login_interactive()
+Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com") # Your RT installation's URL (where you log in)
+rt_login(user = "guest", pass = "guest") # Or use rt_login_interactive()
 ```
 
 ## Example queries
