@@ -2,6 +2,7 @@ context("ticket/merge")
 
 test_that("a ticket can be merged", {
   testthat::skip_on_cran()
+  skip_unless_integration();
 
   tik1 <- rt_ticket_create("General")
   tik2 <- rt_ticket_create("General")

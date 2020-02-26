@@ -2,7 +2,7 @@
 #'
 #' Gets the content of the specified attachment for further processing or
 #' manipulation. You'll almost always want to call a second function like
-#' \code{\link[httr::content]{httr::content}} to make the content of the
+#' \code{\link[httr]{content}} to make the content of the
 #' attachment usable from R.
 #'
 #' @inheritParams rt_ticket_attachment
