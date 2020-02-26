@@ -21,7 +21,11 @@ rt_url <- function(...,
                                            # URL just in case
         "REST",
         "1.0",
-        paste(c(...), collapse = "/"),
+        paste(
+          vapply(c(...),
+                 function(x) { trimws(format(x, scientific = FALSE)) },
+                 ""),
+          collapse = "/"),
         sep = "/")
 
   # Add in query parameters

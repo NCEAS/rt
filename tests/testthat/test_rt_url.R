@@ -29,3 +29,9 @@ test_that("removes NULL items from query params", {
   expect_equal(rt_url("asdf", query_params = list(param = 1, other = NULL)),
                "http://localhost/REST/1.0/asdf?param=1")
 })
+
+
+test_that("rt_url doesn't convert numeric params to scientific", {
+  expect_equal(rt_url("foo", 111111111, 999999999),
+               "http://localhost/REST/1.0/foo/111111111/999999999")
+})
