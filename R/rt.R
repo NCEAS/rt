@@ -137,7 +137,18 @@ print.rt_api <- function(x, max.lines = 10, width = getOption("width")) {
 #'
 #' @return List of properties
 parse_rt_properties <- function(body) {
-  parsed <- lapply(strsplit(body, "\\n")[[1]], function(x) {
+  # Split into fields
+  fields <- strsplit(body, "[\n]+")[[1]]
+
+  # Merge multi-line fields into the previous
+  for (i in which(grepl("^[ ]+", fields))) {
+    # Merge with previous, triming repeat leading whitespace because the
+    # second line is tabtop aligned for some odd reason
+    fields[i - 1] <- paste0(fields[i - 1], gsub("[ ]{2,}", " ", fields[i]))
+    fields <- fields[-i]
+  }
+
+  parsed <- lapply(fields, function(x) {
     strsplit(x, ": ")
   })
 
