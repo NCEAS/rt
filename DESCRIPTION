@@ -7,8 +7,8 @@ Author: c(
   person("Irene", "Steves", role = "ctb")
   )
 Maintainer: Bryce Mecum <mecum@nceas.ucsb.edu>
-Description: This package provides a programmatic interface to the Request
-  Tracker HTTP API. Request Tracker (RT) is a popular ticket tracking system.
+Description: Provides a programmatic interface to the Request Tracker HTTP API.
+  Request Tracker (RT) is a popular ticket tracking system.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
