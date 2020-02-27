@@ -3,7 +3,7 @@ Type: Package
 Title: Interface to the Request Tracker API
 Version: 1.0.0
 Author: c(
-  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre")),
+  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre"), comment = c(ORCID="0000-0002-0381-3766")),
   person("Irene", "Steves", role = "ctb")
   )
 Maintainer: Bryce Mecum <mecum@nceas.ucsb.edu>
