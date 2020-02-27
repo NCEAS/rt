@@ -1,8 +1,9 @@
-[![Build Status](https://travis-ci.org/NCEAS/rt.svg?branch=master)](https://travis-ci.org/NCEAS/rt)
+![CI](https://github.com/NCEAS/rt/workflows/CI/badge.svg)
+![Tests](https://github.com/NCEAS/rt/workflows/Integration/badge.svg)
 
 # rt
 
-An R package for the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST).
+An R package for the [RequestTracker API](https://rt-wiki.bestpractical.com/wiki/REST).
 
 ## Installation
 
@@ -22,7 +23,7 @@ To start using the `rt` R package, log in to your RT instance by setting the ser
 library(rt)
 
 Sys.setenv("RT_BASE_URL"="https://demo.bestpractical.com")
-rt_login()
+rt_login() # Enter demo/demo
 ```
 
 Once you are successfully logged in, you're all set to use the package.
@@ -74,9 +75,16 @@ docker run -d --name rt -p 80:80 netsandbox/request-tracker
 You can then navigate to http://localhost:8080 and log in as user `root` with password `password`.
 Be aware the tests are hard-coded against http://localhost:8080.
 
+By default, only unit tests are run.
+To run all tests, including integration tests, make sure you've started the above Docker container and then set:
+
+```r
+Sys.setenv("RT_INTEGRATION" = TRUE)
+```
+
 ### `rt_api` objects
 
-All API calls go through make use of a custom `rt_api` obejct, which is made up of three parts:
+All API calls go through an intermediate state as an `rt_api` obejct, which is made up of three parts:
 
 1. the `content`, generally returned as a tibble/data frame
 2. the `path` or URL that was accessed
@@ -92,4 +100,4 @@ This is mainly to help normalie out some of the inconsistencies in the RT API it
 
 Support was provided by the National Center for Ecological Analysis and Synthesis, a Center funded by the University of California, Santa Barbara, and the State of California.
 
-[![nceas_footer](https://www.nceas.ucsb.edu/files/newLogo_0.png)](http://www.nceas.ucsb.edu)
+[![nceas_footer](https://www.nceas.ucsb.edu/files/newLogo_0.png)](https://www.nceas.ucsb.edu)
