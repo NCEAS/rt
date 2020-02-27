@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Searching through RT requires some knowledge of how RT does queries.
 This vignette provides a basic introduction to RT's query syntax and some examples of how to make queries with this package.
-Best Practical's [Query Builder documentation](https://docs.bestpractical.com/rt/4.4.0/query_builder.html) and [Ticket SQL wiki page](https://rt-wiki.bestpractical.com/wiki/TicketSQL) highlight some of the key aspects of query-building and are useful to reference while learning.
+Best Practical's [Query Builder documentation](https://docs.bestpractical.com/rt/4.4.4/query_builder.html) and [Ticket SQL wiki page](https://rt-wiki.bestpractical.com/wiki/TicketSQL) highlight some of the key aspects of query-building and are useful to reference while learning.
 
 ## Writing a query
 
@@ -29,7 +29,7 @@ These are the fields that it will return by default, and that you can use to sea
 c("AdminCc", "Created", "Creator", "Due", "FinalPriority", "id", "InitialPriority", "LastUpdated", "Owner", "Priority", "Queue", "Requestors", "Resolved", "Started", "Starts", "Status", "Subject", "TimeEstimated", "TimeLeft", "TimeWorked", "Told", "CF.{NAME_OF_CUSTOM_FIELD}")
 ```
 
-There are additional queryable fields such as `FileName`, `ContentType`, and `Content`, `Requestor.Name` that you can explore in the [Query Builder](https://docs.bestpractical.com/rt/4.4.0/query_builder.html) (Search --> Tickets --> New Search). 
+There are additional queryable fields such as `FileName`, `ContentType`, and `Content`, `Requestor.Name` that you can explore in the [Query Builder](https://docs.bestpractical.com/rt/4.4.4/query_builder.html) (Search --> Tickets --> New Search).
 
 These fields are some of the most commonly queried:
 
@@ -70,7 +70,7 @@ To search for all tickets in the "General" queue, we'd run the following:
 result <- rt_ticket_search("Queue = 'General'")
 ```
 
-Note that, by default, `rt_ticket_search` returns a`data.frame` or `tibble` (if installed). 
+Note that, by default, `rt_ticket_search` returns a`data.frame` or `tibble` (if installed).
 
 You can search against multiple fields using `AND` or `OR` to combine them.
 
@@ -96,12 +96,9 @@ You can also use special [date syntax](https://rt-wiki.bestpractical.com/wiki/Ti
 rt_ticket_search("Created >= '2 days ago'")
 ```
 
-One of the most common use-cases is searching through RT ticket content. 
+One of the most common use-cases is searching through RT ticket content.
 Note that this will only work if your RT installation has full text indexing turned on.
 
 ```{r query-like}
 result <- rt_ticket_search("Content LIKE 'Can you please advise'")
 ```
-
-
-

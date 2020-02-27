@@ -38,11 +38,11 @@ vector when its \code{i}.
 }
 \description{
 Search RT for tickets using RT's query syntax which is documented at
-\url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
+\url{https://docs.bestpractical.com/rt/4.4.4/query_builder.html}.
 }
 \details{
 The \code{query} parameter comforms to RT's
-\href{https://docs.bestpractical.com/rt/4.4.3/query_builder.htm}{query syntax}
+\href{https://docs.bestpractical.com/rt/4.4.4/query_builder.html}{query syntax}
 and requires you to build the query yourself. A query will have one or more
 parameters of the form \verb{$FIELD='$VALUE'} where \verb{$FIELD} is an RT ticket
 property like Subject, Requestor, etc and \verb{$VALUE} (surrounded by single
