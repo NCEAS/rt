@@ -1,14 +1,14 @@
 Package: rt
 Type: Package
-Title: An R Package for the RT REST API
-Version: 0.1.0
+Title: An R Package for the Request Tracker API
+Version: 1.0.0
 Author: c(
   person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre")),
   person("Irene", "Steves", role = "ctb")
   )
-Maintainer: Bryce Mecum <brycemecum@gmail.com>
-Description: This package implements a number of the functions provided by the
-  RT REST API.
+Maintainer: Bryce Mecum <mecum@nceas.ucsb.edu>
+Description: This package provides programmatic access to the Request Tracker 
+  API. Request Tracker (RT) is a popular ticket tracking system.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
