@@ -9,4 +9,45 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+The `rt` package was built to make it easier for our team to work with RT in an automated fashion..
+As a result, most functions in the package return something suitable for programming further with.
+Below are some example workflows you might use this package for.
+
+
+## Creating tickets
+
+You can always email your RT installations associated email address to create a ticket but you can also create one programmatically:
+
+```
+rt_ticket_create("General", "me@example.com", "Hey, a quick question...")
+```
+
+You could also create a set of tickets from a database dump of some kind, such as an old ticket tracking system.
+
+First, let's create some example data to work with:
+
+```r
+old_tickets <- data.frame(
+  queue = "General",
+  subject = c("I need some help", "about those TPS reports...", "hello!"),
+  requestor = c("someone@example.com", "boss@initech.com", "user@example.com"),
+  stringsAsFactors = FALSE
+)
+```
+
+With some example data, creating tickets for each of those in on go is only a few lines of code:
+
+```r
+lapply(seq_len(nrow(old_tickets)), function (row) {
+  do.call(rt_ticket_create, as.list(old_tickets[row,]))
+})
+```
+
 TODO
+
+- Edit a ticket
+    - Set a ticket's status to Resolved
+    - Reassign tickets from one person to another
+- Comment and reply to tickets
+- View all unassigned tickets
+
