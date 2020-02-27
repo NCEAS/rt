@@ -52,14 +52,6 @@ The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.b
 - Queues
   - Queue Properties: `rt_queue_properties()`
 
-### `rt_api` objects
-
-GET calls to the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST) are returned as `rt_api` objects, a list of 3 elements: 
-
-1. the `content`, generally returned as a tibble/data frame
-2. the `path` or URL that was accessed
-3. the HTTP `response` from the API.
-
 ### Logging out
 
 To log out, use the `rt_logout` function (or restart your R session):
@@ -81,6 +73,16 @@ docker run -d --name rt -p 80:80 netsandbox/request-tracker
 
 You can then navigate to http://localhost:8080 and log in as user `root` with password `password`.
 Be aware the tests are hard-coded against http://localhost:8080.
+
+### `rt_api` objects
+
+All API calls go through make use of a custom `rt_api` obejct, which is made up of three parts:
+
+1. the `content`, generally returned as a tibble/data frame
+2. the `path` or URL that was accessed
+3. the HTTP `response` from the API.
+
+This is mainly to help normalie out some of the inconsistencies in the RT API itself and make implementing the API call wrappers easier.
 
 ## Support / Issues / Feedback
 
