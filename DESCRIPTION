@@ -2,7 +2,7 @@ Package: rt
 Type: Package
 Title: Interface to the Request Tracker API
 Version: 1.0.0
-Author: c(
+Authors@R: c(
   person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre"), comment = c(ORCID="0000-0002-0381-3766")),
   person("Irene", "Steves", role = "ctb")
   )
