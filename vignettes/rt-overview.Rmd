@@ -4,16 +4,24 @@ author: "Irene Steves and Bryce Mecum"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{RT Overview}
+  %\VignetteIndexEntry{overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-# knitr::opts_chunk$set(eval = FALSE)
-library(knitr)
-library(kableExtra)
+```{r echo=FALSE}
+NOT_CRAN <- !identical(tolower(Sys.getenv("NOT_CRAN")), "true")
+knitr::opts_chunk$set(
+	comment = "#>",
+	collapse = TRUE,
+	warning = FALSE,
+	message = FALSE,
+  purl = NOT_CRAN,
+  eval = NOT_CRAN
+)
+```
 
+```{r setup, include = FALSE}
 format_result <- function(query_result) {
   result <- knitr::kable(query_result, format = "html")
 
