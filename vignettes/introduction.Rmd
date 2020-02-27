@@ -1,0 +1,58 @@
+---
+title: "Introduction to RT"
+author: "Bryce Mecum"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Setup
+
+To start using the `rt` R package, log in to your RT instance by setting the server URL in using `Sys.setenv` and use `rt_login()` to log in and store your session locally:
+
+```r
+library(rt)
+
+Sys.setenv("RT_BASE_URL"="https://demo.bestpractical.com")
+rt_login()
+```
+
+Once you are successfully logged in, you're all set to use the package.
+The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST):
+
+- General
+  - Login: `rt_login()`
+  - Logout: `rt_logout()`
+- Tickets
+  - Ticket Properties: `rt_ticket_properties()`
+  - Ticket Links: `rt_ticket_links()`
+  - Ticket Attachments: `rt_ticket_attachments()`
+  - Ticket Attachment: `rt_ticket_attachment()`
+  - Ticket Attachment Content: `rt_ticket_attachment_content()`
+  - Ticket History: `rt_ticket_history()`
+  - Ticket History Entry: `rt_ticket_history_entry()`
+  - Ticket Search: `rt_ticket_search()`
+  - Ticket Create: `rt_ticket_create()`
+  - Ticket Edit: `rt_ticket_edit()`
+  - Tickets History Reply: `rt_ticket_history_reply()`
+  - Ticket History Comment: `rt_ticket_history_comment()`
+  - Ticket Links Edit: `rt_ticket_links_edit()`
+- Users
+  - User Properties: `rt_user_properties()`
+  - User Create: `rt_user_create()`
+  - User Edit: `rt_user_edit()`
+- Queues
+  - Queue Properties: `rt_queue_properties()`
+
+## Logging out
+
+To log out, use the `rt_logout` function (or restart your R session):
+
+```r
+rt_logout()
+```
+
+Note: Credentials for your `rt` session are stored using `httr`'s automatic re-use of cookies.

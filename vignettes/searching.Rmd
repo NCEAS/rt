@@ -1,48 +1,29 @@
 ---
-title: "RT Overview"
+title: "Searching RT"
 author: "Irene Steves and Bryce Mecum"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{overview}
+  %\VignetteIndexEntry{searching}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r echo=FALSE}
-NOT_CRAN <- !identical(tolower(Sys.getenv("NOT_CRAN")), "true")
+```{r echo = FALSE}
 knitr::opts_chunk$set(
-	comment = "#>",
-	collapse = TRUE,
-	warning = FALSE,
-	message = FALSE,
-  purl = NOT_CRAN,
-  eval = NOT_CRAN
+  purl = FALSE,
+  eval = FALSE
 )
 ```
 
-```{r setup, include = FALSE}
-format_result <- function(query_result) {
-  result <- knitr::kable(query_result, format = "html")
-
-  kableExtra::kable_styling(result,
-                            bootstrap_options = c("striped",
-                                                  "hover",
-                                                  "condensed"))
-
-  kableExtra::scroll_box(result,
-                         width = "100%",
-                         height = "400px") #display concisely
-
-  result
-}
-```
-
-Searching through RT requires some knowledge of how RT does queries. This vignette provides a basic introduction to RT's query syntax and some examples of how to make queries with this package. Best Practical's [Query Builder documentation](https://docs.bestpractical.com/rt/4.4.0/query_builder.html) and [Ticket SQL wiki page](https://rt-wiki.bestpractical.com/wiki/TicketSQL) highlight some of the key aspects of query-building and are useful to reference while learning.
+Searching through RT requires some knowledge of how RT does queries.
+This vignette provides a basic introduction to RT's query syntax and some examples of how to make queries with this package.
+Best Practical's [Query Builder documentation](https://docs.bestpractical.com/rt/4.4.0/query_builder.html) and [Ticket SQL wiki page](https://rt-wiki.bestpractical.com/wiki/TicketSQL) highlight some of the key aspects of query-building and are useful to reference while learning.
 
 ## Writing a query
 
-The `rt_ticket_search` function makes it easy to search through your tickets. These are the fields that it will return by default, and that you can use to search with:
+The `rt_ticket_search` function makes it easy to search through your tickets.
+These are the fields that it will return by default, and that you can use to search with:
 
 ```{r default-fields, echo = FALSE}
 c("AdminCc", "Created", "Creator", "Due", "FinalPriority", "id", "InitialPriority", "LastUpdated", "Owner", "Priority", "Queue", "Requestors", "Resolved", "Started", "Starts", "Status", "Subject", "TimeEstimated", "TimeLeft", "TimeWorked", "Told", "CF.{NAME_OF_CUSTOM_FIELD}")
@@ -71,13 +52,14 @@ To build a query, you'll want to use the following vocabulary:
 ## Setup
 
 Before we can run queries, we need to load the `rt` package and provide basic details about the RT installation we want to query.
-Best Practical (who makes RT) provide a demonstration RT installation that we'll be using for this vignette but in all likelihood you'll be using different values in your scripts.
+In this example, we're using a local installation of RT but for your use case, you'll want to use a different `RT_BASE_URL` value.
+See `?rt` for more information on setup.
 
-```{r load-and-connect, message = FALSE}
+```{r load-and-connect}
 library(rt)
 
-Sys.setenv(RT_BASE_URL = "https://demo.bestpractical.com") # Your RT installation's URL (where you log in)
-rt_login(user = "guest", pass = "guest") # Or use rt_login_interactive()
+Sys.setenv(RT_BASE_URL = "http://localhost") # Your RT installation's URL (where you log in)
+rt_login(user = "root", pass = "password") # Or use rt_login_interactive()
 ```
 
 ## Example queries
@@ -88,41 +70,38 @@ To search for all tickets in the "General" queue, we'd run the following:
 result <- rt_ticket_search("Queue = 'General'")
 ```
 
-By default, `rt_ticket_search` returns a`data.frame` or `tibble` (if installed). 
-Let's look at that in a formatted table:
-
-```{r formatted-first-query, echo = FALSE}
-format_result(result$content)
-```
+Note that, by default, `rt_ticket_search` returns a`data.frame` or `tibble` (if installed). 
 
 You can search against multiple fields using `AND` or `OR` to combine them.
 
-```{r query-and, eval = FALSE}
-result <- rt_ticket_search("Queue = 'General' AND Subject LIKE 'test'")
+```{r query-and}
+rt_ticket_search("Queue = 'General' AND Subject LIKE 'test'")
 ```
 
 Use parentheses to group query parameters together for more advanced logic.
 
-```{r query-parens, eval = FALSE}
-result <- rt_ticket_search("(Status = 'new' OR Status = 'open') AND Queue = 'General'")
+```{r query-parens}
+rt_ticket_search("(Status = 'new' OR Status = 'open') AND Queue = 'General'")
 ```
 
 For numeric and date/time fields, you can use `>`, `>=`, `<`, and `<=` in addition to `=`.
 
-```{r query-dates, eval = FALSE}
-result <- rt_ticket_search("Created > '2018-04-04'")
+```{r query-dates}
+rt_ticket_search("Started > '2018-04-04'")
 ```
 
 You can also use special [date syntax](https://rt-wiki.bestpractical.com/wiki/TicketSQL#Date_Syntax) for more options.
 
-```{r query-dates-special, eval = FALSE}
-result <- rt_ticket_search("Created >= '2 days ago'")
+```{r query-dates-special}
+rt_ticket_search("Created >= '2 days ago'")
 ```
-
-## Common use-cases
 
 One of the most common use-cases is searching through RT ticket content. 
+Note that this will only work if your RT installation has full text indexing turned on.
 
-```{r query-like, eval = FALSE}
+```{r query-like}
 result <- rt_ticket_search("Content LIKE 'Can you please advise'")
 ```
+
+
+
