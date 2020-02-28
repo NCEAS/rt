@@ -38,6 +38,8 @@ parse_ticket_create_body <- function(body) {
 #' @inheritParams rt_login
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
@@ -95,5 +97,6 @@ rt_ticket_create <- function(queue,
   parsed <- parse_ticket_create_body(response$body)
   stopforstatus(response)
 
-  parsed
+  message(response$body)
+  invisible(parsed)
 }

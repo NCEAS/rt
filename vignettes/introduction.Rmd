@@ -47,6 +47,8 @@ The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.b
 - Queues
   - Queue Properties: `rt_queue_properties()`
 
+Note: Most of these functions support being chained together (for example, with the `%>%`).
+
 ## Logging out
 
 To log out, use the `rt_logout` function (or restart your R session):

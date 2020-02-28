@@ -12,7 +12,7 @@ rt_ticket_merge(origin, into)
 \item{into}{(character|numeric) Ticket ID to merge \code{origin} into}
 }
 \value{
-(rt_api) The response
+(numeric) The ID of ticket both tickets were merged into
 }
 \description{
 Merge two tickets

@@ -4,6 +4,8 @@
 #' @param comment_text (character) Text that to add as a comment
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
@@ -20,5 +22,5 @@ rt_ticket_history_comment <- function(ticket_id, comment_text, ...) {
   response <- rt_POST(url, body = list(content = comment), ...)
   stopforstatus(response)
 
-  response
+  invisible(ticket_id)
 }

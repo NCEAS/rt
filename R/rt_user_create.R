@@ -23,11 +23,13 @@ parse_user_create_body <- function(body) {
 #' @param disabled (numeric) Optional. User disabled status
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the newly-created user
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' rt_user_create()
+#' rt_user_create("Some Person")
 #' }
 rt_user_create <- function(name,
                            password = NULL,
@@ -59,5 +61,5 @@ rt_user_create <- function(name,
 
   stopforstatus(response)
 
-  parse_user_create_body(response$body)
+  invisible(parse_user_create_body(response$body))
 }

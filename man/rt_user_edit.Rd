@@ -35,6 +35,9 @@ rt_user_edit(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+The ID of the edited user
+}
 \description{
 Edit a user's information.
 }

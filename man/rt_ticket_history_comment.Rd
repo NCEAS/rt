@@ -13,6 +13,9 @@ rt_ticket_history_comment(ticket_id, comment_text, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the ticket
+}
 \description{
 Comment on a ticket
 }

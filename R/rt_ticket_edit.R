@@ -6,6 +6,8 @@
 #' @inheritParams rt_ticket_create
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
@@ -64,5 +66,6 @@ rt_ticket_edit <- function(ticket_id,
   response <- rt_POST(url, body = list(content = ticket_content), ...)
   stopforstatus(response)
 
-  response
+  message(response$body)
+  invisible(ticket_id)
 }

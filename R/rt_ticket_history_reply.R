@@ -8,6 +8,8 @@
 #' @param attachment_path (character) Path to a file to upload
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
@@ -39,5 +41,5 @@ rt_ticket_history_reply <- function(ticket_id,
   response <- rt_POST(url, body = list(content = reply_body), ...)
   stopforstatus(response)
 
-  response
+  invisible(ticket_id)
 }

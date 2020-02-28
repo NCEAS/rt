@@ -32,11 +32,14 @@ rt_user_create(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the newly-created user
+}
 \description{
 Create a user
 }
 \examples{
 \dontrun{
-rt_user_create()
+rt_user_create("Some Person")
 }
 }

@@ -62,6 +62,9 @@ and custom field value}
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the ticket
+}
 \description{
 Updates an existing ticket with new information.
 }

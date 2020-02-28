@@ -8,5 +8,5 @@ test_that("a ticket can be merged", {
   tik2 <- rt_ticket_create("General")
   merge_result <- rt_ticket_merge(tik1, tik2)
 
-  testthat::expect_equal(merge_result$body, "Merge completed.")
+  testthat::expect_is(merge_result, "numeric")
 })

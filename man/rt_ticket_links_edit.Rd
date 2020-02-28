@@ -29,12 +29,16 @@ rt_ticket_links_edit(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the ticket
+}
 \description{
 Edit the links on a ticket
 }
 \examples{
 \dontrun{
-rt_ticket_edit(20, "Priority: 2")
+# Make ticket 20 depend on ticket 21
+rt_ticket_links_edit(20, depends_on = 21)
 }
 
 }

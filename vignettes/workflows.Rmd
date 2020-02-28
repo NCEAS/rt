@@ -43,11 +43,50 @@ lapply(seq_len(nrow(old_tickets)), function (row) {
 })
 ```
 
-TODO
+## Editing tickets
 
-- Edit a ticket
-    - Set a ticket's status to Resolved
-    - Reassign tickets from one person to another
+Each ticket has a set of properties associated with it and `rt` makes it quick to update those programatically.
+
+For example, we can resolve a ticket programatically. 
+Say, for example, we're ready to resolve a ticket number 6:
+
+```r
+rt_ticket_edit(6, status = "resolved")
+```
+
+What if we wanted to re-assign a set of tickets?
+We could do this the slow way, by looking up ticket IDs in our web browser but we can, instead, make `rt` do the work for us:
+
+```r
+result <- rt_ticket_search("Owner = 'manager'", format = "i")
+sapply(result, function (id) {
+  rt_ticket_edit(id, owner = "intern")
+})
+```
+
 - Comment and reply to tickets
-- View all unassigned tickets
 
+## Comment and Replying
+
+If you're already using RT, you're probably already familiar with commenting and replying to tickets.
+You've also possibly pasted text into your web browser from another source.
+`rt` can help automate some of this.
+
+For example, what if we were calculating some statistics for a ticket and wanted to put that information in the ticket as a comment?
+
+```r
+rt_ticket_history_comment(6, paste(capture.output({summary(iris)}), collapse = "\n"))
+```
+
+Above, we used the handy `capture.output` function along with `paste` but there are many other ways to get information from R into RT.
+
+## Piping
+
+Many functions in `rt` return values suitable for passing into other functions, such as with the `%>%` operator from the `magrittr` package that's commonly used in the `tidyverse`.
+Here's an example of how this can be used:
+
+```r
+rt_ticket_create("General") %>%
+  rt_ticket_edit(owner = "some_user") %>%
+  rt_ticket_history_comment("Hey, this is just a comment...")
+```

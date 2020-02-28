@@ -3,7 +3,7 @@
 #' @param origin (character|numeric) Ticket ID to merge into \code{into}
 #' @param into (character|numeric) Ticket ID to merge \code{origin} into
 #'
-#' @return (rt_api) The response
+#' @return (numeric) The ID of ticket both tickets were merged into
 #'
 #' @export
 #'
@@ -21,5 +21,6 @@ rt_ticket_merge <- function(origin, into) {
   response <- rt_POST(url)
   stopforstatus(response)
 
-  response
+  message(response$body)
+  invisible(into)
 }

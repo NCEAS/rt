@@ -29,6 +29,9 @@ rt_ticket_history_reply(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the ticket
+}
 \description{
 Reply to a ticket
 }

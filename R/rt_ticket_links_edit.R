@@ -8,11 +8,14 @@
 #' @param depends_on Tickets that are depended on
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_edit(20, "Priority: 2")
+#' # Make ticket 20 depend on ticket 21
+#' rt_ticket_links_edit(20, depends_on = 21)
 #' }
 #'
 rt_ticket_links_edit <- function(ticket_id,
@@ -37,5 +40,6 @@ rt_ticket_links_edit <- function(ticket_id,
   response <- rt_POST(url, body = list(content = links_edit), ...)
   stopforstatus(response)
 
-  response
+  message(response$body)
+  invisible(ticket_id)
 }
