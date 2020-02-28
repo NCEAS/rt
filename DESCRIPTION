@@ -16,7 +16,6 @@ Imports: httr,
   stringr
 Suggests: askpass,
   knitr,
-  kableExtra,
   rmarkdown,
   testthat,
   tibble
