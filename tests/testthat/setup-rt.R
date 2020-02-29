@@ -19,5 +19,7 @@ if (!testthat:::on_cran() && Sys.getenv("RT_INTEGRATION") == TRUE) {
 
 # Skip helper to control whether integration tests are run or not
 skip_unless_integration <- function() {
-  testthat::skip_if(Sys.getenv("RT_INTEGRATION") != TRUE)
+  if (Sys.getenv("RT_INTEGRATION") != TRUE) {
+    skip("Skipping integration test. Set RT_INTEGRATION to TRUE to run all tests.")
+  }
 }
