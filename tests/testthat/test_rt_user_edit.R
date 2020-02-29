@@ -2,7 +2,7 @@ context("user/edit")
 
 test_that("we can edit the properties of a user", {
   testthat::skip_on_cran()
-  skip_unless_integration();
+  skip_unless_integration()
 
   user_name <- tolower(paste(sample(LETTERS, 50, TRUE), collapse = ""))
   user_id <- rt_user_create(user_name, "APassword")
@@ -14,7 +14,7 @@ test_that("we can edit the properties of a user", {
 
 test_that("we get an error when re-using an email address", {
   testthat::skip_on_cran()
-  skip_unless_integration();
+  skip_unless_integration()
 
   user_a <- tolower(paste(sample(LETTERS, 50, TRUE), collapse = ""))
   user_b <- tolower(paste(sample(LETTERS, 50, TRUE), collapse = ""))

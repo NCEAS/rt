@@ -2,7 +2,7 @@ context("rt")
 
 test_that("can construct URLs", {
   testthat::skip_on_cran()
-  skip_unless_integration();
+  skip_unless_integration()
 
   expect_equal(rt_url("a"),
                "http://localhost/REST/1.0/a")
@@ -14,7 +14,7 @@ test_that("can construct URLs", {
 
 test_that("can construct URLs with query parameters", {
   testthat::skip_on_cran()
-  skip_unless_integration();
+  skip_unless_integration()
 
   expect_equal(rt_url("asdf", query_params = list(param = "foo")),
                "http://localhost/REST/1.0/asdf?param=foo")
@@ -25,7 +25,7 @@ test_that("can construct URLs with query parameters", {
 
 test_that("removes NULL items from query params", {
   testthat::skip_on_cran()
-  skip_unless_integration();
+  skip_unless_integration()
 
   expect_equal(rt_url("asdf", query_params = list(param = NULL)),
                "http://localhost/REST/1.0/asdf")
@@ -36,7 +36,7 @@ test_that("removes NULL items from query params", {
 
 test_that("rt_url doesn't convert numeric params to scientific", {
   testthat::skip_on_cran()
-  skip_unless_integration();
+  skip_unless_integration()
 
   expect_equal(rt_url("foo", 111111111, 999999999),
                "http://localhost/REST/1.0/foo/111111111/999999999")
