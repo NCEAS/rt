@@ -3,11 +3,11 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  CI:
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: amoeba/rcmdcheck-action@v7
+      - uses: amoeba/rcmdcheck-action@v8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
