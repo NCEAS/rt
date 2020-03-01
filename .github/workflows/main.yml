@@ -8,4 +8,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: amoeba/rcmdcheck-action@v5
+    - uses: amoeba/rcmdcheck-action@v6
+      
