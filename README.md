@@ -6,26 +6,26 @@
 
 # rt
 
-An R package for the [RequestTracker API](https://rt-wiki.bestpractical.com/wiki/REST).
+An interface to the [RequestTracker API](https://rt-wiki.bestpractical.com/wiki/REST).
 
 ## Installation
 
-You can install the development version from GitHub with:
-
 ```r
-remotes::install_github("NCEAS/rt")
+install.packages("rt")
 ```
 
 ## Usage
 
 ### Setup
 
-To start using the `rt` R package, log in to your RT instance by setting the server URL in using `Sys.setenv` and use `rt_login()` to log in and store your session locally:
+To start using the `rt` package, log in to your RT instance by setting the server URL in using `Sys.setenv` and use `rt_login()` to log in and store your session locally.
+
+Below, we log into Best Practical's demo installation of RT:
 
 ```r
 library(rt)
 
-Sys.setenv("RT_BASE_URL"="https://demo.bestpractical.com")
+Sys.setenv("RT_BASE_URL" = "https://demo.bestpractical.com")
 rt_login() # Enter demo/demo
 ```
 
@@ -58,6 +58,8 @@ The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.b
 
 Note: Most of these functions support being chained together (for example, with the `%>%`).
 
+See the included vignettes for more information about usage.
+
 ### Logging out
 
 To log out, use the `rt_logout` function (or restart your R session):
@@ -66,26 +68,26 @@ To log out, use the `rt_logout` function (or restart your R session):
 rt_logout()
 ```
 
-Note: Credentials for your `rt` session are stored using `httr`'s automatic re-use of cookies.
-
 ## Development & Testing
 
-A Dockerfile is available at the root of the repository so it's easy to get a test installation of RT up and running.
-The tests need this to run so make sure to run the following before running the tests:
+A test suite is provided that is comprised mostly of integration tests that are configured to run against a local installation of RT.
+By default, running `devtools::test()` will only run a small subset of the full test suite: those that do not depend on being able to call out to an RT installation (i.e., unit tests).
 
-```sh
-docker run -d --name rt -p 80:80 netsandbox/request-tracker
-```
+To run the full test suite locally,
 
-You can then navigate to http://localhost:8080 and log in as user `root` with password `password`.
-Be aware the tests are hard-coded against http://localhost:8080.
+1. Start a local RT installation with [Docker](https://www.docker.com/):
 
-By default, only unit tests are run.
-To run all tests, including integration tests, make sure you've started the above Docker container and then set:
+    ```sh
+    docker run -d --name rt -p 80:80 netsandbox/request-tracker
+    ```
 
-```r
-Sys.setenv("RT_INTEGRATION" = TRUE)
-```
+2. Turn on integration tests for your session
+
+    ```r
+    Sys.setenv("RT_INTEGRATION" = TRUE)
+    ```
+
+3. Run `devtools::test()` from the same session as (2)
 
 ### `rt_api` objects
 
