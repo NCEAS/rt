@@ -49,19 +49,6 @@ To build a query, you'll want to use the following vocabulary:
 - `LIKE` to specify that a field `matches` something
 - `NOT LIKE` to specify that a field `doesn't match` something
 
-## Setup
-
-Before we can run queries, we need to load the `rt` package and provide basic details about the RT installation we want to query.
-In this example, we're using a local installation of RT but for your use case, you'll want to use a different `RT_BASE_URL` value.
-See `?rt` for more information on setup.
-
-```{r load-and-connect}
-library(rt)
-
-Sys.setenv(RT_BASE_URL = "http://localhost") # Your RT installation's URL (where you log in)
-rt_login(user = "root", pass = "password") # Or use rt_login_interactive()
-```
-
 ## Example queries
 
 To search for all tickets in the "General" queue, we'd run the following:
@@ -70,7 +57,7 @@ To search for all tickets in the "General" queue, we'd run the following:
 result <- rt_ticket_search("Queue = 'General'")
 ```
 
-Note that, by default, `rt_ticket_search` returns a`data.frame` or `tibble` (if installed).
+Note that, by default, `rt_ticket_search` returns a `data.frame` or `tibble` (if installed).
 
 You can search against multiple fields using `AND` or `OR` to combine them.
 
