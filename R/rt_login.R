@@ -48,7 +48,7 @@ rt_login <- function(user = Sys.getenv("RT_USER"),
 #' @param password (character) Your password.
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
-#' @return (logical) Either returns \code{TRUE} if successfull or errors out
+#' @return (logical) Either returns \code{TRUE} if successful or errors out
 rt_do_login <- function(user, password, ...) {
   url <- rt_url()
   response <- rt_POST(url,
@@ -66,7 +66,7 @@ rt_do_login <- function(user, password, ...) {
 #'
 #' @param response (httr::response) RT API login response
 #'
-#' @return (logical) TRUE if login was succesful, errors out otherwise
+#' @return (logical) TRUE if login was successful, errors out otherwise
 check_login <- function(response) {
   if (response$body != "Invalid object specification: ''\n\nid: ") {
     stop("Login failed: ", response$message, " (", response$body, ")",

@@ -10,7 +10,7 @@ check_login(response)
 \item{response}{(httr::response) RT API login response}
 }
 \value{
-(logical) TRUE if login was succesful, errors out otherwise
+(logical) TRUE if login was successful, errors out otherwise
 }
 \description{
 Check that the login request was successful or not

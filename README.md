@@ -91,13 +91,13 @@ To run the full test suite locally,
 
 ### `rt_api` objects
 
-All API calls go through an intermediate state as an `rt_api` obejct, which is made up of three parts:
+All API calls go through an intermediate state as an `rt_api` object, which is made up of three parts:
 
 1. the `content`, generally returned as a tibble/data frame
 2. the `path` or URL that was accessed
 3. the HTTP `response` from the API.
 
-This is mainly to help normalie out some of the inconsistencies in the RT API itself and make implementing the API call wrappers easier.
+This is mainly to help normalize out some of the inconsistencies in the RT API itself and make implementing the API call wrappers easier.
 
 ## Support / Issues / Feedback
 

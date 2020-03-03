@@ -14,7 +14,7 @@ rt_do_login(user, password, ...)
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
 \value{
-(logical) Either returns \code{TRUE} if successfull or errors out
+(logical) Either returns \code{TRUE} if successful or errors out
 }
 \description{
 Called by \code{\link{rt_login}} and \code{\link{rt_login_interactive}} to

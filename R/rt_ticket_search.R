@@ -51,7 +51,7 @@ tidy_long_search_result <- function(result) {
 #' Search RT for tickets using RT's query syntax which is documented at
 #' \url{https://docs.bestpractical.com/rt/4.4.4/query_builder.html}.
 #'
-#' The `query` parameter comforms to RT's
+#' The `query` parameter conforms to RT's
 #' [query syntax](https://docs.bestpractical.com/rt/4.4.4/query_builder.html)
 #' and requires you to build the query yourself. A query will have one or more
 #' parameters of the form `$FIELD='$VALUE'` where `$FIELD` is an RT ticket
