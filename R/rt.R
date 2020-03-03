@@ -126,7 +126,9 @@ print.rt_api <- function(x, max_lines = 10) {
   cat("<RT ", x$path, ">\n", sep = "")
   cat("  Status: ", x$status, "\n", sep = "")
   cat("  Message: ", x$message, "\n", sep = "")
-  cat(paste(head(strsplit(x$body, "\n")[[1]], n = max_lines), collapse = "\n"))
+  cat(paste(
+    utils::head(strsplit(x$body, "\n")[[1]], n = max_lines),
+    collapse = "\n"))
 
   invisible(x)
 }
