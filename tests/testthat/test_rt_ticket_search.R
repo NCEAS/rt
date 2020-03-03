@@ -84,11 +84,6 @@ test_that("tidy_long_search_result works as expected", {
     "data.frame")
 
   testthat::expect_is(tidy_long_search_result(
-    list(list("id" = 1)),
-    FALSE),
-    "data.frame")
-
-  testthat::expect_is(tidy_long_search_result(
     list(
       list("id" = 1, "Subject" = "Foo"),
       list("id" = 2, "Subject" = "Foo")
