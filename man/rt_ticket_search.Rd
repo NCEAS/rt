@@ -20,10 +20,6 @@ Defaults to \code{l}.}
 results.}
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
-
-\item{coerce_tibble}{(logical) Whether or not to make the result when
-\code{format} is \code{l} or \code{s} into a \code{tibble}. Defaults to \code{TRUE} and only works
-when the \code{tibble} package is installed.}
 }
 \value{
 Either a data.frame/tibble (when format is \code{l} or \code{s}) or a numeric
