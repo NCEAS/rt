@@ -11,7 +11,7 @@ try_tibble <- function(df, coerce = TRUE) {
     return(df)
   }
 
-  if (!requireNamespace("tibble")) {
+  if (suppressMessages(!requireNamespace("tibble"))) {
     return(df)
   }
 
