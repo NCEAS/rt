@@ -4,14 +4,7 @@
 \alias{rt_ticket_search}
 \title{Search for tickets}
 \usage{
-rt_ticket_search(
-  query,
-  orderby = NULL,
-  format = "l",
-  fields = NULL,
-  coerce_tibble = TRUE,
-  ...
-)
+rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL, ...)
 }
 \arguments{
 \item{query}{(character) Your query (See Details)}
@@ -26,11 +19,11 @@ Defaults to \code{l}.}
 \item{fields}{(character) Comma-separated list of fields to include in the
 results.}
 
+\item{...}{Other arguments passed to \code{\link{rt_GET}}}
+
 \item{coerce_tibble}{(logical) Whether or not to make the result when
 \code{format} is \code{l} or \code{s} into a \code{tibble}. Defaults to \code{TRUE} and only works
 when the \code{tibble} package is installed.}
-
-\item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \value{
 Either a data.frame/tibble (when format is \code{l} or \code{s}) or a numeric

@@ -4,16 +4,13 @@
 \alias{tidy_long_search_result}
 \title{tidy_long_search_result}
 \usage{
-tidy_long_search_result(result, coerce_tibble = TRUE)
+tidy_long_search_result(result)
 }
 \arguments{
 \item{result}{(list) List of lists from search results}
-
-\item{coerce_tibble}{(logical) Whether or not to try to coerce the result to
-a \code{tibble}.}
 }
 \value{
-A \code{data.frame} or \code{tbl_df}
+A \code{data.frame} or \code{tibble}
 }
 \description{
 tidy_long_search_result

@@ -21,13 +21,11 @@ try_tibble <- function(df, coerce = TRUE) {
 #' tidy_long_search_result
 #'
 #' @param result (list) List of lists from search results
-#' @param coerce_tibble (logical) Whether or not to try to coerce the result to
-#' a `tibble`.
 #'
-#' @return A `data.frame` or `tbl_df`
-tidy_long_search_result <- function(result, coerce_tibble = TRUE) {
+#' @return A `data.frame` or `tibble`
+tidy_long_search_result <- function(result) {
   if (length(result) == 1 && names(result[[1]]) == "No matching results.") {
-    return(try_tibble(data.frame(), coerce_tibble))
+    return(try_tibble(data.frame()))
   }
 
   # Turn into a list of data.frames with cleaner names
@@ -96,7 +94,6 @@ rt_ticket_search <- function(query,
                              orderby = NULL,
                              format = "l",
                              fields = NULL,
-                             coerce_tibble = TRUE,
                              ...) {
   if (!(format %in% c("l", "s", "i"))) {
       stop(call. = FALSE,
@@ -143,7 +140,7 @@ rt_ticket_search <- function(query,
       strsplit(response$body, "\\n\\n--\\n\\n")[[1]],
       parse_rt_properties)
 
-    result <- tidy_long_search_result(result, coerce_tibble)
+    result <- tidy_long_search_result(result)
   }
 
   result
