@@ -4,12 +4,12 @@
 \alias{print.rt_api}
 \title{Print an \code{rt_api} object}
 \usage{
-\method{print}{rt_api}(x, max_lines = 10)
+\method{print}{rt_api}(x, ...)
 }
 \arguments{
 \item{x}{object of class \code{rt_api}}
 
-\item{max_lines}{(numeric) The maximum number of lines of the body to print.}
+\item{...}{Other arguments passed to \code{\link[utils]{head}}}
 }
 \description{
 Print an \code{rt_api} object

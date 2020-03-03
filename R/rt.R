@@ -119,15 +119,15 @@ rt_POST <- function(url, raw = FALSE, ...) {
 #' Print an `rt_api` object
 #'
 #' @param x object of class `rt_api`
-#' @param max_lines (numeric) The maximum number of lines of the body to print.
+#' @param ... Other arguments passed to \code{\link[utils]{head}}
 #'
 #' @export
-print.rt_api <- function(x, max_lines = 10) {
+print.rt_api <- function(x, ...) {
   cat("<RT ", x$path, ">\n", sep = "")
   cat("  Status: ", x$status, "\n", sep = "")
   cat("  Message: ", x$message, "\n", sep = "")
   cat(paste(
-    utils::head(strsplit(x$body, "\n")[[1]], n = max_lines),
+    utils::head(strsplit(x$body, "\n")[[1]], ...),
     collapse = "\n"))
 
   invisible(x)
