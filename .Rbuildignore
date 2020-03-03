@@ -3,3 +3,5 @@
 .travis.yml
 Dockerfile
 .github
+cran-comments.md
+NEWS.md
