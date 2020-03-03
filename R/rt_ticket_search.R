@@ -66,9 +66,6 @@ tidy_long_search_result <- function(result) {
 #' Defaults to \code{l}.
 #' @param fields (character) Comma-separated list of fields to include in the
 #' results.
-#' @param coerce_tibble (logical) Whether or not to make the result when
-#' `format` is `l` or `s` into a `tibble`. Defaults to `TRUE` and only works
-#' when the `tibble` package is installed.
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
 #' @return Either a data.frame/tibble (when format is `l` or `s`) or a numeric
