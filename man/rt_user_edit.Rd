@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_user_edit.R
 \name{rt_user_edit}
 \alias{rt_user_edit}
-\title{Edit user information}
+\title{Edit a user}
 \usage{
 rt_user_edit(
   user_id,
@@ -35,11 +35,18 @@ rt_user_edit(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+The ID of the edited user
+}
 \description{
-Edit user information
+Edit a user's information.
 }
 \examples{
 \dontrun{
-rt_user_create()
+# First, create a user
+user_id <- rt_user_create("Example", "password", "me@example.com")
+
+# Then we can edit it
+rt_user_edit(user_id, real_name = "Example User")
 }
 }

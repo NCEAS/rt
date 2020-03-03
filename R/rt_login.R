@@ -24,8 +24,10 @@
 #' # And then log in directly like
 #' rt_login()
 #'
-#' # Or if you prefer, you can pass the values directly, like
-#' rt_login("user", "password", "https://demo.bestpractical.com")
+#' # You can also skip setting `RT_USER` and `RT_PASSWORD` and specify them
+#' # directly
+#' rt_login("user", "password")
+#' # Note that you still need to set `RT_BASE_URL`
 #'}
 rt_login <- function(user = Sys.getenv("RT_USER"),
                      password = Sys.getenv("RT_PASSWORD"),
@@ -51,12 +53,13 @@ rt_do_login <- function(user, password, ...) {
   url <- rt_url()
   response <- rt_POST(url,
                       body = list(
-                        'user' = utils::URLencode(user,
-                                                  reserved = TRUE),
-                        'pass' = utils::URLencode(password,
-                                                  reserved = TRUE)),
+                      "user" = utils::URLencode(user, reserved = TRUE),
+                      "pass" = utils::URLencode(password, reserved = TRUE)),
                       ...)
-  check_login(response)
+  result <- check_login(response)
+  stopforstatus(response)
+
+  invisible(result)
 }
 
 #' Check that the login request was successful or not
@@ -84,8 +87,6 @@ check_login <- function(response) {
 #' \code{Sys.getenv("RT_BASE_URL" = "https://server.name/rt/")}
 #' @param ... Other arguments passed to \code{\link{rt_do_login}}
 #'
-#' @importFrom getPass getPass
-#'
 #' @export
 #'
 #' @examples
@@ -94,8 +95,18 @@ check_login <- function(response) {
 #' rt_login_interactive()
 #' }
 rt_login_interactive <- function(rt_base_url = Sys.getenv("RT_BASE"), ...) {
-  rt_do_login(user = readline("Enter username: "),
-              password = getPass::getPass(),
+  if (!requireNamespace("askpass")) {
+    stop(call. = FALSE,
+         paste(
+           "The 'askpass' is required when enter your password interactively.",
+           'Install it with install.packages("askpass").',
+           "\nYou can also set your password with",
+           'Sys.getenv(RT_PASSWORD="your password").',
+           "See ?rt for more details."))
+  }
+
+  rt_do_login(user = trimws(readline("Enter username: ")),
+              password = trimws(askpass::askpass()),
               rt_base_url = rt_base_url,
               ...)
 }

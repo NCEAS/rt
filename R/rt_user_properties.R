@@ -1,7 +1,8 @@
-#' Get RT user properties
+#' Get a user's properties
 #'
 #' @param user_id (numeric) The ID of the User to edit
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
+#'
 #' @export
 #'
 #' @examples
@@ -17,6 +18,8 @@ rt_user_properties <- function(user_id, ...) {
   if (stringr::str_detect(response$body, "does not exist")) {
     stop("User ", user_id, " does not exist.", call. = FALSE)
   }
+
+  stopforstatus(response)
 
   parse_rt_properties(response$body)
 }

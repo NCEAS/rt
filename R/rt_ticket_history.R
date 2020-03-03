@@ -1,6 +1,4 @@
-#' Get ticket history
-#'
-#' Retrieves information about the ticket history
+#' Get a ticket's history
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param format (character) The format of the ticket history response. Either
@@ -24,5 +22,8 @@ rt_ticket_history <- function(ticket_id, format = "l", ...) {
                 "history",
                 query_params = list(format = format))
 
-  rt_GET(url, ...)
+  response <- rt_GET(url, ...)
+  stopforstatus(response)
+
+  response
 }

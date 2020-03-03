@@ -1,6 +1,9 @@
 context("ticket/links")
 
 test_that("a ticket without links returns successfully", {
+  testthat::skip_on_cran()
+  skip_unless_integration()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   links <- rt_ticket_links(ticket_id)
 
@@ -11,6 +14,9 @@ test_that("a ticket without links returns successfully", {
 })
 
 test_that("we can add links to a ticket", {
+  testthat::skip_on_cran()
+  skip_unless_integration()
+
   ticket_a <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   ticket_b <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   rt_ticket_links_edit(ticket_a, referred_to_by = ticket_b)

@@ -14,5 +14,5 @@ parse_ticket_create_body(body)
 }
 \description{
 This function essential parses the text:
-  "# Ticket 1 created."
+\code{"# Ticket 1 created."}
 }

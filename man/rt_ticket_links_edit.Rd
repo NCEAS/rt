@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_links_edit.R
 \name{rt_ticket_links_edit}
 \alias{rt_ticket_links_edit}
-\title{Edit an RT ticket link}
+\title{Edit the links on a ticket}
 \usage{
 rt_ticket_links_edit(
   ticket_id,
@@ -29,12 +29,16 @@ rt_ticket_links_edit(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the ticket
+}
 \description{
-Update links of an existing RT ticket.
+Edit the links on a ticket
 }
 \examples{
 \dontrun{
-rt_ticket_edit(20, "Priority: 2")
+# Make ticket 20 depend on ticket 21
+rt_ticket_links_edit(20, depends_on = 21)
 }
 
 }

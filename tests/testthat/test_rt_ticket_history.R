@@ -1,9 +1,9 @@
 context("ticket/history")
 
-Sys.setenv(RT_BASE_URL = "http://localhost:8080")
-rt_login("root", "password")
-
 test_that("we can get the history of a ticket in long format", {
+  testthat::skip_on_cran()
+  skip_unless_integration()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   history_long <- rt_ticket_history(ticket_id)
 
@@ -12,6 +12,9 @@ test_that("we can get the history of a ticket in long format", {
 })
 
 test_that("we can get the history of a ticket in short format", {
+  testthat::skip_on_cran()
+  skip_unless_integration()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   history_short <- rt_ticket_history(ticket_id, format = "s")
 
@@ -20,6 +23,9 @@ test_that("we can get the history of a ticket in short format", {
 })
 
 test_that("we can comment on a ticket", {
+  testthat::skip_on_cran()
+  skip_unless_integration()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   rt_ticket_history_comment(ticket_id, "Testing commenting")
   history <- rt_ticket_history(ticket_id)
@@ -29,6 +35,9 @@ test_that("we can comment on a ticket", {
 })
 
 test_that("we can reply to a ticket", {
+  testthat::skip_on_cran()
+  skip_unless_integration()
+
   ticket_id <- rt_ticket_create("General", "root@localhost", "Ticket to edit")
   rt_ticket_history_reply(ticket_id, "Testing replying",)
   history <- rt_ticket_history(ticket_id)

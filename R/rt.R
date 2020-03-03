@@ -21,7 +21,11 @@ rt_url <- function(...,
                                            # URL just in case
         "REST",
         "1.0",
-        paste(c(...), collapse = "/"),
+        paste(
+          vapply(c(...),
+                 function(x) { trimws(format(x, scientific = FALSE)) },
+                 ""),
+          collapse = "/"),
         sep = "/")
 
   # Add in query parameters
@@ -70,75 +74,6 @@ construct_newline_pairs <- function(params) {
   paste(names(params_clean), params_clean, sep = ": ", collapse = "\n")
 }
 
-#' Parse an RT response
-#'
-#' Parse an RT response
-#'
-#' @param resp_cont (character) The RT ticket response content
-#'
-parse_ticket <- function(resp_cont) {
-  #clean/split response
-  resp_split <- resp_cont %>%
-    stringr::str_replace_all("^RT.*Ok\n|\n\n$", "") %>% #remove headers/footers
-    stringr::str_split("\\n--\\n") %>%  #split if multiple tickets/etc displayed
-    unlist(recursive = FALSE)
-
-  resp_processed <- tryCatch(
-    lapply(resp_split,
-           function(.x){
-             tibble::tibble(fields = stringr::str_extract_all(.x, "\n[^: ]+:")[[1]] %>%
-                      stringr::str_replace_all("\\n|:", "") %>%
-                      trimws(),
-                    values = stringr::str_split(.x, "\n[^: ]+:")[[1]][-1] %>%
-                      trimws()) %>%
-               tidyr::spread(fields, values)
-           }),
-    error = function(e) {NULL})
-
-  out <- dplyr::bind_rows(resp_processed)
-
-  if(nrow(out) == 0){
-    return(resp_split)
-    warning("The response could not be parsed into a tabular format")
-  } else {
-    return(out)
-  }
-}
-
-
-rt_handle_response <- function(response) {
-  if (httr::http_type(response) != "text/plain") {
-    stop("API did not return text/plain", call. = FALSE)
-  }
-
-  body <- httr::content(response)
-
-  # Since API does not return failure codes; need to parse content strings to check for errors
-  if (!is.na(body) & stringr::str_detect(body, "does not exist|Invalid")) {
-    stop(
-      sprintf(
-        "RT API request failed [%s]\n%s",
-        httr::status_code(response),
-        body
-      ),
-      call. = FALSE
-    )
-  }
-
-  if(class(body) != "raw"){
-    body <- parse_ticket(body)
-  }
-
-  structure(
-    list(
-      content = body,
-      path = url,
-      response = response
-    ),
-    class = "rt_api"
-  )
-}
-
 
 #' Get an RT response
 #'
@@ -152,6 +87,7 @@ rt_handle_response <- function(response) {
 #' @return (rt_api) The parsed response from RT
 rt_GET <- function(url, raw = FALSE, ...) {
   response <- httr::GET(url, ...,  httr::user_agent(rt_user_agent()))
+  stopforstatus(response)
 
   if (raw) {
     return(response)
@@ -170,6 +106,7 @@ rt_GET <- function(url, raw = FALSE, ...) {
 #' @return (rt_api) The parsed response from RT
 rt_POST <- function(url, raw = FALSE, ...) {
   response <- httr::POST(url, ..., httr::user_agent(rt_user_agent()))
+  stopforstatus(response)
 
   if (raw) {
     return(response)
@@ -179,11 +116,19 @@ rt_POST <- function(url, raw = FALSE, ...) {
 }
 
 
-print.rt_api <- function(x, max.lines = 10, width = getOption("width")) {
+#' Print an `rt_api` object
+#'
+#' @param x object of class `rt_api`
+#' @param ... Other arguments passed to \code{\link[utils]{head}}
+#'
+#' @export
+print.rt_api <- function(x, ...) {
   cat("<RT ", x$path, ">\n", sep = "")
   cat("  Status: ", x$status, "\n", sep = "")
   cat("  Message: ", x$message, "\n", sep = "")
-  cat(x$body, "\n", sep = "")
+  cat(paste(
+    utils::head(strsplit(x$body, "\n")[[1]], ...),
+    collapse = "\n"))
 
   invisible(x)
 }
@@ -200,12 +145,23 @@ print.rt_api <- function(x, max.lines = 10, width = getOption("width")) {
 #'
 #' @return List of properties
 parse_rt_properties <- function(body) {
-  parsed <- lapply(strsplit(body, "\\n")[[1]], function(x) {
+  # Split into fields
+  fields <- strsplit(body, "[\n]+")[[1]]
+
+  # Merge multi-line fields into the previous
+  for (i in which(grepl("^[ ]+", fields))) {
+    # Merge with previous, triming repeat leading whitespace because the
+    # second line is tabtop aligned for some odd reason
+    fields[i - 1] <- paste0(fields[i - 1], gsub("[ ]{2,}", " ", fields[i]))
+    fields <- fields[-i]
+  }
+
+  parsed <- lapply(fields, function(x) {
     strsplit(x, ": ")
   })
 
   result <- lapply(parsed, function(x) { x[[1]][2]})
-  names(result) <- vapply(parsed, function(x){ trimws(x[[1]][1]) }, "")
+  names(result) <- vapply(parsed, function(x) { trimws(x[[1]][1]) }, "")
 
   result
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_history_reply.R
 \name{rt_ticket_history_reply}
 \alias{rt_ticket_history_reply}
-\title{Add ticket history reply}
+\title{Reply to a ticket}
 \usage{
 rt_ticket_history_reply(
   ticket_id,
@@ -29,8 +29,11 @@ rt_ticket_history_reply(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(numeric) The ID of the ticket
+}
 \description{
-Add a response to an existing ticket
+Reply to a ticket
 }
 \examples{
 \dontrun{

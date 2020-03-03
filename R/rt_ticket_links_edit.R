@@ -1,6 +1,4 @@
-#' Edit an RT ticket link
-#'
-#' Update links of an existing RT ticket.
+#' Edit the links on a ticket
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param referred_to_by Tickets that are referred to
@@ -10,11 +8,14 @@
 #' @param depends_on Tickets that are depended on
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_edit(20, "Priority: 2")
+#' # Make ticket 20 depend on ticket 21
+#' rt_ticket_links_edit(20, depends_on = 21)
 #' }
 #'
 rt_ticket_links_edit <- function(ticket_id,
@@ -36,5 +37,9 @@ rt_ticket_links_edit <- function(ticket_id,
   links_edit <- construct_newline_pairs(params)
 
   url <- rt_url("ticket", ticket_id, "links")
-  rt_POST(url, body = list(content = links_edit), ...)
+  response <- rt_POST(url, body = list(content = links_edit), ...)
+  stopforstatus(response)
+
+  message(response$body)
+  invisible(ticket_id)
 }

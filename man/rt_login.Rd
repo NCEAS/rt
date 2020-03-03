@@ -37,7 +37,9 @@ Sys.setenv("RT_USER" = "user",
 # And then log in directly like
 rt_login()
 
-# Or if you prefer, you can pass the values directly, like
-rt_login("user", "password", "https://demo.bestpractical.com")
+# You can also skip setting `RT_USER` and `RT_PASSWORD` and specify them
+# directly
+rt_login("user", "password")
+# Note that you still need to set `RT_BASE_URL`
 }
 }

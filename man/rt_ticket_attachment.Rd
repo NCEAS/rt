@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_attachment.R
 \name{rt_ticket_attachment}
 \alias{rt_ticket_attachment}
-\title{Get ticket attachment}
+\title{Get a ticket's attachment}
 \usage{
 rt_ticket_attachment(ticket_id, attachment_id, ...)
 }
@@ -14,7 +14,8 @@ rt_ticket_attachment(ticket_id, attachment_id, ...)
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \description{
-Retrieves attachment metadata
+Retrieves attachment metadata. To get the attachment itself, see
+\link{rt_ticket_attachment_content}.
 }
 \examples{
 \dontrun{

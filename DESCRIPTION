@@ -1,26 +1,26 @@
 Package: rt
 Type: Package
-Title: An R Package for the RT REST API
-Version: 0.1.0
-Author: c(
-  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre")),
+Title: Interface to the Request Tracker API
+Description: Provides a programmatic interface to the Request Tracker HTTP API.
+  Request Tracker (RT) is a popular ticket tracking system.
+Version: 1.0.0
+URL: https://github.com/nceas/rt
+BugReports: https://github.com/nceas/rt/issues
+Authors@R: c(
+  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre"), comment = c(ORCID="0000-0002-0381-3766")),
   person("Irene", "Steves", role = "ctb")
   )
-Maintainer: Bryce Mecum <brycemecum@gmail.com>
-Description: This package implements a number of the functions provided by the
-  RT REST API.
+Maintainer: Bryce Mecum <mecum@nceas.ucsb.edu>
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Imports: dplyr,
-  getPass,
-  httr,
-  stringr,
-  tibble,
-  tidyr
-Suggests: testthat,
-    knitr,
-    rmarkdown,
-    kableExtra
+Imports: httr,
+  stringr
+Suggests: askpass,
+  knitr,
+  rmarkdown,
+  testthat,
+  tibble
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
+Encoding: UTF-8
+LazyData: true

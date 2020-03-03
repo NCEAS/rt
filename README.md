@@ -1,28 +1,32 @@
-[![Build Status](https://travis-ci.org/NCEAS/rt.svg?branch=master)](https://travis-ci.org/NCEAS/rt)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+![CI](https://github.com/NCEAS/rt/workflows/CI/badge.svg)
+![Tests](https://github.com/NCEAS/rt/workflows/Tests/badge.svg)
+[![cran version](https://www.r-pkg.org/badges/version/rt)](https://cran.r-project.org/package=rt)
+[![cran checks](https://cranchecks.info/badges/worst/rt)](https://cranchecks.info/pkgs/rt)
 
 # rt
 
-An R package for the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST).
+An interface to the [RequestTracker API](https://rt-wiki.bestpractical.com/wiki/REST).
 
 ## Installation
 
-You can install the development version from GitHub with:
-
 ```r
-remotes::install_github("NCEAS/rt")
+install.packages("rt")
 ```
 
 ## Usage
 
 ### Setup
 
-To start using the `rt` R package, log in to your RT instance by setting the server URL in using `Sys.setenv` and use `rt_login()` to log in and store your session locally:
+To start using the `rt` package, log in to your RT instance by setting the server URL in using `Sys.setenv` and use `rt_login()` to log in and store your session locally.
+
+Below, we log into Best Practical's demo installation of RT:
 
 ```r
 library(rt)
 
-Sys.setenv("RT_BASE_URL"="https://demo.bestpractical.com")
-rt_login()
+Sys.setenv("RT_BASE_URL" = "https://demo.bestpractical.com")
+rt_login() # Enter demo/demo
 ```
 
 Once you are successfully logged in, you're all set to use the package.
@@ -52,13 +56,9 @@ The `rt` package supports all of the [RequestTracker REST API](https://rt-wiki.b
 - Queues
   - Queue Properties: `rt_queue_properties()`
 
-### `rt_api` objects
+Note: Most of these functions support being chained together (for example, with the `%>%`).
 
-GET calls to the [RequestTracker REST API](https://rt-wiki.bestpractical.com/wiki/REST) are returned as `rt_api` objects, a list of 3 elements: 
-
-1. the `content`, generally returned as a tibble/data frame
-2. the `path` or URL that was accessed
-3. the HTTP `response` from the API.
+See the included vignettes for more information about usage.
 
 ### Logging out
 
@@ -68,19 +68,36 @@ To log out, use the `rt_logout` function (or restart your R session):
 rt_logout()
 ```
 
-Note: Credentials for your `rt` session are stored using `httr`'s automatic re-use of cookies.
-
 ## Development & Testing
 
-A Dockerfile is available at the root of the repository so it's easy to get a test installation of RT up and running.
-The tests need this to run so make sure to run the following before running the tests:
+A test suite is provided that is comprised mostly of integration tests that are configured to run against a local installation of RT.
+By default, running `devtools::test()` will only run a small subset of the full test suite: those that do not depend on being able to call out to an RT installation (i.e., unit tests).
 
-```sh
-docker run -d --name rt -p 8080:80 netsandbox/request-tracker
-```
+To run the full test suite locally,
 
-You can then navigate to http://localhost:8080 and log in as user `root` with password `password`.
-Be aware the tests are hard-coded against http://localhost:8080.
+1. Start a local RT installation with [Docker](https://www.docker.com/):
+
+    ```sh
+    docker run -d --name rt -p 80:80 netsandbox/request-tracker
+    ```
+
+2. Turn on integration tests for your session
+
+    ```r
+    Sys.setenv("RT_INTEGRATION" = TRUE)
+    ```
+
+3. Run `devtools::test()` from the same session as (2)
+
+### `rt_api` objects
+
+All API calls go through an intermediate state as an `rt_api` obejct, which is made up of three parts:
+
+1. the `content`, generally returned as a tibble/data frame
+2. the `path` or URL that was accessed
+3. the HTTP `response` from the API.
+
+This is mainly to help normalie out some of the inconsistencies in the RT API itself and make implementing the API call wrappers easier.
 
 ## Support / Issues / Feedback
 
@@ -90,4 +107,4 @@ Be aware the tests are hard-coded against http://localhost:8080.
 
 Support was provided by the National Center for Ecological Analysis and Synthesis, a Center funded by the University of California, Santa Barbara, and the State of California.
 
-[![nceas_footer](https://www.nceas.ucsb.edu/files/newLogo_0.png)](http://www.nceas.ucsb.edu)
+[![nceas_footer](https://www.nceas.ucsb.edu/files/newLogo_0.png)](https://www.nceas.ucsb.edu)

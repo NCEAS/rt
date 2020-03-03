@@ -2,7 +2,7 @@
 % Please edit documentation in R/rt_ticket_search.R
 \name{rt_ticket_search}
 \alias{rt_ticket_search}
-\title{Search RT}
+\title{Search for tickets}
 \usage{
 rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL, ...)
 }
@@ -10,7 +10,7 @@ rt_ticket_search(query, orderby = NULL, format = "l", fields = NULL, ...)
 \item{query}{(character) Your query (See Details)}
 
 \item{orderby}{(character) How to order your search results. Should be a
-ticket property name preceeded by either a + or a - character.}
+ticket property name preceded by either a + or a - character.}
 
 \item{format}{(character) Either \code{i} (ticket ID only),
 \code{s} (ticket ID and subject), or \code{l} (full ticket metadata).
@@ -21,14 +21,34 @@ results.}
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+Either a data.frame/tibble (when format is \code{l} or \code{s}) or a numeric
+vector when its \code{i}.
+}
 \description{
-Search RT for tickets using RT's query syntax. Queries are specified using RT's custom syntax which you can read about at \url{https://docs.bestpractical.com/rt/4.4.3/query_builder.html}.
+Search RT for tickets using RT's query syntax which is documented at
+\url{https://docs.bestpractical.com/rt/4.4.4/query_builder.html}.
+}
+\details{
+The \code{query} parameter comforms to RT's
+\href{https://docs.bestpractical.com/rt/4.4.4/query_builder.html}{query syntax}
+and requires you to build the query yourself. A query will have one or more
+parameters of the form \verb{$FIELD='$VALUE'} where \verb{$FIELD} is an RT ticket
+property like Subject, Requestor, etc and \verb{$VALUE} (surrounded by single
+quotes) is the value to filter by. See Examples for examples.
 }
 \examples{
 \dontrun{
 # To return all un-owned tickets on a queue:
 rt_ticket_search("Queue='General' AND (Status='new')")
+
+# We can sort by date created, increasing
 rt_ticket_search("Queue='General' AND (Status='new')",
-                 orderBy = "+Created")
+                 orderby = "+Created")
+
+# If we just need a vector of ticket ids
+rt_ticket_search("Queue='General' AND (Status='new')",
+                 orderby = "+Created",
+                 format = "i")
 }
 }

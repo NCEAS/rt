@@ -1,0 +1,91 @@
+---
+title: "Searching RT"
+author: "Irene Steves and Bryce Mecum"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{searching}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(
+  purl = FALSE,
+  eval = FALSE
+)
+```
+
+Searching through RT requires some knowledge of how RT does queries.
+This vignette provides a basic introduction to RT's query syntax and some examples of how to make queries with this package.
+Best Practical's [Query Builder documentation](https://docs.bestpractical.com/rt/4.4.4/query_builder.html) and [Ticket SQL wiki page](https://rt-wiki.bestpractical.com/wiki/TicketSQL) highlight some of the key aspects of query-building and are useful to reference while learning.
+
+## Writing a query
+
+The `rt_ticket_search` function makes it easy to search through your tickets.
+These are the fields that it will return by default, and that you can use to search with:
+
+```{r default-fields, echo = FALSE}
+c("AdminCc", "Created", "Creator", "Due", "FinalPriority", "id", "InitialPriority", "LastUpdated", "Owner", "Priority", "Queue", "Requestors", "Resolved", "Started", "Starts", "Status", "Subject", "TimeEstimated", "TimeLeft", "TimeWorked", "Told", "CF.{NAME_OF_CUSTOM_FIELD}")
+```
+
+There are additional queryable fields such as `FileName`, `ContentType`, and `Content`, `Requestor.Name` that you can explore in the [Query Builder](https://docs.bestpractical.com/rt/4.4.4/query_builder.html) (Search --> Tickets --> New Search).
+
+These fields are some of the most commonly queried:
+
+- **id** - the ticket #
+- **Subject** - the subject of the ticket
+- **Owner** - the current owner of the ticket
+- **Queue** - the queue(s) you want to search through
+- **Content** - the text content of your RT tickets (email correspondence, comments, etc.); _note:_ unless the full-text indexing feature is enabled, you will only be able to search through the metadata of your tickets
+- **FileName** - the name of an attached file
+
+To build a query, you'll want to use the following vocabulary:
+
+- `AND` or `OR` to join multiple query conditions together
+- `=` to specify that a field `is` or is `equal to` something
+- `!=` to specify that a field `is not` or is `not equal to` something
+- `<` or `>` to specify that a field `less than` (`before`) or `greater than` (`after`) something
+- `LIKE` to specify that a field `matches` something
+- `NOT LIKE` to specify that a field `doesn't match` something
+
+## Example queries
+
+To search for all tickets in the "General" queue, we'd run the following:
+
+```{r first-query}
+result <- rt_ticket_search("Queue = 'General'")
+```
+
+Note that, by default, `rt_ticket_search` returns a `data.frame` or `tibble` (if installed).
+
+You can search against multiple fields using `AND` or `OR` to combine them.
+
+```{r query-and}
+rt_ticket_search("Queue = 'General' AND Subject LIKE 'test'")
+```
+
+Use parentheses to group query parameters together for more advanced logic.
+
+```{r query-parens}
+rt_ticket_search("(Status = 'new' OR Status = 'open') AND Queue = 'General'")
+```
+
+For numeric and date/time fields, you can use `>`, `>=`, `<`, and `<=` in addition to `=`.
+
+```{r query-dates}
+rt_ticket_search("Started > '2018-04-04'")
+```
+
+You can also use special [date syntax](https://rt-wiki.bestpractical.com/wiki/TicketSQL#Date_Syntax) for more options.
+
+```{r query-dates-special}
+rt_ticket_search("Created >= '2 days ago'")
+```
+
+One of the most common use-cases is searching through RT ticket content.
+Note that this will only work if your RT installation has full text indexing turned on.
+
+```{r query-like}
+result <- rt_ticket_search("Content LIKE 'Can you please advise'")
+```

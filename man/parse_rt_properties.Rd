@@ -18,5 +18,5 @@ newline-separated key-value pairs with a ': ' between them. e.g.,
 }
 \details{
 id: queue/1
-  Name: General
+Name: General
 }

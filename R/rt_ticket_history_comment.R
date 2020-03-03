@@ -1,10 +1,10 @@
-#' Add ticket history comment
-#'
-#' Add a comment to an existing ticket
+#' Comment on a ticket
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param comment_text (character) Text that to add as a comment
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
+#'
+#' @return (numeric) The ID of the ticket
 #'
 #' @export
 #'
@@ -19,5 +19,8 @@ rt_ticket_history_comment <- function(ticket_id, comment_text, ...) {
                      ticket_id,
                      comment_text)
 
-  rt_POST(url, body = list(content = comment), ...)
+  response <- rt_POST(url, body = list(content = comment), ...)
+  stopforstatus(response)
+
+  invisible(ticket_id)
 }

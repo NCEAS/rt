@@ -1,6 +1,4 @@
-#' Add ticket history reply
-#'
-#' Add a response to an existing ticket
+#' Reply to a ticket
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param text (character) Text that to add as a comment
@@ -9,6 +7,8 @@
 #' @param time_worked (character)
 #' @param attachment_path (character) Path to a file to upload
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
+#'
+#' @return (numeric) The ID of the ticket
 #'
 #' @export
 #'
@@ -38,5 +38,8 @@ rt_ticket_history_reply <- function(ticket_id,
   url <- rt_url("ticket", ticket_id, "comment", query_params = params)
   reply_body <- construct_newline_pairs(params)
 
-  rt_POST(url, body = list(content = reply_body), ...)
+  response <- rt_POST(url, body = list(content = reply_body), ...)
+  stopforstatus(response)
+
+  invisible(ticket_id)
 }

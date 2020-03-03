@@ -1,7 +1,9 @@
-#' Get RT ticket links
+#' Get a ticket's links
 #'
-#' Gets the ticket links for a single ticket. If applicable, the following fields will be returned: \code{HasMember},
-#' \code{ReferredToBy}, \code{DependedOnBy}, \code{MemberOf}, \code{RefersTo}, and \code{DependsOn}.
+#' Gets the ticket links for a single ticket. If applicable, the following
+#' fields will be returned: \code{HasMember},
+#' \code{ReferredToBy}, \code{DependedOnBy}, \code{MemberOf}, \code{RefersTo},
+#' and \code{DependsOn}.
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
@@ -17,5 +19,8 @@ rt_ticket_links <- function(ticket_id, ...) {
 
   url <- rt_url("ticket", ticket_id, "links", "show")
 
-  rt_GET(url, ...)
+  response <- rt_GET(url, ...)
+  stopforstatus(response)
+
+  response
 }

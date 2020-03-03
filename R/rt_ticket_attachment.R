@@ -1,6 +1,7 @@
-#' Get ticket attachment
+#' Get a ticket's attachment
 #'
-#' Retrieves attachment metadata
+#' Retrieves attachment metadata. To get the attachment itself, see
+#' \link{rt_ticket_attachment_content}.
 #'
 #' @param ticket_id (numeric) The ticket identifier
 #' @param attachment_id (numeric) The attachment identifier
@@ -16,5 +17,8 @@ rt_ticket_attachment <- function(ticket_id,
                                  attachment_id,
                                  ...) {
   url <- rt_url("ticket", ticket_id, "attachments", attachment_id)
-  rt_GET(url, ...)
+  response <- rt_GET(url, ...)
+  stopforstatus(response)
+
+  response
 }

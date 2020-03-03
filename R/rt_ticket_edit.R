@@ -1,16 +1,24 @@
-#' Edit an RT ticket
+#' Edit a ticket
 #'
-#' Update an existing ticket with new information.
+#' Updates an existing ticket with new information.
 #'
 #' @param ticket_id (numeric|character) The ticket number
 #' @inheritParams rt_ticket_create
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
-
+#'
+#' @return (numeric) The ID of the ticket
+#'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' rt_ticket_edit(20, priority = 2, custom_field = c(Description = "A description"))
+#' # First, create a ticket
+#' ticket <- rt_ticket_create("General")
+#'
+#' # Then we can update its fields
+#' rt_ticket_edit(ticket,
+#'                requestor = "me@example.com",
+#'                subject = "My subject")
 #' }
 rt_ticket_edit <- function(ticket_id,
                            queue = NULL,
@@ -33,7 +41,7 @@ rt_ticket_edit <- function(ticket_id,
 
   params <- compact(list(id = ticket_id,
                          Queue = queue,
-                         Requestor = requestor,
+                         Requestors = requestor,
                          Subject = subject,
                          Cc = cc,
                          AdminCc = admin_cc,
@@ -55,5 +63,9 @@ rt_ticket_edit <- function(ticket_id,
   }
 
   url <- rt_url("ticket", ticket_id, "edit")
-  rt_POST(url, body = list(content = ticket_content), ...)
+  response <- rt_POST(url, body = list(content = ticket_content), ...)
+  stopforstatus(response)
+
+  message(response$body)
+  invisible(ticket_id)
 }

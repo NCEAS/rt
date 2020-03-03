@@ -1,9 +1,10 @@
-#' Get ticket properties
+#' Get a ticket's properties
 #'
 #' Retrieves ticket properties
 #'
 #' @inheritParams rt_ticket_attachment
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
+#'
 #' @export
 #'
 #' @examples
@@ -17,6 +18,8 @@ rt_ticket_properties <- function(ticket_id, ...) {
   if (grepl("Ticket \\d+ does not exist\\.", response$body)) {
     stop(response$body)
   }
+
+  stopforstatus(response)
 
   parse_rt_properties(response$body)
 }
