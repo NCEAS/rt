@@ -2,7 +2,6 @@
 ![CI](https://github.com/NCEAS/rt/workflows/CI/badge.svg)
 ![Tests](https://github.com/NCEAS/rt/workflows/Tests/badge.svg)
 [![cran version](https://www.r-pkg.org/badges/version/rt)](https://cran.r-project.org/package=rt)
-[![cran checks](https://cranchecks.info/badges/worst/rt)](https://cranchecks.info/pkgs/rt)
 
 # rt
 

@@ -10,5 +10,10 @@ On GitHub Actions:
 
 ## R CMD check results
 
-There were no ERRORS, WARNINGS, or NOTES.
+There were no ERRORS, WARNINGS, one NOTES:
+
+NOTE  checking CRAN incoming feasibility
+   Maintainer: 'Bryce Mecum <mecum@nceas.ucsb.edu>'
+
+   New submission
 
