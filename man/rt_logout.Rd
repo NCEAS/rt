@@ -9,6 +9,9 @@ rt_logout(...)
 \arguments{
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+(rt_api) The parsed response from RT
+}
 \description{
 Use this to log out of RT at the end of your session.
 Note: restarting your R session will also log you out.

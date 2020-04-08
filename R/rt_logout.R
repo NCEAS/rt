@@ -4,6 +4,7 @@
 #' Note: restarting your R session will also log you out.
 #'
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
+#' @return (rt_api) The parsed response from RT
 #'
 #' @export
 #'
