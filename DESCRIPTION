@@ -1,8 +1,9 @@
 Package: rt
 Type: Package
-Title: Interface to the Request Tracker API
-Description: Provides a programmatic interface to the Request Tracker HTTP API.
-  Request Tracker (RT) is a popular ticket tracking system.
+Title: Interface to the 'Request Tracker' API
+Description: Provides a programmatic interface to the 'Request Tracker' (RT) 
+  HTTP API <https://rt-wiki.bestpractical.com/wiki/REST>. 'RT' is a popular 
+  ticket tracking system.
 Version: 1.0.0
 URL: https://github.com/nceas/rt
 BugReports: https://github.com/nceas/rt/issues
