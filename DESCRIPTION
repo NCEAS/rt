@@ -8,8 +8,11 @@ Version: 1.0.0
 URL: https://github.com/nceas/rt
 BugReports: https://github.com/nceas/rt/issues
 Authors@R: c(
-  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", role = c("aut", "cre"), comment = c(ORCID="0000-0002-0381-3766")),
-  person("Irene", "Steves", role = "ctb")
+  person("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu", 
+         role = c("aut", "cre"), comment = c(ORCID="0000-0002-0381-3766")),
+  person("Irene", "Steves", role = "ctb"),
+  person("National Center for Ecological Analysis and Synthesis", 
+         role = c("cph"))
   )
 Maintainer: Bryce Mecum <mecum@nceas.ucsb.edu>
 License: MIT + file LICENSE
