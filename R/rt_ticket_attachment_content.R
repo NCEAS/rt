@@ -8,7 +8,8 @@
 #' @inheritParams rt_ticket_attachment
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
-#' @return (response) A `response` object with the response
+#' @return (rt_api) An `rt_api` object with the response
+#'
 #' @export
 #'
 #' @examples

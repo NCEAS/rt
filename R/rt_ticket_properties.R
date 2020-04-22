@@ -5,6 +5,7 @@
 #' @inheritParams rt_ticket_attachment
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
+#' @return (list) A list of the ticket's properties
 #' @export
 #'
 #' @examples

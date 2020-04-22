@@ -11,11 +11,15 @@ rt_user_properties(user_id, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(list) A list of the user's properties
+}
 \description{
 Get a user's properties
 }
 \examples{
 \dontrun{
+# Assuming we have a user with id 1, we can get its properties
 rt_user_properties(1)
 }
 }

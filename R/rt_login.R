@@ -11,6 +11,7 @@
 #' @param password (character) Your password.
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
+#' @return Either `TRUE`, invisibly, if logged in, or throws an error.
 #' @export
 #'
 #' @examples

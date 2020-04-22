@@ -3,6 +3,8 @@
 #' @param queue (character) The queue
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
+#' @return (list) A list of queue properties
+#'
 #' @export
 #'
 #' @examples

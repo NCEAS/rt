@@ -11,6 +11,9 @@ rt_queue_properties(queue, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(list) A list of queue properties
+}
 \description{
 Get the properties of a queue
 }

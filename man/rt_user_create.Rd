@@ -40,6 +40,10 @@ Create a user
 }
 \examples{
 \dontrun{
+# Create a barebones user with just a name
 rt_user_create("Some Person")
+
+# Create user that also has an email address
+rt_user_create("Person", email_address = "person@example.com")
 }
 }

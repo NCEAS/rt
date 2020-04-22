@@ -11,6 +11,9 @@ rt_ticket_properties(ticket_id, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(list) A list of the ticket's properties
+}
 \description{
 Retrieves ticket properties
 }

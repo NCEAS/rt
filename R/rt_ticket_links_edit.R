@@ -14,7 +14,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Make ticket 20 depend on ticket 21
+#' # Assuming we have tickets 20 and 21, we can make ticket 20 depend on ticket
+#' # 21
 #' rt_ticket_links_edit(20, depends_on = 21)
 #' }
 #'

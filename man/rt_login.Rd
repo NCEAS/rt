@@ -17,6 +17,9 @@ rt_login(
 
 \item{...}{Other arguments passed to \code{\link{rt_POST}}}
 }
+\value{
+Either \code{TRUE}, invisibly, if logged in, or throws an error.
+}
 \description{
 Use this to log into RT at the start of your session. Once you call this
 function and successfully log in, calls of other functions within this

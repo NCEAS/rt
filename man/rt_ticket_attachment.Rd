@@ -13,12 +13,20 @@ rt_ticket_attachment(ticket_id, attachment_id, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(rt_api) An \code{rt_api} object with the response
+}
 \description{
 Retrieves attachment metadata. To get the attachment itself, see
 \link{rt_ticket_attachment_content}.
 }
 \examples{
 \dontrun{
-rt_ticket_attachment(2, 1)
+# Before running rt_ticket_attachment, you'll probably want to get a list of
+# the attachments for a given ticket, like:
+attachments <- rt_ticket_attachments(1) # Ticket ID 1
+
+# And then you can get information about a specific attachment:
+rt_ticket_attachment(1, 3) # Attachment 3 on ticket 1
 }
 }

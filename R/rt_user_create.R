@@ -29,7 +29,11 @@ parse_user_create_body <- function(body) {
 #'
 #' @examples
 #' \dontrun{
+#' # Create a barebones user with just a name
 #' rt_user_create("Some Person")
+#'
+#' # Create user that also has an email address
+#' rt_user_create("Person", email_address = "person@example.com")
 #' }
 rt_user_create <- function(name,
                            password = NULL,

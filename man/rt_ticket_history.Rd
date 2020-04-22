@@ -15,15 +15,18 @@ Defaults to \code{l}.}
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(rt_api) An \code{rt_api} object with the response
+}
 \description{
 Get a ticket's history
 }
 \examples{
 \dontrun{
-# Get the full ticket history
+# Get the full ticket history for ticket 992
 rt_ticket_history(992)
 
-# Get just the ticket ID and subject
+# Get just the ticket ID and subject for ticket 992
 rt_ticket_history(992, format = "s")
 }
 }

@@ -37,6 +37,7 @@ Reply to a ticket
 }
 \examples{
 \dontrun{
+# Reply to ticket 11 with a courteous message
 rt_ticket_history_reply(11,
                         "Thank you.
 

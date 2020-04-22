@@ -22,8 +22,8 @@ results.}
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \value{
-Either a data.frame/tibble (when format is \code{l} or \code{s}) or a numeric
-vector when its \code{i}.
+Either a \code{data.frame} or \code{tibble} (when format is \code{l} or \code{s}) or a
+numeric vector when it's \code{i}.
 }
 \description{
 Search RT for tickets using RT's query syntax which is documented at

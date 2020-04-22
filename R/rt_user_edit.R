@@ -23,6 +23,7 @@ warn_user_edit_warnings <- function(body) {
 #' @param ... Other arguments passed to \code{\link{rt_POST}}
 #'
 #' @return The ID of the edited user
+#'
 #' @export
 #'
 #' @examples

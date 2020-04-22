@@ -68,8 +68,8 @@ tidy_long_search_result <- function(result) {
 #' results.
 #' @param ... Other arguments passed to \code{\link{rt_GET}}
 #'
-#' @return Either a data.frame/tibble (when format is `l` or `s`) or a numeric
-#' vector when its `i`.
+#' @return Either a `data.frame` or `tibble` (when format is `l` or `s`) or a
+#' numeric vector when it's `i`.
 #'
 #' @export
 #'

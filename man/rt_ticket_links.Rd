@@ -11,6 +11,9 @@ rt_ticket_links(ticket_id, ...)
 
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
+\value{
+(rt_api) An \code{rt_api} object with the response
+}
 \description{
 Gets the ticket links for a single ticket. If applicable, the following
 fields will be returned: \code{HasMember},
@@ -19,6 +22,7 @@ and \code{DependsOn}.
 }
 \examples{
 \dontrun{
+# Assuming have a ticket with id 1007, we can get it links by calling
 rt_ticket_links(1007)
 }
 }

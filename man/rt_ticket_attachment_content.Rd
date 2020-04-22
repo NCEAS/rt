@@ -14,7 +14,7 @@ rt_ticket_attachment_content(ticket_id, attachment_id, ...)
 \item{...}{Other arguments passed to \code{\link{rt_GET}}}
 }
 \value{
-(response) A \code{response} object with the response
+(rt_api) An \code{rt_api} object with the response
 }
 \description{
 Gets the content of the specified attachment for further processing or
