@@ -22,5 +22,9 @@ rt_ticket_links <- function(ticket_id, ...) {
   response <- rt_GET(url, ...)
   stopforstatus(response)
 
+  if (grepl("Ticket \\d+ does not exist", response$body)) {
+    stop(response$body)
+  }
+
   response
 }
