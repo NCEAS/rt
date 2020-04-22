@@ -20,5 +20,13 @@ rt_ticket_attachment <- function(ticket_id,
   response <- rt_GET(url, ...)
   stopforstatus(response)
 
+  if (grepl("Ticket \\d+ does not exist", response$body)) {
+    stop(response$body)
+  }
+
+  if (grepl("^Invalid attachment id:", response$body)) {
+    stop(response$body)
+  }
+
   response
 }
