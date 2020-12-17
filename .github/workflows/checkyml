@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: CHECK
+name: Check
 
 jobs:
-  CHECK:
+  check:
     runs-on: ${{ matrix.config.os }}
 
     strategy:
