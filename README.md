@@ -1,5 +1,5 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-![CI](https://github.com/NCEAS/rt/workflows/CI/badge.svg)
+![CI](https://github.com/NCEAS/rt/workflows/Check/badge.svg)
 ![Tests](https://github.com/NCEAS/rt/workflows/Tests/badge.svg)
 [![cran version](https://www.r-pkg.org/badges/version/rt)](https://cran.r-project.org/package=rt)
 
