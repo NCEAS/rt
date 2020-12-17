@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: Tests
+name: Test
 
 jobs:
-  CI:
+  test:
     services:
       rt:
         image: netsandbox/request-tracker
