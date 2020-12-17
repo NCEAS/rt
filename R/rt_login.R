@@ -54,8 +54,9 @@ rt_do_login <- function(user, password, ...) {
   url <- rt_url()
   response <- rt_POST(url,
                       body = list(
-                      "user" = user,
-                      "pass" = password),
+                        "user" = user,
+                        "pass" = password),
+                      encode = "form",
                       ...)
   result <- check_login(response)
   stopforstatus(response)
