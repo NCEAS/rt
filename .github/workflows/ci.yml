@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: CI
+name: CHECK
 
 jobs:
-  CI:
+  CHECK:
     runs-on: ${{ matrix.config.os }}
 
     strategy:
@@ -12,7 +12,6 @@ jobs:
         config:
           - { os: windows-latest, r: "3.6", args: "--no-manual" }
           - { os: windows-latest, r: "4.0", args: "--no-manual" }
-          - { os: macOS-latest, r: "3.6" }
           - { os: macOS-latest, r: "4.0" }
           - { os: macOS-latest, r: "devel", args: "--no-manual" }
           - { os: ubuntu-18.04, r: "3.5", args: "--no-manual" }
