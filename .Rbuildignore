@@ -6,3 +6,4 @@ Dockerfile
 cran-comments.md
 ^CRAN-RELEASE$
 LICENSE.md
+^\.github$
