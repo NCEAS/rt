@@ -4,9 +4,16 @@ name: Test
 
 jobs:
   test:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { rt: 4.4 }
+          - { rt: 5.0 }
+
     services:
       rt:
-        image: netsandbox/request-tracker
+        image: netsandbox/request-tracker:${{ matrix.config.rt }}
         ports:
           - 80:80
 
