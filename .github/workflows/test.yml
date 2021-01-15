@@ -8,8 +8,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { rt: 4.4 }
-          - { rt: 5.0 }
+          - { rt: "4.4" }
+          - { rt: "5.0" }
 
     services:
       rt:
