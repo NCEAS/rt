@@ -1,4 +1,4 @@
-This 1.0.1 release is a patch release aimed at fixing a bug that effects some users and completely limits their use of all parts of the package.
+This 1.1 release is a minor release adding a new user-facing function and tweaking the behavior of an internal function to work in more scenarios.
 
 ## Test environments
 
