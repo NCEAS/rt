@@ -6,7 +6,7 @@ NEW
 
 CHANGED
 
-- Re-wrote internal `parse_rt_properties` function to produce more consistent output
+- Re-wrote internal `parse_rt_properties` function to produce more consistent output for various user-facing functions.s
 
 ## rt 1.0.1
 
