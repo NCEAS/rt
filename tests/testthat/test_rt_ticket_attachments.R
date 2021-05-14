@@ -18,7 +18,7 @@ test_that("we can get an attachment", {
   ticket_id <- rt_ticket_create("General", "root@localhost", "Attachment test")
   attachments <- rt_ticket_attachments(ticket_id)
 
-  attachment <- rt_ticket_attachment(ticket_id, names(attachments)[3])
+  attachment <- rt_ticket_attachment(ticket_id, attachments[1,"id"][[1]])
 
   testthat::expect_is(attachment, "rt_api")
   testthat::expect_gt(nchar(attachment$body), 0)

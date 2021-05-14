@@ -108,15 +108,15 @@ rt_ticket_search <- function(query,
   response <- rt_GET(url, ...)
   stopforstatus(response)
 
+  if (response$body == "No matching results.") {
+    return(try_tibble(data.frame()))
+  }
+
   if (format == "s") {
     result <- lapply(
       strsplit(response$body, "\\n")[[1]],
       parse_rt_properties)
 
-    # Special behavior to handle RT returning zero results
-    if (length(result) == 1 & names(result[[1]]) == "No matching results.") {
-      result <- try_tibble(data.frame())
-    } else {
       result <- data.frame(id = unlist(lapply(result, names)),
                            Subject = unlist(lapply(result,
                                                    unlist,
@@ -125,7 +125,6 @@ rt_ticket_search <- function(query,
       names(result) <- c("id", "Subject")
 
       result <- try_tibble(result)
-    }
   } else if (format == "i") {
     result <- stringr::str_split(response$body, "\n")[[1]]
     result <- Filter(function(r) {
