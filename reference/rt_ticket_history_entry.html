@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • rt</title>
+<title>Gets the history information for a single history item — rt_ticket_history_entry • rt</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Gets the history information for a single history item — rt_ticket_history_entry" />
+<meta property="og:description" content="Gets the history information for a single history item" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -128,46 +129,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/nceas/rt/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Gets the history information for a single history item</h1>
+    <small class="dont-index">Source: <a href='https://github.com/nceas/rt/blob/master/R/rt_ticket_history_entry.R'><code>R/rt_ticket_history_entry.R</code></a></small>
+    <div class="hidden name"><code>rt_ticket_history_entry.Rd</code></div>
     </div>
 
-    <div id="rt-11" class="section level1">
-<h1 class="page-header" data-toc-text="1.1">
-<a href="#rt-11" class="anchor"></a>rt 1.1<small> Unreleased </small>
-</h1>
-<p>NEW</p>
-<ul>
-<li>Added <code>rt_ticket_history_entry</code> function that was previously missing. <a href="https://github.com/NCEAS/rt/issues/41"><a href='https://github.com/nceas/rt/issues/41'>#41</a></a>
-</li>
-</ul>
-<p>CHANGED</p>
-<ul>
-<li>Re-wrote internal <code>parse_rt_properties</code> function to produce more consistent output</li>
-</ul>
-<div id="rt-101" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rt-101" class="anchor"></a>rt 1.0.1</h2>
-<p>FIXED</p>
-<ul>
-<li>Fixed a bug affecting logging in when passwords contained special characters. <a href="https://github.com/NCEAS/rt/issues/36"><a href='https://github.com/nceas/rt/issues/36'>#36</a></a>
-</li>
-</ul>
-</div>
-<div id="rt-100" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rt-100" class="anchor"></a>rt 1.0.0</h2>
-<p>Initial release</p>
-</div>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Gets the history information for a single history item</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>rt_ticket_history_entry</span><span class='op'>(</span><span class='va'>ticket_id</span>, <span class='va'>history_id</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ticket_id</th>
+      <td><p>(numeric) The ticket identifier</p></td>
+    </tr>
+    <tr>
+      <th>history_id</th>
+      <td><p>(numeric) The history entry identifier</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed to <code><a href='rt_GET.html'>rt_GET</a></code></p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>(rt_api) An <code>rt_api</code> object with the response</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># Get the history entry for ticket 992 and history id 123</span>
+<span class='fu'><a href='rt_ticket_history.html'>rt_ticket_history</a></span><span class='op'>(</span><span class='fl'>992</span>, <span class='fl'>123</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
