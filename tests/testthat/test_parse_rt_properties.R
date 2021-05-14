@@ -45,7 +45,7 @@ test_that("can parse a tricky multiline properties response", {
           "barlow@example.com, bryant@example.com, frye@example.com, ",
           "travis@example.com, woodard@example.com"),
          Cc = "raymond@example.com",
-         AdminCc = "",
+         AdminCc = NA,
          Created = "Wed Apr 24 12:03:22 2019",
          Starts = "Not set",
          Started = "Not set",
