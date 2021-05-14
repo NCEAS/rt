@@ -145,25 +145,37 @@ print.rt_api <- function(x, ...) {
 #'
 #' @return List of properties
 parse_rt_properties <- function(body) {
-  # Split into fields
-  fields <- strsplit(body, "[\n]+")[[1]]
+  lines <- strsplit(body, "\\n")[[1]]
+  lines <- Filter(function(line) nchar(line) > 0, lines)
 
-  # Merge multi-line fields into the previous
-  for (i in which(grepl("^[ ]+", fields))) {
-    # Merge with previous, triming repeat leading whitespace because the
-    # second line is tabtop aligned for some odd reason
-    fields[i - 1] <- paste0(fields[i - 1], gsub("[ ]{2,}", " ", fields[i]))
-    fields <- fields[-i]
+  properties <- list()
+  last_key <- NA
+
+  for (line in lines) {
+    if (!grepl("^ ", line)) {
+      parts <- stringr::str_split(line, "(: ?)", 2)[[1]]
+
+      if (length(parts) == 1) {
+        properties <- c(properties, list(parts))
+      } else {
+        properties[parts[1]] <- parts[2]
+        last_key <- parts[1]
+      }
+    } else {
+      properties[last_key] <- paste(properties[[last_key]], line, sep = "\n")
+    }
   }
 
-  parsed <- lapply(fields, function(x) {
-    strsplit(x, ": ")
+  # Replace empty values with NA
+  properties <- lapply(properties, function(property) {
+    if (nchar(property) == 0) {
+      NA
+    } else {
+      property
+    }
   })
 
-  result <- lapply(parsed, function(x) { x[[1]][2]})
-  names(result) <- vapply(parsed, function(x) { trimws(x[[1]][1]) }, "")
-
-  result
+  properties
 }
 
 #' Get the version of the currently installed version of this package as a
