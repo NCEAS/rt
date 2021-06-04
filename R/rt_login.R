@@ -71,7 +71,11 @@ rt_do_login <- function(user, password, ...) {
 #' @return (logical) TRUE if login was successful, errors out otherwise
 check_login <- function(response) {
   if (response$body != "Invalid object specification: ''\n\nid: ") {
-    stop("Login failed: ", response$message, " (", response$body, ")",
+    stop("Login failed: ",
+         response$message,
+         " (",
+         response$body,
+         ").\nSee ?rt for information on setting credentials.",
          call. = FALSE)
   }
 
