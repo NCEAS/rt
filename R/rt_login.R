@@ -59,7 +59,6 @@ rt_do_login <- function(user, password, ...) {
                       encode = "form",
                       ...)
   result <- check_login(response)
-  stopforstatus(response)
 
   invisible(result)
 }
